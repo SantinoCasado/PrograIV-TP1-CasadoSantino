@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { finalize, take } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { Navbar } from '../../layouts/navbar/navbar';
 import { GithubService } from '../../core/services/github/github';
 import { GithubUser } from '../../core/models/github-user';
@@ -20,7 +20,10 @@ export class QuienSoy implements OnInit {
 
   githubUsername = 'SantinoCasado';
 
-  constructor(private githubService: GithubService) {}
+  constructor(
+    private githubService: GithubService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.loadGitHubUser();
@@ -33,17 +36,15 @@ export class QuienSoy implements OnInit {
 
     this.githubService
       .getUser(this.githubUsername)
-      .pipe(
-        take(1),
-        finalize(() => {
-          this.loading = false;
-        })
-      )
+      .pipe(take(1))
       .subscribe({
         next: (data) => {
           this.user = data;
+          this.loading = false;
+          this.cdr.detectChanges();
         },
         error: (err) => {
+          this.loading = false;
           if (err?.name === 'TimeoutError') {
             this.error = 'La solicitud tardó demasiado. Intentá nuevamente.';
           } else if (err?.status === 403) {
@@ -53,6 +54,7 @@ export class QuienSoy implements OnInit {
           } else {
             this.error = 'No se pudo cargar el perfil de GitHub. Verificá tu conexión.';
           }
+          this.cdr.detectChanges();
         },
       });
   }

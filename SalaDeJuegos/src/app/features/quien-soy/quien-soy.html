@@ -90,13 +90,11 @@
       </div>
 
       <aside class="image-panel">
-        <div class="w-100 h-100">
-          <img
-            [src]="user.avatar_url"
-            [alt]="user.name || user.login || 'Perfil GitHub'"
-            class="profile-image"
-          />
-        </div>
+        <img
+          [src]="user.avatar_url"
+          [alt]="user.name || user.login || 'Perfil GitHub'"
+          class="profile-image"
+        />
         <div class="image-actions">
           <a
             *ngIf="user.html_url"
