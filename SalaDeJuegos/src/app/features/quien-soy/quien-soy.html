@@ -6,21 +6,15 @@
     <a routerLink="/" class="btn btn-back text-uppercase">Volver</a>
   </div>
 
-  <div
-    *ngIf="loading && !user"
-    class="loading-box text-center py-5 d-flex flex-column align-items-center justify-content-center"
-  >
-    <div class="spinner-border text-warning" role="status">
-      <span class="visually-hidden">Cargando...</span>
-    </div>
-    <p class="text-muted mt-3">Trayendo perfil desde GitHub...</p>
+  <div *ngIf="loading && !user" class="text-center py-5">
+    <p class="text-muted mb-0">Trayendo perfil desde GitHub...</p>
   </div>
 
-  <div *ngIf="error && !loading" class="alert alert-danger mx-auto my-3 col-11 col-md-9 col-lg-8">
+  <div *ngIf="error" class="alert alert-danger mx-auto my-3 col-11 col-md-9 col-lg-8">
     {{ error }}
   </div>
 
-  <section *ngIf="user" class="personal-hero">
+  <section *ngIf="user && !error" class="personal-hero">
     <div class="hero-grid container-fluid px-3 px-md-5">
       <div class="d-grid gap-3">
         <article class="profile-panel">
@@ -97,10 +91,20 @@
 
       <aside class="image-panel">
         <div class="w-100 h-100">
-          <img [src]="user.avatar_url" [alt]="user.name || user.login" class="profile-image" />
+          <img
+            [src]="user.avatar_url"
+            [alt]="user.name || user.login || 'Perfil GitHub'"
+            class="profile-image"
+          />
         </div>
         <div class="image-actions">
-          <a [href]="user.html_url" target="_blank" class="btn btn-burn-outline">Ver mi GitHub</a>
+          <a
+            *ngIf="user.html_url"
+            [href]="user.html_url"
+            target="_blank"
+            class="btn btn-burn-outline"
+            >Ver mi GitHub</a
+          >
         </div>
       </aside>
     </div>

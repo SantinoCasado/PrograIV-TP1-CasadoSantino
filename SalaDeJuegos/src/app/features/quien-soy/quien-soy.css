@@ -29,6 +29,7 @@
     0 0 28px rgba(224, 31, 31, 0.5),
     0 0 8px rgba(224, 31, 31, 0.45);
   line-height: 1;
+  animation: fadeDown 380ms ease-out both;
 }
 
 .btn-back {
@@ -50,17 +51,13 @@
   color: #111;
 }
 
-.loading-box {
-  min-height: 55vh;
-}
-
 .personal-hero {
   background: linear-gradient(180deg, rgba(10, 10, 10, 0.92), rgba(8, 8, 8, 0.96));
 }
 
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(420px, 1.06fr) minmax(300px, 0.84fr);
+  grid-template-columns: minmax(390px, 0.96fr) minmax(380px, 1.08fr);
   gap: 14px;
   align-items: start;
   justify-content: start;
@@ -89,6 +86,7 @@
   border-radius: 18px;
   padding: 14px 16px;
   box-shadow: 0 16px 34px rgba(0, 0, 0, 0.36);
+  animation: fadeUp 420ms ease-out both;
 }
 
 .eyebrow {
@@ -156,8 +154,9 @@
   border: 1px solid rgba(224, 31, 31, 0.26);
   box-shadow: 0 14px 34px rgba(0, 0, 0, 0.34);
   position: relative;
-  height: calc(100vh - 170px);
-  min-height: 360px;
+  height: clamp(520px, 82vh, 820px);
+  min-height: 520px;
+  animation: fadeLeft 480ms ease-out both;
 }
 
 .profile-image {
@@ -183,6 +182,7 @@
   justify-content: space-between;
   gap: 8px;
   color: #e7e7e7;
+  animation: fadeUp 540ms ease-out both;
 }
 
 .description-panel h2 {
@@ -234,11 +234,28 @@
   padding: 10px 20px;
   border-radius: 8px;
   font-weight: 700;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease;
 }
 
 .btn-burn-outline:hover {
   background: #e01f1f;
   color: #111;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(224, 31, 31, 0.28);
+}
+
+.stat-box {
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease;
+}
+
+.stat-box:hover {
+  transform: translateY(-2px);
+  border-color: rgba(224, 31, 31, 0.42);
 }
 
 @media (max-width: 768px) {
@@ -282,7 +299,7 @@
 
   .image-panel {
     max-height: none;
-    height: 380px;
+    height: 520px;
   }
 
   .description-panel {

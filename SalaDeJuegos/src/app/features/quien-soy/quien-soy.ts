@@ -15,7 +15,7 @@ styleUrl: './quien-soy.css',
 })
 export class QuienSoy implements OnInit {
   user: GithubUser | null = null;
-  loading = true;
+  loading = false;
   error: string | null = null;
 
   githubUsername = 'SantinoCasado';
@@ -31,30 +31,19 @@ export class QuienSoy implements OnInit {
     this.error = null;
     this.user = null;
 
-    // Failsafe UI: evita spinner infinito si la request queda colgada.
-    const watchdog = setTimeout(() => {
-      if (this.loading) {
-        this.error = 'La solicitud está tardando demasiado. Intentá nuevamente.';
-        this.loading = false;
-      }
-    }, 10000);
-
     this.githubService
       .getUser(this.githubUsername)
       .pipe(
         take(1),
         finalize(() => {
-          clearTimeout(watchdog);
           this.loading = false;
         })
       )
       .subscribe({
         next: (data) => {
           this.user = data;
-          this.loading = false;
         },
         error: (err) => {
-          this.loading = false;
           if (err?.name === 'TimeoutError') {
             this.error = 'La solicitud tardó demasiado. Intentá nuevamente.';
           } else if (err?.status === 403) {
@@ -62,7 +51,7 @@ export class QuienSoy implements OnInit {
           } else if (err?.status === 404) {
             this.error = `Usuario "${this.githubUsername}" no encontrado en GitHub.`;
           } else {
-          this.error = 'No se pudo cargar el perfil de GitHub. Verificá tu conexión.';
+            this.error = 'No se pudo cargar el perfil de GitHub. Verificá tu conexión.';
           }
         },
       });
