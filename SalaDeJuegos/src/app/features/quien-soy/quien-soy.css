@@ -69,7 +69,7 @@
 
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(420px, 620px) minmax(360px, 560px);
+  grid-template-columns: minmax(390px, 560px) minmax(420px, 700px);
   gap: 26px;
   align-items: stretch;
   justify-content: center;
@@ -213,6 +213,14 @@
   margin-bottom: 8px;
 }
 
+.description-panel h3 {
+  color: #ff6a6a;
+  font-size: 1.1rem;
+  margin: 14px 0 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
 .description-panel p {
   color: #d4d4d4;
   margin-bottom: 10px;
@@ -225,6 +233,17 @@
 
 .description-panel li {
   margin-bottom: 6px;
+}
+
+.description-panel a {
+  color: #ff8a8a;
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(255, 138, 138, 0.45);
+}
+
+.description-panel a:hover {
+  color: #ffd0d0;
+  border-bottom-color: rgba(255, 208, 208, 0.65);
 }
 
 .btn-burn-outline {

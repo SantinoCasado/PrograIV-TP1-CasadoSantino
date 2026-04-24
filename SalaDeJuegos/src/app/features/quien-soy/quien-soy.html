@@ -20,6 +20,13 @@
     {{ error }}
   </div>
 
+  <div *ngIf="!loading && !error && !user && loadedOnce" class="about-error alert alert-warning">
+    No se recibieron datos del perfil en este intento.
+    <button class="btn btn-sm btn-outline-danger ms-3" type="button" (click)="retryLoad()">
+      Reintentar
+    </button>
+  </div>
+
   <section *ngIf="user && !loading" class="personal-hero">
     <div class="hero-grid container-fluid px-3 px-md-5">
       <div class="left-column">
@@ -54,13 +61,37 @@
         <article class="description-panel">
           <h2>Sobre mi</h2>
           <p>
-            Este espacio queda para que completes tu descripcion personal, experiencia, objetivos y
-            cualquier informacion que quieras destacar.
+            Me encuentro en mi ultimo año de estudio de la "Técnicatura en Programación" en la UTN,
+            Universidad Nacional de Avellanea. Actualmente cuento con cocimientos en web development
+            pero mi principal interés se encuentra en el analisis de datos.
           </p>
+
+          <h3>Objetivos profesionales</h3>
           <ul>
-            <li>[Completar: presentacion breve]</li>
-            <li>[Completar: stack o tecnologias]</li>
-            <li>[Completar: proyecto o logro destacado]</li>
+            <li>🏆 B2 nivel de inglés</li>
+            <li>🤔 Actualmente busco roles junior que impulsen talento en crecimiento.</li>
+            <li>🚀 Abierto a pasantias y posiciones entry-level en desarrollo de software.</li>
+            <li>💼 Busco oportunidades para aplicar conocimiento academico en proyectos reales.</li>
+          </ul>
+
+          <h3>Stack</h3>
+          <p>Python, Java, SQL, MongoDB, Git Bash, HTML, CSS, JavaScript, Angular y TypeScript.</p>
+
+          <h3>Contacto</h3>
+          <ul>
+            <li>
+              LinkedIn:
+              <a
+                href="https://www.linkedin.com/in/santino-casado-1841902aa/"
+                target="_blank"
+                rel="noopener noreferrer"
+                >www.linkedin.com/in/santino-casado-1841902aa/</a
+              >
+            </li>
+            <li>
+              Email: <a href="mailto:santino.casado05@gmail.com">santino.casado05@gmail.com</a>
+            </li>
+            <li>Teléfono: <a href="tel:+5491134567890">+54 9 11 5911 0639</a></li>
           </ul>
         </article>
       </div>

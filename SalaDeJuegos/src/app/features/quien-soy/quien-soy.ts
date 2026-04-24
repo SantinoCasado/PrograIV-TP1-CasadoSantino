@@ -16,6 +16,7 @@ export class QuienSoy implements OnInit {
   user: GitHubUser | null = null;
   loading = true;
   error: string | null = null;
+  loadedOnce = false;
 
   githubUsername = 'SantinoCasado';
 
@@ -29,10 +30,16 @@ export class QuienSoy implements OnInit {
     this.loading = true;
     this.error = null;
     this.user = null;
+    this.loadedOnce = false;
 
     this.githubService
       .getUser(this.githubUsername)
-      .pipe(finalize(() => (this.loading = false)))
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.loadedOnce = true;
+        })
+      )
       .subscribe({
         next: (data) => {
           this.user = data;
@@ -48,5 +55,9 @@ export class QuienSoy implements OnInit {
           }
         },
       });
+  }
+
+  retryLoad(): void {
+    this.loadGitHubUser();
   }
 }
