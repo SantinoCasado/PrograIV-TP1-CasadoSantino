@@ -1,0 +1,22 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+:root {
+  --burn-bg: #0a0a0a;
+  --burn-surface: #151515;
+  --burn-primary: #e01f1f;
+  --burn-text: #f3f3f3;
+  --burn-muted: #b7b7b7;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--burn-bg);
+  color: var(--burn-text);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

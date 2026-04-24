@@ -1,0 +1,30 @@
+<app-navbar></app-navbar>
+
+<main class="landing-page">
+  <section class="hero container-fluid px-3 px-md-5">
+    <div class="hero-content row g-4 align-items-center">
+      <div class="col-12 col-lg-6">
+        <h1 class="title">Bienvenido a <span>Cyber Burn</span></h1>
+        <p class="subtitle">
+          El mejor lugar para jugar, competir y subir de nivel con tu squad. Torneos, estadísticas y
+          comunidad en un solo lugar.
+        </p>
+      </div>
+
+      <div class="col-12 col-lg-6">
+        <section class="auth-panel">
+          <router-outlet></router-outlet>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <section class="carousel-section container-fluid px-3 px-md-5">
+    <h2 class="section-title">Juegos Disponibles</h2>
+    <app-carousel></app-carousel>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p>Cyber Burn © 2026 - Play hard. Burn brighter.</p>
+</footer>

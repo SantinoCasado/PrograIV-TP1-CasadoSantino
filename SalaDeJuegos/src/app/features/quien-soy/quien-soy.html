@@ -1,0 +1,84 @@
+<div class="about-container">
+  <section class="about-hero">
+    <h1>Sobre mí</h1>
+  </section>
+
+  <section class="about-content">
+    <div class="col-lg-8 mx-auto">
+      <!-- Estado de carga -->
+      <div *ngIf="loading" class="text-center py-5">
+        <div class="spinner-border text-warning" role="status">
+          <span class="visually-hidden">Cargando...</span>
+        </div>
+        <p class="text-muted mt-3">Trayendo datos de GitHub...</p>
+      </div>
+
+      <!-- Error -->
+      <div *ngIf="error && !loading" class="alert alert-danger">
+        {{ error }}
+      </div>
+
+      <!-- Datos GitHub -->
+      <div *ngIf="user && !loading" class="github-card">
+        <div class="github-header">
+          <img [src]="user.avatar_url" [alt]="user.name" class="github-avatar" />
+          <div class="github-info">
+            <h2>{{ user.name || user.login }}</h2>
+            <p class="github-username">@{{ user.login }}</p>
+            <p *ngIf="user.bio" class="github-bio">{{ user.bio }}</p>
+            <div class="github-meta">
+              <span *ngIf="user.location" class="badge bg-secondary">📍 {{ user.location }}</span>
+              <span *ngIf="user.company" class="badge bg-secondary">🏢 {{ user.company }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="github-stats">
+          <div class="stat">
+            <span class="stat-value">{{ user.public_repos }}</span>
+            <span class="stat-label">Repositorios</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value">{{ user.followers }}</span>
+            <span class="stat-label">Seguidores</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value">{{ user.following }}</span>
+            <span class="stat-label">Seguidos</span>
+          </div>
+        </div>
+
+        <a [href]="user.html_url" target="_blank" class="btn btn-burn-outline">
+          Ver perfil en GitHub →
+        </a>
+      </div>
+
+      <!-- Explicación del juego propio -->
+      <article class="card-content mt-5" *ngIf="!loading">
+        <h2>Mi Juego: Cyber Hunt 🎮</h2>
+        <p>
+          <strong>Concepto:</strong> Un juego de estrategia en tiempo real donde los jugadores deben
+          encontrar objetivos (targets) ocultos en un mapa cyberspacial mientras evitan trampas
+          (firewalls y malwares).
+        </p>
+
+        <h3>¿Cómo jugar?</h3>
+        <ol>
+          <li>Se te asigna una zona del "ciber espacio" (grid 10x10)</li>
+          <li>Debes clickear casillas para buscar los 5 targets ocultos</li>
+          <li>Cada target encontrado suma puntos</li>
+          <li>Evita los firewalls (reducen puntuación) y malwares (fin del juego)</li>
+          <li>Objetivo: Máxima puntuación antes de 60 segundos</li>
+        </ol>
+
+        <h3>Mecánicas</h3>
+        <ul class="skills-list">
+          <li>⏱️ Modo Contra Reloj</li>
+          <li>💥 Power-ups (detectar targets cercanos)</li>
+          <li>📊 Estadísticas por sesión</li>
+          <li>🏆 Tabla de posiciones</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+</div>
