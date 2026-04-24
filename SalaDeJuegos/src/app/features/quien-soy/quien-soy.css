@@ -1,79 +1,241 @@
-/* GitHub Card */
-.github-card {
-  background: linear-gradient(135deg, rgba(21, 21, 21, 0.8), rgba(31, 31, 31, 0.8));
-  border: 2px solid rgba(220, 30, 30, 0.4);
-  border-radius: 16px;
-  padding: 28px;
-  margin: 28px 0;
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&display=swap');
+
+:host {
+  display: block;
+  background: #0a0a0a;
+  color: #f3f3f3;
+  min-height: 100vh;
+  font-family: 'Rajdhani', 'Segoe UI', sans-serif;
 }
 
-.github-header {
+.about-container {
+  width: 100%;
+  padding-top: 92px;
+}
+
+.page-header {
+  max-width: 1240px;
+  margin: 0 auto 6px;
+  padding: 0 12px;
   display: flex;
-  gap: 20px;
-  align-items: flex-start;
-  margin-bottom: 28px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
-.github-avatar {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  border: 3px solid #e01f1f;
-  object-fit: cover;
+.page-heading {
+  text-align: center;
+  margin: 2px 0 14px;
+  font-family: 'Bebas Neue', 'Oswald', sans-serif;
+  font-size: clamp(2rem, 4.2vw, 3.4rem);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #ff2f2f;
+  text-shadow:
+    0 0 28px rgba(224, 31, 31, 0.5),
+    0 0 8px rgba(224, 31, 31, 0.45);
+  line-height: 1;
+  animation: revealUp 500ms ease both;
 }
 
-.github-info h2 {
+.btn-back {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-58%);
+  border: 1px solid rgba(224, 31, 31, 0.65);
+  color: #ff4d4d;
+  background: rgba(18, 18, 18, 0.85);
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.btn-back:hover {
+  background: #e01f1f;
+  color: #111;
+}
+
+.loading-box {
+  min-height: 55vh;
+  display: grid;
+  place-content: center;
+}
+
+.about-error {
+  max-width: 920px;
+  margin: 14px auto;
+}
+
+.personal-hero {
+  min-height: auto;
+  background: linear-gradient(180deg, rgba(10, 10, 10, 0.92), rgba(8, 8, 8, 0.96));
+  animation: revealUp 600ms ease both;
+}
+
+.hero-grid {
+  min-height: auto;
+  display: grid;
+  grid-template-columns: minmax(420px, 620px) minmax(360px, 560px);
+  gap: 26px;
+  align-items: stretch;
+  justify-content: center;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.left-column {
+  display: grid;
+  gap: 16px;
+}
+
+.profile-panel {
+  background: linear-gradient(160deg, rgba(10, 10, 10, 0.82), rgba(18, 18, 18, 0.88));
+  border: 1px solid rgba(224, 31, 31, 0.34);
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.36);
+  animation: revealUp 850ms ease both;
+}
+
+.eyebrow {
   margin: 0;
-  color: #e01f1f;
-  font-weight: 800;
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #ff9b9b;
 }
 
-.github-username {
-  color: #e01f1f;
-  font-size: 0.95rem;
-  margin: 4px 0;
+.title {
+  font-size: clamp(1.9rem, 4vw, 3.5rem);
+  line-height: 1.06;
+  margin: 8px 0 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  animation: revealUp 720ms ease both;
+}
+
+.username {
+  color: #ff6a6a;
   font-weight: 600;
+  margin: 0 0 12px;
 }
 
-.github-bio {
-  color: #d9d9d9;
-  margin: 12px 0 0;
+.title,
+.title span {
+  color: #e01f1f;
+  text-shadow: 0 0 24px rgba(220, 30, 30, 0.36);
+}
+
+.bio {
+  color: #e0e0e0;
   line-height: 1.5;
+  margin-bottom: 14px;
 }
 
-.github-meta {
+.meta-chips {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 12px;
 }
 
-.github-stats {
+.chip {
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(224, 31, 31, 0.42);
+  background: rgba(224, 31, 31, 0.12);
+  color: #ffd8d8;
+  font-size: 0.82rem;
+}
+
+.stats-row {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  margin: 24px 0;
-  background: rgba(220, 30, 30, 0.05);
-  padding: 16px;
-  border-radius: 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 18px;
 }
 
-.stat {
+.stat-box {
+  background: rgba(224, 31, 31, 0.08);
+  border: 1px solid rgba(224, 31, 31, 0.26);
+  border-radius: 10px;
+  padding: 10px;
   text-align: center;
 }
 
 .stat-value {
   display: block;
-  font-size: 1.8rem;
+  font-size: 1.35rem;
   font-weight: 800;
-  color: #e01f1f;
+  color: #ff4747;
 }
 
 .stat-label {
+  color: #c9c9c9;
+  font-size: 0.78rem;
+}
+
+.image-panel {
+  height: auto;
+  border-radius: 18px;
+  overflow: hidden;
+  background: transparent;
+  border: 1px solid rgba(224, 31, 31, 0.26);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.34);
+  animation: revealUp 980ms ease both;
+  position: relative;
+}
+
+.image-media {
+  width: 100%;
+  height: 100%;
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
   display: block;
-  color: #b7b7b7;
-  font-size: 0.85rem;
-  margin-top: 4px;
+}
+
+.image-actions {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  z-index: 2;
+}
+
+.description-panel {
+  background: linear-gradient(160deg, rgba(10, 10, 10, 0.82), rgba(18, 18, 18, 0.88));
+  border: 1px dashed rgba(224, 31, 31, 0.34);
+  border-radius: 16px;
+  padding: 26px;
+  min-height: 260px;
+  color: #e7e7e7;
+}
+
+.description-panel h2 {
+  color: #ff4b4b;
+  font-size: 1.45rem;
+  margin-bottom: 8px;
+}
+
+.description-panel p {
+  color: #d4d4d4;
+  margin-bottom: 10px;
+}
+
+.description-panel ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.description-panel li {
+  margin-bottom: 6px;
 }
 
 .btn-burn-outline {
@@ -93,24 +255,72 @@
   color: #111111;
 }
 
-/* Spinner color */
 .spinner-border-warning {
   --bs-spinner-color: #e01f1f;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
-  .github-header {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+  .about-container {
+    padding-top: 84px;
   }
 
-  .github-stats {
+  .page-header {
+    justify-content: space-between;
+  }
+
+  .page-heading {
+    margin-bottom: 12px;
+  }
+
+  .btn-back {
+    position: static;
+    transform: none;
+    padding: 7px 12px;
+    font-size: 0.8rem;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    min-height: auto;
+    padding-top: 18px;
+    padding-bottom: 20px;
+  }
+
+  .personal-hero {
+    min-height: auto;
+  }
+
+  .stats-row {
     grid-template-columns: 1fr;
   }
 
-  .card-content {
+  .profile-panel {
     padding: 16px;
+  }
+
+  .image-panel {
+    height: 520px;
+  }
+
+  .description-panel {
+    min-height: 220px;
+    padding: 20px;
+  }
+
+  .image-actions {
+    right: 10px;
+    bottom: 10px;
+  }
+}
+
+@keyframes revealUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

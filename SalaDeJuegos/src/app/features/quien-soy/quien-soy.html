@@ -1,84 +1,75 @@
+<app-navbar></app-navbar>
+
 <div class="about-container">
-  <section class="about-hero">
-    <h1>Sobre mí</h1>
-  </section>
+  <div class="page-header">
+    <h1 class="page-heading">Quien Soy</h1>
+    <a routerLink="/" class="btn btn-back">Volver</a>
+  </div>
 
-  <section class="about-content">
-    <div class="col-lg-8 mx-auto">
-      <!-- Estado de carga -->
-      <div *ngIf="loading" class="text-center py-5">
-        <div class="spinner-border text-warning" role="status">
-          <span class="visually-hidden">Cargando...</span>
-        </div>
-        <p class="text-muted mt-3">Trayendo datos de GitHub...</p>
-      </div>
+  <div *ngIf="loading" class="loading-box text-center py-5">
+    <div class="spinner-border text-warning" role="status">
+      <span class="visually-hidden">Cargando...</span>
+    </div>
+    <p class="text-muted mt-3">Trayendo perfil desde GitHub...</p>
+  </div>
 
-      <!-- Error -->
-      <div *ngIf="error && !loading" class="alert alert-danger">
-        {{ error }}
-      </div>
+  <div *ngIf="error && !loading" class="about-error alert alert-danger">
+    {{ error }}
+  </div>
 
-      <!-- Datos GitHub -->
-      <div *ngIf="user && !loading" class="github-card">
-        <div class="github-header">
-          <img [src]="user.avatar_url" [alt]="user.name" class="github-avatar" />
-          <div class="github-info">
-            <h2>{{ user.name || user.login }}</h2>
-            <p class="github-username">@{{ user.login }}</p>
-            <p *ngIf="user.bio" class="github-bio">{{ user.bio }}</p>
-            <div class="github-meta">
-              <span *ngIf="user.location" class="badge bg-secondary">📍 {{ user.location }}</span>
-              <span *ngIf="user.company" class="badge bg-secondary">🏢 {{ user.company }}</span>
+  <section *ngIf="user && !loading" class="personal-hero">
+    <div class="hero-grid container-fluid px-3 px-md-5">
+      <div class="left-column">
+        <article class="profile-panel">
+          <p class="eyebrow">Perfil Personal</p>
+          <h1 class="title">{{ user.name || user.login }}</h1>
+          <p class="username">@{{ user.login }}</p>
+
+          <p class="bio" *ngIf="user.bio">{{ user.bio }}</p>
+
+          <div class="meta-chips">
+            <span *ngIf="user.location" class="chip">{{ user.location }}</span>
+            <span *ngIf="user.company" class="chip">{{ user.company }}</span>
+          </div>
+
+          <div class="stats-row">
+            <div class="stat-box">
+              <span class="stat-value">{{ user.public_repos }}</span>
+              <span class="stat-label">Repos</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-value">{{ user.followers }}</span>
+              <span class="stat-label">Followers</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-value">{{ user.following }}</span>
+              <span class="stat-label">Following</span>
             </div>
           </div>
-        </div>
+        </article>
 
-        <div class="github-stats">
-          <div class="stat">
-            <span class="stat-value">{{ user.public_repos }}</span>
-            <span class="stat-label">Repositorios</span>
-          </div>
-          <div class="stat">
-            <span class="stat-value">{{ user.followers }}</span>
-            <span class="stat-label">Seguidores</span>
-          </div>
-          <div class="stat">
-            <span class="stat-value">{{ user.following }}</span>
-            <span class="stat-label">Seguidos</span>
-          </div>
-        </div>
-
-        <a [href]="user.html_url" target="_blank" class="btn btn-burn-outline">
-          Ver perfil en GitHub →
-        </a>
+        <article class="description-panel">
+          <h2>Sobre mi</h2>
+          <p>
+            Este espacio queda para que completes tu descripcion personal, experiencia, objetivos y
+            cualquier informacion que quieras destacar.
+          </p>
+          <ul>
+            <li>[Completar: presentacion breve]</li>
+            <li>[Completar: stack o tecnologias]</li>
+            <li>[Completar: proyecto o logro destacado]</li>
+          </ul>
+        </article>
       </div>
 
-      <!-- Explicación del juego propio -->
-      <article class="card-content mt-5" *ngIf="!loading">
-        <h2>Mi Juego: Cyber Hunt 🎮</h2>
-        <p>
-          <strong>Concepto:</strong> Un juego de estrategia en tiempo real donde los jugadores deben
-          encontrar objetivos (targets) ocultos en un mapa cyberspacial mientras evitan trampas
-          (firewalls y malwares).
-        </p>
-
-        <h3>¿Cómo jugar?</h3>
-        <ol>
-          <li>Se te asigna una zona del "ciber espacio" (grid 10x10)</li>
-          <li>Debes clickear casillas para buscar los 5 targets ocultos</li>
-          <li>Cada target encontrado suma puntos</li>
-          <li>Evita los firewalls (reducen puntuación) y malwares (fin del juego)</li>
-          <li>Objetivo: Máxima puntuación antes de 60 segundos</li>
-        </ol>
-
-        <h3>Mecánicas</h3>
-        <ul class="skills-list">
-          <li>⏱️ Modo Contra Reloj</li>
-          <li>💥 Power-ups (detectar targets cercanos)</li>
-          <li>📊 Estadísticas por sesión</li>
-          <li>🏆 Tabla de posiciones</li>
-        </ul>
-      </article>
+      <aside class="image-panel">
+        <div class="image-media">
+          <img [src]="user.avatar_url" [alt]="user.name || user.login" class="profile-image" />
+        </div>
+        <div class="image-actions">
+          <a [href]="user.html_url" target="_blank" class="btn btn-burn-outline">Ver mi GitHub</a>
+        </div>
+      </aside>
     </div>
   </section>
 </div>
