@@ -12,8 +12,6 @@
 .hero {
   position: relative;
   overflow: hidden;
-  padding-top: 48px;
-  padding-bottom: 24px;
 }
 
 .hero::before {
@@ -58,11 +56,6 @@
   animation: revealUp 900ms ease both;
 }
 
-.carousel-section {
-  padding-top: 18px;
-  padding-bottom: 42px;
-}
-
 .section-title {
   font-size: 1.15rem;
   font-weight: 700;
@@ -76,18 +69,5 @@
   border-top: 1px solid rgba(220, 30, 30, 0.2);
   background: #060606;
   color: #9d9d9d;
-  text-align: center;
-  padding: 14px 10px;
   font-size: 0.9rem;
-}
-
-@keyframes revealUp {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }

@@ -1,12 +1,15 @@
 <app-navbar></app-navbar>
 
 <div class="about-container">
-  <div class="page-header">
+  <div class="page-header d-flex align-items-center justify-content-center">
     <h1 class="page-heading">Quien Soy</h1>
     <a routerLink="/" class="btn btn-back">Volver</a>
   </div>
 
-  <div *ngIf="loading" class="loading-box text-center py-5">
+  <div
+    *ngIf="loading"
+    class="loading-box text-center py-5 d-flex flex-column align-items-center justify-content-center"
+  >
     <div class="spinner-border text-warning" role="status">
       <span class="visually-hidden">Cargando...</span>
     </div>

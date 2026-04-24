@@ -1,15 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&display=swap');
-
 :host {
   display: block;
   background: #0a0a0a;
   color: #f3f3f3;
   min-height: 100vh;
-  font-family: 'Rajdhani', 'Segoe UI', sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .about-container {
-  width: 100%;
   padding-top: 92px;
 }
 
@@ -17,16 +14,13 @@
   max-width: 1240px;
   margin: 0 auto 6px;
   padding: 0 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: relative;
 }
 
 .page-heading {
   text-align: center;
   margin: 2px 0 14px;
-  font-family: 'Bebas Neue', 'Oswald', sans-serif;
+  font-family: 'Impact', 'Arial Black', 'Segoe UI', sans-serif;
   font-size: clamp(2rem, 4.2vw, 3.4rem);
   font-weight: 400;
   text-transform: uppercase;
@@ -61,8 +55,6 @@
 
 .loading-box {
   min-height: 55vh;
-  display: grid;
-  place-content: center;
 }
 
 .about-error {
@@ -71,13 +63,11 @@
 }
 
 .personal-hero {
-  min-height: auto;
   background: linear-gradient(180deg, rgba(10, 10, 10, 0.92), rgba(8, 8, 8, 0.96));
   animation: revealUp 600ms ease both;
 }
 
 .hero-grid {
-  min-height: auto;
   display: grid;
   grid-template-columns: minmax(420px, 620px) minmax(360px, 560px);
   gap: 26px;
@@ -179,7 +169,6 @@
 }
 
 .image-panel {
-  height: auto;
   border-radius: 18px;
   overflow: hidden;
   background: transparent;
@@ -282,13 +271,8 @@
   .hero-grid {
     grid-template-columns: 1fr;
     gap: 16px;
-    min-height: auto;
     padding-top: 18px;
     padding-bottom: 20px;
-  }
-
-  .personal-hero {
-    min-height: auto;
   }
 
   .stats-row {
@@ -311,16 +295,5 @@
   .image-actions {
     right: 10px;
     bottom: 10px;
-  }
-}
-
-@keyframes revealUp {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
   }
 }

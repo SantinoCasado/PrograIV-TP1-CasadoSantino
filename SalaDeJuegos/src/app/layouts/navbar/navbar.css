@@ -1,16 +1,8 @@
 .topbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  padding: 14px 22px;
   background: rgba(8, 8, 8, 0.9);
   border-bottom: 1px solid rgba(220, 30, 30, 0.2);
   backdrop-filter: blur(8px);
   z-index: 1000;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .brand {
@@ -24,15 +16,8 @@
   color: #e01f1f;
 }
 
-.menu {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.menu a {
+.menu .nav-link {
   color: #f2f2f2;
-  text-decoration: none;
   font-weight: 600;
   font-size: 0.92rem;
   padding: 8px 12px;
@@ -41,8 +26,8 @@
   transition: 220ms ease;
 }
 
-.menu a:hover,
-.menu a.active {
+.menu .nav-link:hover,
+.menu .nav-link.active {
   color: #e01f1f;
   border-color: rgba(220, 30, 30, 0.45);
   background: rgba(220, 30, 30, 0.08);
