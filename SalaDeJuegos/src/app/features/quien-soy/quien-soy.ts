@@ -13,6 +13,7 @@ imports: [CommonModule, RouterLink, Navbar],
 templateUrl: './quien-soy.html',
 styleUrl: './quien-soy.css',
 })
+
 export class QuienSoy implements OnInit {
   user: GithubUser | null = null;
   loading = false;
@@ -22,6 +23,24 @@ export class QuienSoy implements OnInit {
 
   constructor(
     private githubService: GithubService,
+
+/*
+Tenia un problema con la detección de cambios en Angular al usar el servicio de GitHub. 
+Cuando el observable emitía un nuevo valor o un error, Angular no actualizaba la interfaz de 
+usuario automáticamente. Al inyectar ChangeDetectorRef y llamar a detectChanges() 
+después de actualizar los datos o manejar errores, pude forzar a Angular a detectar los cambios y 
+actualizar la vista correctamente. Esto fue especialmente útil para mostrar mensajes de error o 
+actualizar el perfil del usuario sin problemas.
+    	            1ra vez	  2da vez
+¿Llegó el dato?	  ✓ sí	    ✓ sí (de caché)
+¿Angular lo vio?	✗ no	    ✓ sí
+¿Se mostró?	      ✗ no	    ✓ sí
+
+Explicacion de la IA:
+ChangeDetectorRef se usa para forzar a Angular a detectar cambios después de que el observable emite un 
+nuevo valor o un error, asegurando que la interfaz de usuario se actualice correctamente incluso si la 
+suscripción ocurre fuera del ciclo de detección de Angular.
+*/
     private cdr: ChangeDetectorRef
   ) {}
 
