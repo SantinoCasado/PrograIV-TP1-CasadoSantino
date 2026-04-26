@@ -1,1 +1,21 @@
 @import '../../../../../styles/auth-card.css';
+
+.quick-access-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.quick-access-btn {
+  flex: 1 1 120px;
+  min-width: 0;
+  border: 1px solid rgba(224, 31, 31, 0.75);
+  background: rgba(224, 31, 31, 0.14);
+  color: #ffd6d6;
+  font-weight: 700;
+}
+
+.quick-access-btn:hover {
+  background: #e01f1f;
+  color: #111111;
+}
