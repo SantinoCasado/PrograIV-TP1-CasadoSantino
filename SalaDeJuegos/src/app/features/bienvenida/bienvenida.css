@@ -27,6 +27,7 @@
 }
 
 .title {
+  /* Responsive: clamp adapta el título entre mobile y desktop sin cortes bruscos. */
   font-size: clamp(2rem, 4.5vw, 4rem);
   line-height: 1.05;
   margin-bottom: 12px;
@@ -70,4 +71,20 @@
   background: #060606;
   color: #9d9d9d;
   font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  /* Responsive: reduce aire y paneles para pantallas chicas. */
+  .landing-page {
+    padding-top: 76px;
+  }
+
+  .hero::before {
+    width: 320px;
+    height: 320px;
+  }
+
+  .auth-panel {
+    padding: 16px;
+  }
 }

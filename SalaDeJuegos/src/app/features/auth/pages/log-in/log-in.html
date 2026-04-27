@@ -1,6 +1,6 @@
-<div class="auth-card">
+<div class="tarjeta-auth">
   <h3>Iniciar sesión</h3>
-  <p class="muted">Entrá y disfruta de nuestro catálogo de juegos.</p>
+  <p class="texto-secundario">Entrá y disfruta de nuestro catálogo de juegos.</p>
 
   <!-- Inicio del formulario de inicio de sesión -->
   <form [formGroup]="form" (ngSubmit)="enviar()" class="row g-3 mt-1">
@@ -59,24 +59,24 @@
   <!-- Sección de acceso rápido con botones para iniciar sesión con cuentas predefinidas (para pruebas) -->
   <div class="mt-3">
     <p class="muted mb-2">Acceso rápido:</p>
-    <div class="quick-access-buttons">
+    <div class="botones-acceso-rapido">
       <button
         type="button"
-        class="btn quick-access-btn"
+        class="btn boton-acceso-rapido"
         (click)="loginRapido('test1@cyberburn.com', 'test123')"
       >
         Jugador 1
       </button>
       <button
         type="button"
-        class="btn quick-access-btn"
+        class="btn boton-acceso-rapido"
         (click)="loginRapido('test2@cyberburn.com', 'test123')"
       >
         Jugador 2
       </button>
       <button
         type="button"
-        class="btn quick-access-btn"
+        class="btn boton-acceso-rapido"
         (click)="loginRapido('test3@cyberburn.com', 'test123')"
       >
         Jugador 3
@@ -85,7 +85,7 @@
   </div>
 
   <!-- Enlace para registrarse si no se tiene una cuenta -->
-  <p class="switch-text">
+  <p class="texto-cambio-formulario">
     ¿No tenés cuenta?
     <a routerLink="/registro">Registrate</a>
   </p>

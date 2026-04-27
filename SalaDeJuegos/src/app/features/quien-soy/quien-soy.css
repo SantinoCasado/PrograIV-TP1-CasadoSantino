@@ -6,21 +6,22 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.about-container {
+.contenedor-sobre-mi {
   padding-top: 72px;
 }
 
-.page-header {
+.encabezado-pagina {
   max-width: 1240px;
   margin: 0 auto;
   padding: 0 12px;
   position: relative;
 }
 
-.page-heading {
+.titulo-pagina {
   text-align: center;
   margin: 0 0 8px;
   font-family: 'Impact', 'Arial Black', 'Segoe UI', sans-serif;
+  /* Responsive: clamp hace que el título escale sin saltos entre celular y desktop. */
   font-size: clamp(1.55rem, 3.1vw, 2.55rem);
   font-weight: 400;
   letter-spacing: 0.16em;
@@ -31,7 +32,7 @@
   animation: fadeDown 380ms ease-out both;
 }
 
-.btn-back {
+.boton-volver {
   position: absolute;
   left: 12px;
   top: 50%;
@@ -45,17 +46,18 @@
   letter-spacing: 0.05em;
 }
 
-.btn-back:hover {
+.boton-volver:hover {
   background: #e01f1f;
   color: #111;
 }
 
-.personal-hero {
+.seccion-presentacion {
   background: linear-gradient(180deg, rgba(10, 10, 10, 0.92), rgba(8, 8, 8, 0.96));
 }
 
-.hero-grid {
+.grilla-presentacion {
   display: grid;
+  /* Base desktop: dos columnas flexibles en vez de anchos totalmente fijos. */
   grid-template-columns: minmax(390px, 0.96fr) minmax(380px, 1.08fr);
   gap: 14px;
   align-items: start;
@@ -67,7 +69,7 @@
   padding-bottom: 6px;
 }
 
-.hero-grid > .d-grid {
+.grilla-presentacion > .d-grid {
   display: flex !important;
   flex-direction: column;
   height: calc(100vh - 170px);
@@ -75,12 +77,12 @@
   gap: 10px !important;
 }
 
-.profile-panel,
-.description-panel {
+.panel-perfil,
+.panel-descripcion {
   background: linear-gradient(160deg, rgba(10, 10, 10, 0.82), rgba(18, 18, 18, 0.88));
 }
 
-.profile-panel {
+.panel-perfil {
   border: 1px solid rgba(224, 31, 31, 0.34);
   border-radius: 18px;
   padding: 14px 16px;
@@ -88,7 +90,7 @@
   animation: fadeUp 420ms ease-out both;
 }
 
-.eyebrow {
+.subtitulo-panel {
   margin: 0;
   font-size: 0.74rem;
   text-transform: uppercase;
@@ -96,7 +98,7 @@
   color: #ff9b9b;
 }
 
-.title {
+.nombre-principal {
   font-size: clamp(1.45rem, 2.7vw, 2.2rem);
   line-height: 1.02;
   margin: 4px 0 6px;
@@ -105,17 +107,17 @@
   text-shadow: 0 0 24px rgba(220, 30, 30, 0.36);
 }
 
-.username {
+.nombre-usuario {
   color: #ff6a6a;
 }
 
-.bio {
+.biografia {
   color: #e0e0e0;
   font-size: 0.94rem;
   line-height: 1.32;
 }
 
-.chip {
+.etiqueta-dato {
   padding: 4px 9px;
   border-radius: 999px;
   border: 1px solid rgba(224, 31, 31, 0.42);
@@ -124,7 +126,7 @@
   font-size: 0.78rem;
 }
 
-.stat-box {
+.caja-estadistica {
   background: rgba(224, 31, 31, 0.08);
   border: 1px solid rgba(224, 31, 31, 0.26);
   border-radius: 10px;
@@ -132,43 +134,44 @@
   text-align: center;
 }
 
-.stat-value {
+.valor-estadistica {
   display: block;
   font-size: 1.15rem;
   font-weight: 800;
   color: #ff4747;
 }
 
-.stat-label {
+.etiqueta-estadistica {
   color: #c9c9c9;
   font-size: 0.78rem;
 }
 
-.image-panel {
+.panel-imagen {
   border-radius: 18px;
   overflow: hidden;
   border: 1px solid rgba(224, 31, 31, 0.26);
   box-shadow: 0 14px 34px rgba(0, 0, 0, 0.34);
   position: relative;
+  /* Responsive: la imagen usa clamp para no quedar ni diminuta ni gigante. */
   height: clamp(520px, 82vh, 820px);
   min-height: 520px;
   animation: fadeLeft 480ms ease-out both;
 }
 
-.profile-image {
+.imagen-perfil {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
 
-.image-actions {
+.acciones-imagen {
   position: absolute;
   right: 14px;
   bottom: 14px;
 }
 
-.description-panel {
+.panel-descripcion {
   border: 1px dashed rgba(224, 31, 31, 0.34);
   border-radius: 16px;
   padding: 18px;
@@ -181,44 +184,44 @@
   animation: fadeUp 540ms ease-out both;
 }
 
-.description-panel h2 {
+.panel-descripcion h2 {
   color: #ff4b4b;
   font-size: 1.15rem;
   margin-bottom: 0;
 }
 
-.description-panel h3 {
+.panel-descripcion h3 {
   color: #ff6a6a;
   font-size: 0.92rem;
   margin: 0;
   letter-spacing: 0.04em;
 }
 
-.description-panel p {
+.panel-descripcion p {
   color: #d4d4d4;
   margin-bottom: 0;
   line-height: 1.45;
   font-size: 0.9rem;
 }
 
-.description-panel ul {
+.panel-descripcion ul {
   margin: 0;
   padding-left: 18px;
 }
 
-.description-panel li {
+.panel-descripcion li {
   margin-bottom: 6px;
   font-size: 0.89rem;
   line-height: 1.4;
 }
 
-.description-panel a {
+.panel-descripcion a {
   color: #ff8a8a;
   text-decoration: none;
   border-bottom: 1px dashed rgba(255, 138, 138, 0.45);
 }
 
-.description-panel a:hover {
+.panel-descripcion a:hover {
   color: #ffd0d0;
   border-bottom-color: rgba(255, 208, 208, 0.65);
 }
@@ -238,26 +241,27 @@
 }
 
 @media (max-width: 768px) {
-  .about-container {
+  /* Responsive real: acá el layout cambia de dos columnas a una sola. */
+  .contenedor-sobre-mi {
     padding-top: 84px;
   }
 
-  .page-header {
+  .encabezado-pagina {
     justify-content: space-between;
   }
 
-  .page-heading {
+  .titulo-pagina {
     margin-bottom: 12px;
   }
 
-  .btn-back {
+  .boton-volver {
     position: static;
     transform: none;
     padding: 7px 12px;
     font-size: 0.8rem;
   }
 
-  .hero-grid {
+  .grilla-presentacion {
     grid-template-columns: 1fr;
     gap: 16px;
     min-height: 0;
@@ -265,29 +269,52 @@
     padding-bottom: 20px;
   }
 
-  .hero-grid > .d-grid {
+  .grilla-presentacion > .d-grid {
     display: grid !important;
     height: auto;
     min-height: 0;
     gap: 16px !important;
   }
 
-  .profile-panel {
+  .panel-perfil {
     padding: 16px;
   }
 
-  .image-panel {
+  .panel-imagen {
     max-height: none;
-    height: 520px;
+    height: 420px;
+    min-height: 420px;
   }
 
-  .description-panel {
+  .panel-descripcion {
     display: block;
     padding: 20px;
   }
 
-  .image-actions {
+  .acciones-imagen {
     right: 10px;
     bottom: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Responsive fino: ajusta alturas y espaciados para celulares angostos. */
+  .encabezado-pagina {
+    padding: 0 8px;
+  }
+
+  .grilla-presentacion {
+    gap: 12px;
+    padding-top: 12px;
+  }
+
+  .panel-perfil,
+  .panel-descripcion {
+    padding: 14px;
+  }
+
+  .panel-imagen {
+    height: 320px;
+    min-height: 320px;
   }
 }

@@ -1,9 +1,9 @@
 <app-navbar></app-navbar>
 
-<div class="about-container">
-  <div class="page-header d-flex align-items-center justify-content-center">
-    <h1 class="page-heading text-uppercase">Quien Soy</h1>
-    <a routerLink="/" class="btn btn-back text-uppercase">Volver</a>
+<div class="contenedor-sobre-mi">
+  <div class="encabezado-pagina d-flex align-items-center justify-content-center">
+    <h1 class="titulo-pagina text-uppercase">Quien Soy</h1>
+    <a routerLink="/" class="btn boton-volver text-uppercase">Volver</a>
   </div>
 
   <div *ngIf="loading && !user" class="text-center py-5">
@@ -14,44 +14,44 @@
     {{ error }}
   </div>
 
-  <section *ngIf="user && !error" class="personal-hero">
-    <div class="hero-grid container-fluid px-3 px-md-5">
+  <section *ngIf="user && !error" class="seccion-presentacion">
+    <div class="grilla-presentacion container-fluid px-3 px-md-5">
       <div class="d-grid gap-3">
-        <article class="profile-panel">
-          <p class="eyebrow">Perfil Personal</p>
-          <h1 class="title text-uppercase">{{ user.name || user.login }}</h1>
-          <p class="username fw-semibold mb-2">@{{ user.login }}</p>
+        <article class="panel-perfil">
+          <p class="subtitulo-panel">Perfil Personal</p>
+          <h1 class="nombre-principal text-uppercase">{{ user.name || user.login }}</h1>
+          <p class="nombre-usuario fw-semibold mb-2">@{{ user.login }}</p>
 
-          <p class="bio mb-2" *ngIf="user.bio">{{ user.bio }}</p>
+          <p class="biografia mb-2" *ngIf="user.bio">{{ user.bio }}</p>
 
           <div class="d-flex flex-wrap gap-2">
-            <span *ngIf="user.location" class="chip">{{ user.location }}</span>
-            <span *ngIf="user.company" class="chip">{{ user.company }}</span>
+            <span *ngIf="user.location" class="etiqueta-dato">{{ user.location }}</span>
+            <span *ngIf="user.company" class="etiqueta-dato">{{ user.company }}</span>
           </div>
 
           <div class="row row-cols-1 row-cols-md-3 g-2 mt-3">
             <div class="col">
-              <div class="stat-box h-100">
-                <span class="stat-value">{{ user.public_repos }}</span>
-                <span class="stat-label">Repos</span>
+              <div class="caja-estadistica h-100">
+                <span class="valor-estadistica">{{ user.public_repos }}</span>
+                <span class="etiqueta-estadistica">Repos</span>
               </div>
             </div>
             <div class="col">
-              <div class="stat-box h-100">
-                <span class="stat-value">{{ user.followers }}</span>
-                <span class="stat-label">Followers</span>
+              <div class="caja-estadistica h-100">
+                <span class="valor-estadistica">{{ user.followers }}</span>
+                <span class="etiqueta-estadistica">Followers</span>
               </div>
             </div>
             <div class="col">
-              <div class="stat-box h-100">
-                <span class="stat-value">{{ user.following }}</span>
-                <span class="stat-label">Following</span>
+              <div class="caja-estadistica h-100">
+                <span class="valor-estadistica">{{ user.following }}</span>
+                <span class="etiqueta-estadistica">Following</span>
               </div>
             </div>
           </div>
         </article>
 
-        <article class="description-panel">
+        <article class="panel-descripcion">
           <h2>Sobre mi</h2>
           <p>
             Me encuentro en mi ultimo año de estudio de la "Técnicatura en Programación" en la UTN,
@@ -90,13 +90,13 @@
         </article>
       </div>
 
-      <aside class="image-panel">
+      <aside class="panel-imagen">
         <img
           [src]="user.avatar_url"
           [alt]="user.name || user.login || 'Perfil GitHub'"
-          class="profile-image"
+          class="imagen-perfil"
         />
-        <div class="image-actions">
+        <div class="acciones-imagen">
           <a
             *ngIf="user.html_url"
             [href]="user.html_url"

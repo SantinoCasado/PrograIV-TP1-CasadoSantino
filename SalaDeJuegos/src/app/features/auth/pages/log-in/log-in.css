@@ -1,12 +1,12 @@
 @import '../../../../../styles/auth-card.css';
 
-.quick-access-buttons {
+.botones-acceso-rapido {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
 }
 
-.quick-access-btn {
+.boton-acceso-rapido {
   flex: 1 1 120px;
   min-width: 0;
   border: 1px solid rgba(224, 31, 31, 0.75);
@@ -15,7 +15,7 @@
   font-weight: 700;
 }
 
-.quick-access-btn:hover {
+.boton-acceso-rapido:hover {
   background: #e01f1f;
   color: #111111;
 }

@@ -1,10 +1,15 @@
-.auth-card h3 {
+.tarjeta-auth {
+  width: min(100%, 440px);
+  margin: 0 auto;
+}
+
+.tarjeta-auth h3 {
   margin: 0;
   font-weight: 800;
   letter-spacing: 0.02em;
 }
 
-.muted {
+.texto-secundario {
   margin: 8px 0 14px;
   color: #afafaf;
   font-size: 0.93rem;
@@ -41,14 +46,30 @@
   filter: brightness(1.04);
 }
 
-.switch-text {
+.texto-cambio-formulario {
   margin: 12px 0 0;
   color: #b7b7b7;
   font-size: 0.92rem;
 }
 
-.switch-text a {
+.texto-cambio-formulario a {
   color: #e01f1f;
   text-decoration: none;
   font-weight: 700;
+}
+
+@media (max-width: 576px) {
+  /* Responsive: en mobile reduce padding visual y evita formularios demasiado anchos. */
+  .tarjeta-auth {
+    width: 100%;
+  }
+
+  .texto-secundario {
+    margin-bottom: 12px;
+    font-size: 0.9rem;
+  }
+
+  .btn-burn {
+    height: 42px;
+  }
 }

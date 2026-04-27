@@ -32,3 +32,25 @@
   border-color: rgba(220, 30, 30, 0.45);
   background: rgba(220, 30, 30, 0.08);
 }
+
+@media (max-width: 576px) {
+  /* Responsive: apila marca y navegación para que no se compriman en una sola fila. */
+  .topbar .container-fluid {
+    flex-direction: column;
+    align-items: stretch !important;
+    gap: 10px;
+  }
+
+  .brand {
+    text-align: center;
+  }
+
+  .menu {
+    justify-content: center;
+  }
+
+  .menu .nav-link {
+    font-size: 0.86rem;
+    padding: 7px 10px;
+  }
+}
