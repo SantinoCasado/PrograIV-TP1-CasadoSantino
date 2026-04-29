@@ -60,7 +60,7 @@ suscripción ocurre fuera del ciclo de detección de Angular.
         next: (data) => {
           this.user = data;
           this.loading = false;
-          this.cdr.detectChanges();
+          this.cdr.detectChanges(); // Forzar detección de cambios después de actualizar el usuario
         },
         error: (err) => {
           this.loading = false;
