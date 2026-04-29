@@ -1,92 +1,99 @@
-<div class="tarjeta-auth">
-  <h3>Iniciar sesión</h3>
-  <p class="texto-secundario">Entrá y disfruta de nuestro catálogo de juegos.</p>
+<app-bienvenida>
+  <div class="tarjeta-auth">
+    <h3>Iniciar sesión</h3>
+    <p class="texto-secundario">Entrá y disfruta de nuestro catálogo de juegos.</p>
 
-  <!-- Inicio del formulario de inicio de sesión -->
-  <form [formGroup]="form" (ngSubmit)="enviar()" class="row g-3 mt-1">
-    <div class="col-12">
-      <label class="form-label">Email</label>
-      <input type="email" formControlName="email" class="form-control" placeholder="tu@email.com" />
-      <!-- Validación del email, si es inválido y se ha intentado enviar el formulario o el campo ha sido tocado -->
-      @if (form.get('email')?.invalid && (form.get('email')?.touched || intentoEnvio)) {
-        @if (form.get('email')?.hasError('required')) {
-          <!-- Si el campo email es requerido y está vacío -->
-          <small class="text-danger">El email es obligatorio.</small>
-        }
-        @if (form.get('email')?.hasError('email')) {
-          <!-- Si el campo email no tiene un formato válido -->
-          <small class="text-danger">El formato del email no es válido.</small>
-        }
-      }
-    </div>
-
-    <div class="col-12">
-      <label class="form-label">Contraseña</label>
-      <input
-        type="password"
-        formControlName="password"
-        class="form-control"
-        placeholder="********"
-      />
-      <!-- Validación de la contraseña, si es inválida y se ha intentado enviar el formulario o el campo ha sido tocado -->
-      @if (form.get('password')?.invalid && (form.get('password')?.touched || intentoEnvio)) {
-        @if (form.get('password')?.hasError('required')) {
-          <!-- Si el campo contraseña es requerido y está vacío -->
-          <small class="text-danger">La contraseña es obligatoria.</small>
-        }
-        @if (form.get('password')?.hasError('minlength')) {
-          <!-- Si el campo contraseña no cumple con la longitud mínima -->
-          <small class="text-danger">Mínimo 6 caracteres.</small>
-        }
-      }
-    </div>
-
-    <!-- Mostrar mensaje de error general si existe -->
-    @if (mensajeError) {
+    <!-- Inicio del formulario de inicio de sesión -->
+    <form [formGroup]="form" (ngSubmit)="enviar()" class="row g-3 mt-1">
       <div class="col-12">
-        <p class="text-danger mb-0">{{ mensajeError }}</p>
+        <label class="form-label">Email</label>
+        <input
+          type="email"
+          formControlName="email"
+          class="form-control"
+          placeholder="tu@email.com"
+        />
+        <!-- Validación del email, si es inválido y se ha intentado enviar el formulario o el campo ha sido tocado -->
+        @if (form.get('email')?.invalid && (form.get('email')?.touched || intentoEnvio)) {
+          @if (form.get('email')?.hasError('required')) {
+            <!-- Si el campo email es requerido y está vacío -->
+            <small class="text-danger">El email es obligatorio.</small>
+          }
+          @if (form.get('email')?.hasError('email')) {
+            <!-- Si el campo email no tiene un formato válido -->
+            <small class="text-danger">El formato del email no es válido.</small>
+          }
+        }
       </div>
-    }
 
-    <!-- Botón de envío del formulario, deshabilitado mientras se está procesando el inicio de sesión -->
-    <div class="col-12 d-grid mt-2">
-      <button type="submit" class="btn btn-burn" [disabled]="cargando">
-        {{ cargando ? 'Ingresando...' : 'Log in' }}
-      </button>
-    </div>
-  </form>
+      <div class="col-12">
+        <label class="form-label">Contraseña</label>
+        <input
+          type="password"
+          formControlName="password"
+          class="form-control"
+          placeholder="********"
+        />
+        <!-- Validación de la contraseña, si es inválida y se ha intentado enviar el formulario o el campo ha sido tocado -->
+        @if (form.get('password')?.invalid && (form.get('password')?.touched || intentoEnvio)) {
+          @if (form.get('password')?.hasError('required')) {
+            <!-- Si el campo contraseña es requerido y está vacío -->
+            <small class="text-danger">La contraseña es obligatoria.</small>
+          }
+          @if (form.get('password')?.hasError('minlength')) {
+            <!-- Si el campo contraseña no cumple con la longitud mínima -->
+            <small class="text-danger">Mínimo 6 caracteres.</small>
+          }
+        }
+      </div>
 
-  <!-- Sección de acceso rápido con botones para iniciar sesión con cuentas predefinidas (para pruebas) -->
-  <div class="mt-3">
-    <p class="muted mb-2">Acceso rápido:</p>
-    <div class="botones-acceso-rapido">
-      <button
-        type="button"
-        class="btn boton-acceso-rapido"
-        (click)="loginRapido('test1@cyberburn.com', 'test123')"
-      >
-        Jugador 1
-      </button>
-      <button
-        type="button"
-        class="btn boton-acceso-rapido"
-        (click)="loginRapido('test2@cyberburn.com', 'test123')"
-      >
-        Jugador 2
-      </button>
-      <button
-        type="button"
-        class="btn boton-acceso-rapido"
-        (click)="loginRapido('test3@cyberburn.com', 'test123')"
-      >
-        Jugador 3
-      </button>
+      <!-- Mostrar mensaje de error general si existe -->
+      @if (mensajeError) {
+        <div class="col-12">
+          <p class="text-danger mb-0">{{ mensajeError }}</p>
+        </div>
+      }
+
+      <!-- Botón de envío del formulario, deshabilitado mientras se está procesando el inicio de sesión -->
+      <div class="col-12 d-grid mt-2">
+        <button type="submit" class="btn btn-burn" [disabled]="cargando">
+          {{ cargando ? 'Ingresando...' : 'Log in' }}
+        </button>
+      </div>
+    </form>
+
+    <!-- Sección de acceso rápido con botones para iniciar sesión con cuentas predefinidas (para pruebas) -->
+    <div class="mt-3">
+      <p class="muted mb-2">Acceso rápido:</p>
+      <div class="botones-acceso-rapido">
+        <button
+          type="button"
+          class="btn boton-acceso-rapido"
+          (click)="loginRapido('test1@cyberburn.com', 'test123')"
+        >
+          Jugador 1
+        </button>
+        <button
+          type="button"
+          class="btn boton-acceso-rapido"
+          (click)="loginRapido('test2@cyberburn.com', 'test123')"
+        >
+          Jugador 2
+        </button>
+        <button
+          type="button"
+          class="btn boton-acceso-rapido"
+          (click)="loginRapido('test3@cyberburn.com', 'test123')"
+        >
+          Jugador 3
+        </button>
+      </div>
     </div>
+
+    <!-- Enlace para registrarse si no se tiene una cuenta -->
+    <p class="texto-cambio-formulario">
+      ¿No tenés cuenta?
+      <a routerLink="/registro">Registrate</a>
+    </p>
   </div>
-
-  <!-- Enlace para registrarse si no se tiene una cuenta -->
-  <p class="texto-cambio-formulario">
-    ¿No tenés cuenta?
-    <a routerLink="/registro">Registrate</a>
-  </p>
-</div>
+</app-bienvenida>

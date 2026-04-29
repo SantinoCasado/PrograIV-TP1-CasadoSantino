@@ -1,122 +1,131 @@
-<div class="tarjeta-auth">
-  <h3>Crear cuenta</h3>
-  <p class="texto-secundario">Unite a Cyber Burn y empezá a jugar.</p>
+<app-bienvenida>
+  <div class="tarjeta-auth">
+    <h3>Crear cuenta</h3>
+    <p class="texto-secundario">Unite a Cyber Burn y empezá a jugar.</p>
 
-  <!-- Inicio del formulario de registro -->
-  <form [formGroup]="form" (ngSubmit)="enviar()" class="row g-3 mt-1">
-    <div class="col-12">
-      <label class="form-label">Nombre</label>
-      <input type="text" formControlName="nombre" class="form-control" placeholder="Tu nombre" />
-
-      <!-- Validación del campo nombre -->
-      @if (form.get('nombre')?.invalid && (form.get('nombre')?.touched || intentoEnvio)) {
-        <!-- Si el campo nombre es inválido y se ha intentado enviar el formulario o el campo ha sido tocado -->
-        @if (form.get('nombre')?.hasError('required')) {
-          <!-- Si el campo nombre es requerido y está vacío -->
-          <small class="text-danger">El nombre es obligatorio.</small>
-        }
-        @if (form.get('nombre')?.hasError('minlength')) {
-          <!-- Si el campo nombre no cumple con la longitud mínima -->
-          <small class="text-danger">El nombre debe tener al menos 2 caracteres.</small>
-        }
-      }
-    </div>
-
-    <div class="col-12">
-      <label class="form-label">Apellido</label>
-      <input
-        type="text"
-        formControlName="apellido"
-        class="form-control"
-        placeholder="Tu apellido"
-      />
-      <!-- Validación del campo apellido -->
-      @if (form.get('apellido')?.invalid && (form.get('apellido')?.touched || intentoEnvio)) {
-        <!-- Si el campo apellido es inválido y se ha intentado enviar el formulario o el campo ha sido tocado -->
-        @if (form.get('apellido')?.hasError('required')) {
-          <!-- Si el campo apellido es requerido y está vacío -->
-          <small class="text-danger">El apellido es obligatorio.</small>
-        }
-        @if (form.get('apellido')?.hasError('minlength')) {
-          <!-- Si el campo apellido no cumple con la longitud mínima -->
-          <small class="text-danger">El apellido debe tener al menos 2 caracteres.</small>
-        }
-      }
-    </div>
-
-    <div class="col-12">
-      <label class="form-label">Edad</label>
-      <input type="number" formControlName="edad" class="form-control" placeholder="Tu edad" />
-
-      <!-- Validación del campo edad -->
-      @if (form.get('edad')?.invalid && (form.get('edad')?.touched || intentoEnvio)) {
-        <!-- Si el campo edad es inválido y se ha intentado enviar el formulario o el campo ha sido tocado -->
-        @if (form.get('edad')?.hasError('required')) {
-          <!-- Si el campo edad es requerido y está vacío -->
-          <small class="text-danger">La edad es obligatoria.</small>
-        }
-        @if (form.get('edad')?.hasError('min') || form.get('edad')?.hasError('max')) {
-          <!-- Si el campo edad no cumple con el rango permitido -->
-          <small class="text-danger">La edad debe estar entre 13 y 120 años.</small>
-        }
-      }
-    </div>
-
-    <div class="col-12">
-      <label class="form-label">Email</label>
-      <input type="email" formControlName="email" class="form-control" placeholder="tu@email.com" />
-      <!-- Validación del campo email -->
-      @if (form.get('email')?.invalid && (form.get('email')?.touched || intentoEnvio)) {
-        <!-- Si el campo email es inválido y se ha intentado enviar el formulario o el campo ha sido tocado -->
-        @if (form.get('email')?.hasError('required')) {
-          <!-- Si el campo email es requerido y está vacío -->
-          <small class="text-danger">El email es obligatorio.</small>
-        }
-        @if (form.get('email')?.hasError('email')) {
-          <!-- Si el campo email no tiene un formato válido -->
-          <small class="text-danger">El formato del email no es válido.</small>
-        }
-      }
-    </div>
-
-    <div class="col-12">
-      <label class="form-label">Contraseña</label>
-      <input
-        type="password"
-        formControlName="password"
-        class="form-control"
-        placeholder="********"
-      />
-      <!-- Validación del campo contraseña -->
-      @if (form.get('password')?.invalid && (form.get('password')?.touched || intentoEnvio)) {
-        <!-- Si el campo contraseña es inválido y se ha intentado enviar el formulario o el campo ha sido tocado -->
-        @if (form.get('password')?.hasError('required')) {
-          <!-- Si el campo contraseña es requerido y está vacío -->
-          <small class="text-danger">La contraseña es obligatoria.</small>
-        }
-        @if (form.get('password')?.hasError('minlength')) {
-          <!-- Si el campo contraseña no cumple con la longitud mínima -->
-          <small class="text-danger">La contraseña debe tener al menos 6 caracteres.</small>
-        }
-      }
-    </div>
-
-    <!-- Mostrar mensaje de error general si existe -->
-    @if (mensajeError) {
+    <!-- Inicio del formulario de registro -->
+    <form [formGroup]="form" (ngSubmit)="enviar()" class="row g-3 mt-1">
       <div class="col-12">
-        <p class="text-danger mb-0">{{ mensajeError }}</p>
+        <label class="form-label">Nombre</label>
+        <input type="text" formControlName="nombre" class="form-control" placeholder="Tu nombre" />
+
+        <!-- Validación del campo nombre -->
+        @if (form.get('nombre')?.invalid && (form.get('nombre')?.touched || intentoEnvio)) {
+          <!-- Si el campo nombre es inválido y se ha intentado enviar el formulario o el campo ha sido tocado -->
+          @if (form.get('nombre')?.hasError('required')) {
+            <!-- Si el campo nombre es requerido y está vacío -->
+            <small class="text-danger">El nombre es obligatorio.</small>
+          }
+          @if (form.get('nombre')?.hasError('minlength')) {
+            <!-- Si el campo nombre no cumple con la longitud mínima -->
+            <small class="text-danger">El nombre debe tener al menos 2 caracteres.</small>
+          }
+        }
       </div>
-    }
 
-    <div class="col-12 d-grid mt-2">
-      <button type="submit" class="btn btn-burn" [disabled]="cargando">
-        {{ cargando ? 'Creando cuenta...' : 'Registrarme' }}
-      </button>
-    </div>
-  </form>
+      <div class="col-12">
+        <label class="form-label">Apellido</label>
+        <input
+          type="text"
+          formControlName="apellido"
+          class="form-control"
+          placeholder="Tu apellido"
+        />
+        <!-- Validación del campo apellido -->
+        @if (form.get('apellido')?.invalid && (form.get('apellido')?.touched || intentoEnvio)) {
+          <!-- Si el campo apellido es inválido y se ha intentado enviar el formulario o el campo ha sido tocado -->
+          @if (form.get('apellido')?.hasError('required')) {
+            <!-- Si el campo apellido es requerido y está vacío -->
+            <small class="text-danger">El apellido es obligatorio.</small>
+          }
+          @if (form.get('apellido')?.hasError('minlength')) {
+            <!-- Si el campo apellido no cumple con la longitud mínima -->
+            <small class="text-danger">El apellido debe tener al menos 2 caracteres.</small>
+          }
+        }
+      </div>
 
-  <p class="texto-cambio-formulario">
-    ¿Ya tenés cuenta?
-    <a routerLink="/log-in">Iniciá sesión</a>
-  </p>
-</div>
+      <div class="col-12">
+        <label class="form-label">Edad</label>
+        <input type="number" formControlName="edad" class="form-control" placeholder="Tu edad" />
+
+        <!-- Validación del campo edad -->
+        @if (form.get('edad')?.invalid && (form.get('edad')?.touched || intentoEnvio)) {
+          <!-- Si el campo edad es inválido y se ha intentado enviar el formulario o el campo ha sido tocado -->
+          @if (form.get('edad')?.hasError('required')) {
+            <!-- Si el campo edad es requerido y está vacío -->
+            <small class="text-danger">La edad es obligatoria.</small>
+          }
+          @if (form.get('edad')?.hasError('min') || form.get('edad')?.hasError('max')) {
+            <!-- Si el campo edad no cumple con el rango permitido -->
+            <small class="text-danger">La edad debe estar entre 13 y 120 años.</small>
+          }
+        }
+      </div>
+
+      <div class="col-12">
+        <label class="form-label">Email</label>
+        <input
+          type="email"
+          formControlName="email"
+          class="form-control"
+          placeholder="tu@email.com"
+        />
+        <!-- Validación del campo email -->
+        @if (form.get('email')?.invalid && (form.get('email')?.touched || intentoEnvio)) {
+          <!-- Si el campo email es inválido y se ha intentado enviar el formulario o el campo ha sido tocado -->
+          @if (form.get('email')?.hasError('required')) {
+            <!-- Si el campo email es requerido y está vacío -->
+            <small class="text-danger">El email es obligatorio.</small>
+          }
+          @if (form.get('email')?.hasError('email')) {
+            <small class="text-danger">El formato del email no es válido.</small>
+          }
+          @if (form.get('email')?.hasError('yaRegistrado')) {
+            <small class="text-danger">Este email ya se encuentra registrado.</small>
+          }
+        }
+      </div>
+
+      <div class="col-12">
+        <label class="form-label">Contraseña</label>
+        <input
+          type="password"
+          formControlName="password"
+          class="form-control"
+          placeholder="********"
+        />
+        <!-- Validación del campo contraseña -->
+        @if (form.get('password')?.invalid && (form.get('password')?.touched || intentoEnvio)) {
+          <!-- Si el campo contraseña es inválido y se ha intentado enviar el formulario o el campo ha sido tocado -->
+          @if (form.get('password')?.hasError('required')) {
+            <!-- Si el campo contraseña es requerido y está vacío -->
+            <small class="text-danger">La contraseña es obligatoria.</small>
+          }
+          @if (form.get('password')?.hasError('minlength')) {
+            <!-- Si el campo contraseña no cumple con la longitud mínima -->
+            <small class="text-danger">La contraseña debe tener al menos 6 caracteres.</small>
+          }
+        }
+      </div>
+
+      <!-- Mostrar mensaje de error general si existe -->
+      @if (mensajeError) {
+        <div class="col-12">
+          <p class="text-danger mb-0">{{ mensajeError }}</p>
+        </div>
+      }
+
+      <div class="col-12 d-grid mt-2">
+        <button type="submit" class="btn btn-burn" [disabled]="cargando">
+          {{ cargando ? 'Creando cuenta...' : 'Registrarme' }}
+        </button>
+      </div>
+    </form>
+
+    <p class="texto-cambio-formulario">
+      ¿Ya tenés cuenta?
+      <a routerLink="/log-in">Iniciá sesión</a>
+    </p>
+  </div>
+</app-bienvenida>

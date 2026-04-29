@@ -21,15 +21,10 @@
   text-align: center;
   margin: 0 0 8px;
   font-family: 'Impact', 'Arial Black', 'Segoe UI', sans-serif;
-  /* Responsive: clamp hace que el título escale sin saltos entre celular y desktop. */
   font-size: clamp(1.55rem, 3.1vw, 2.55rem);
   font-weight: 400;
   letter-spacing: 0.16em;
   color: #ff2f2f;
-  text-shadow:
-    0 0 28px rgba(224, 31, 31, 0.5),
-    0 0 8px rgba(224, 31, 31, 0.45);
-  animation: fadeDown 380ms ease-out both;
 }
 
 .boton-volver {
@@ -52,12 +47,11 @@
 }
 
 .seccion-presentacion {
-  background: linear-gradient(180deg, rgba(10, 10, 10, 0.92), rgba(8, 8, 8, 0.96));
+  background: #0a0a0a;
 }
 
 .grilla-presentacion {
   display: grid;
-  /* Base desktop: dos columnas flexibles en vez de anchos totalmente fijos. */
   grid-template-columns: minmax(390px, 0.96fr) minmax(380px, 1.08fr);
   gap: 14px;
   align-items: start;
@@ -77,16 +71,10 @@
   gap: 10px !important;
 }
 
-.panel-perfil,
-.panel-descripcion {
-  background: linear-gradient(160deg, rgba(10, 10, 10, 0.82), rgba(18, 18, 18, 0.88));
-}
-
 .panel-perfil {
   border: 1px solid rgba(224, 31, 31, 0.34);
   border-radius: 18px;
   padding: 14px 16px;
-  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.36);
   animation: fadeUp 420ms ease-out both;
 }
 
@@ -104,7 +92,6 @@
   margin: 4px 0 6px;
   letter-spacing: 0.01em;
   color: #e01f1f;
-  text-shadow: 0 0 24px rgba(220, 30, 30, 0.36);
 }
 
 .nombre-usuario {
@@ -150,9 +137,7 @@
   border-radius: 18px;
   overflow: hidden;
   border: 1px solid rgba(224, 31, 31, 0.26);
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.34);
   position: relative;
-  /* Responsive: la imagen usa clamp para no quedar ni diminuta ni gigante. */
   height: clamp(520px, 82vh, 820px);
   min-height: 520px;
   animation: fadeLeft 480ms ease-out both;
@@ -181,7 +166,6 @@
   justify-content: space-between;
   gap: 8px;
   color: #e7e7e7;
-  animation: fadeUp 540ms ease-out both;
 }
 
 .panel-descripcion h2 {
@@ -241,7 +225,6 @@
 }
 
 @media (max-width: 768px) {
-  /* Responsive real: acá el layout cambia de dos columnas a una sola. */
   .contenedor-sobre-mi {
     padding-top: 84px;
   }
@@ -298,7 +281,6 @@
 }
 
 @media (max-width: 480px) {
-  /* Responsive fino: ajusta alturas y espaciados para celulares angostos. */
   .encabezado-pagina {
     padding: 0 8px;
   }

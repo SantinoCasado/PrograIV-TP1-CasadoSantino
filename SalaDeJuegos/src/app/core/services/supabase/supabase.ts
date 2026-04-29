@@ -40,4 +40,8 @@ export class Supabase {
   obtenerPerfil(email: string) {
     return this.client.from('usuariosTabla').select('*').eq('email', email).single();
   }
+
+  obtenerPerfilPorEmail(email: string) {
+    return this.client.from('usuariosTabla').select('*').eq('email', email).single();
+  }
 }

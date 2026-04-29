@@ -3,11 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { Supabase } from '../../../../core/services/supabase/supabase';
+import { Bienvenida } from '../../../bienvenida/bienvenida';
 
 @Component({
   selector: 'app-log-in',
   standalone: true,
-  imports: [CommonModule, RouterLink, ReactiveFormsModule],
+  imports: [CommonModule, RouterLink, ReactiveFormsModule, Bienvenida],
   templateUrl: './log-in.html',
   styleUrl: './log-in.css',
 })
