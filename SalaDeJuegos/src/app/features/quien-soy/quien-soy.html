@@ -3,7 +3,7 @@
 <div class="contenedor-sobre-mi">
   <div class="encabezado-pagina d-flex align-items-center justify-content-center">
     <h1 class="titulo-pagina text-uppercase">Quien Soy</h1>
-    <a routerLink="/" class="btn boton-volver text-uppercase">Volver</a>
+    <a (click)="volver()" class="btn boton-volver text-uppercase" style="cursor: pointer">Volver</a>
   </div>
 
   <div *ngIf="loading() && !user()" class="text-center py-5">
@@ -52,23 +52,18 @@
         </article>
 
         <article class="panel-descripcion">
-          <h2>Sobre mi</h2>
-          <p>
-            Me encuentro en mi ultimo año de estudio de la "Técnicatura en Programación" en la UTN,
-            Universidad Nacional de Avellanea. Actualmente cuento con cocimientos en web development
-            pero mi principal interés se encuentra en el analisis de datos.
-          </p>
-
-          <h3 class="text-uppercase">EXPLICACION DEL JUEGO PROPIO</h3>
+          <h3 class="text-uppercase">EXPLICACIÓN DEL JUEGO PROPIO</h3>
           <p>
             El quinto juego del proyecto el cual era a eleccion propia es el "Busca Minas". ¿Por
             qué?. Siento que es un juego que me permite demostrar habilidades tanto de logica
-            (recursividad) como de diseño . Ademas, es un juego que me gusta mucho y que se que me
-            voy a ¿divertir? programando.
+            (recursividad) como de diseño . El juego consiste en un tablero de celdas, algunas
+            contienen minas. Al hacer clic en una celda, se revelará si contiene una mina o no. Si
+            la celda no contiene una mina, se mostrará un número que indica cuántas minas hay en las
+            celdas adyacentes. El jugador puede usar esta información para deducir dónde están las
+            minas y evitar hacer clic en ellas. El juego termina cuando el jugador descubre todas
+            las celdas sin minas (ganar) o hace clic en una celda con una mina (perder).
           </p>
-          <p>P.D: Ayuda.</p>
-
-          <h3 class="text-uppercase">Stack</h3>
+          <h3 class="text-uppercase">Stack del estudiante</h3>
           <p>Python, Java, SQL, MongoDB, Git Bash, HTML, CSS, JavaScript, Angular y TypeScript.</p>
 
           <h3 class="text-uppercase">Contacto</h3>
@@ -108,4 +103,8 @@
       </aside>
     </div>
   </section>
+
+  <footer class="site-footer text-center py-3">
+    <p>Cyber Burn © 2026 - Play hard. Burn brighter.</p>
+  </footer>
 </div>

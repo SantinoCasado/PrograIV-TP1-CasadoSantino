@@ -3,7 +3,7 @@
   background: #0a0a0a;
   color: #f3f3f3;
   min-height: 100vh;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', sans-serif;
 }
 
 .contenedor-sobre-mi {
@@ -20,7 +20,7 @@
 .titulo-pagina {
   text-align: center;
   margin: 0 0 8px;
-  font-family: 'Impact', 'Arial Black', 'Segoe UI', sans-serif;
+  font-family: Impact, 'Arial Black', sans-serif;
   font-size: clamp(1.55rem, 3.1vw, 2.55rem);
   font-weight: 400;
   letter-spacing: 0.16em;
@@ -46,16 +46,11 @@
   color: #111;
 }
 
-.seccion-presentacion {
-  background: #0a0a0a;
-}
-
 .grilla-presentacion {
   display: grid;
   grid-template-columns: minmax(390px, 0.96fr) minmax(380px, 1.08fr);
   gap: 14px;
   align-items: start;
-  justify-content: start;
   max-width: 1280px;
   margin: 0 auto;
   min-height: calc(100vh - 150px);
@@ -299,4 +294,11 @@
     height: 320px;
     min-height: 320px;
   }
+}
+
+.site-footer {
+  border-top: 1px solid rgba(220, 30, 30, 0.2);
+  background: #060606;
+  color: #9d9d9d;
+  font-size: 0.9rem;
 }

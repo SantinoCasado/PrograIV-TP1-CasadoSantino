@@ -1,0 +1,26 @@
+<div class="juegos-carrusel" aria-label="Juegos disponibles">
+  <article
+    class="juego-tarjeta"
+    [class.tarjeta-sin-recorte]="juego.evitarRecorte"
+    *ngFor="let juego of juegos"
+  >
+    <img [src]="juego.imagen" [alt]="juego.nombre" class="juego-imagen" />
+
+    @if (!modoHome) {
+      <!-- Modo landing: nombre + descripción pequeña -->
+      <div class="juego-info">
+        <h3>{{ juego.nombre }}</h3>
+        <p>{{ juego.descripcion }}</p>
+      </div>
+    } @else {
+      <!-- Modo home: nombre grande + botones Jugar / Reglas -->
+      <div class="juego-info juego-info-home">
+        <h3 class="juego-nombre-home">{{ juego.nombre }}</h3>
+        <div class="juego-acciones">
+          <button class="btn-jugar" disabled>Jugar</button>
+          <button class="btn-reglas" disabled>Reglas</button>
+        </div>
+      </div>
+    }
+  </article>
+</div>

@@ -1,0 +1,111 @@
+<aside class="sidebar">
+  <a href="/home" class="sidebar-logo">Menu</a>
+  <hr />
+
+  <nav class="sidebar-nav">
+    <a href="/home" class="sidebar-link" [class.sidebar-link-active]="seccionActiva === 'home'">
+      <span class="sidebar-link-main">
+        <img src="assets/icons/home-red.svg" alt="" class="sidebar-link-icon" />
+        Home
+      </span>
+    </a>
+
+    <a
+      href="#"
+      class="sidebar-link sidebar-link-disabled"
+      [class.sidebar-link-active]="seccionActiva === 'perfil'"
+    >
+      <span class="sidebar-link-main">
+        <img src="assets/icons/perfil-red.svg" alt="" class="sidebar-link-icon" />
+        Perfil / Estadisticas
+      </span>
+      <span class="sidebar-badge">Proximamente</span>
+    </a>
+
+    <a
+      href="#"
+      class="sidebar-link sidebar-link-disabled"
+      [class.sidebar-link-active]="seccionActiva === 'tabla'"
+    >
+      <span class="sidebar-link-main">
+        <img src="assets/icons/tabla-red.svg" alt="" class="sidebar-link-icon" />
+        Tabla general
+      </span>
+      <span class="sidebar-badge">Proximamente</span>
+    </a>
+
+    <a
+      href="#"
+      class="sidebar-link sidebar-link-disabled"
+      [class.sidebar-link-active]="seccionActiva === 'chat'"
+    >
+      <span class="sidebar-link-main">
+        <img src="assets/icons/chat-red.svg" alt="" class="sidebar-link-icon" />
+        Chat general
+      </span>
+      <span class="sidebar-badge">Proximamente</span>
+    </a>
+
+    <a href="#" class="sidebar-link sidebar-link-disabled">
+      <span class="sidebar-link-main">
+        <img src="assets/icons/guia-red.svg" alt="" class="sidebar-link-icon" />
+        Guia
+      </span>
+      <span class="sidebar-badge">Proximamente</span>
+    </a>
+
+    <a
+      href="/about-me"
+      class="sidebar-link"
+      [class.sidebar-link-active]="seccionActiva === 'about'"
+    >
+      <span class="sidebar-link-main">
+        <img src="assets/icons/about-red.svg" alt="" class="sidebar-link-icon" />
+        Sobre mi
+      </span>
+    </a>
+  </nav>
+
+  <hr />
+
+  <div class="github-card">
+    @if (loading()) {
+      <p class="github-estado">Cargando GitHub...</p>
+    } @else if (error()) {
+      <p class="github-estado">{{ error() }}</p>
+    } @else if (user()) {
+      <button type="button" class="social-trigger" (click)="alternarSocialMenu()">
+        <span class="social-trigger-main">
+          <img
+            [src]="user()!.avatar_url"
+            [alt]="'Avatar de ' + user()!.login"
+            class="github-avatar"
+          />
+          <strong class="github-username">{{ user()!.name || user()!.login }}</strong>
+        </span>
+        <span class="social-trigger-arrow" [class.social-trigger-arrow-open]="socialMenuAbierto()">
+          &#9650;
+        </span>
+      </button>
+
+      @if (socialMenuAbierto()) {
+        <div class="social-dropdown">
+          <a
+            [href]="user()!.html_url"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-link"
+          >
+            <span class="social-icon social-icon-github">GH</span>
+            <span class="social-text">GitHub</span>
+          </a>
+
+          <a [href]="linkedInUrl" target="_blank" rel="noopener noreferrer" class="social-link">
+            <span class="social-icon social-icon-linkedin">in</span>
+            <span class="social-text">LinkedIn</span>
+          </a>
+        </div>
+      }
+    }
+  </div>
+</aside>

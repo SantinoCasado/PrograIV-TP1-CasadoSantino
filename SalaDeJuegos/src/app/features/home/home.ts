@@ -1,9 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import { Auth } from '../../core/services/auth/auth';
+import { GaleriaJuegosDisponibles } from '../../shared/components/galeria-juegos-disponibles/galeria-juegos-disponibles';
+import { SidebarMenu } from '../../shared/components/sidebar-menu/sidebar-menu';
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  standalone: true,
+  imports: [GaleriaJuegosDisponibles, RouterLink, SidebarMenu],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
-export class Home {}
+export class Home {
+  protected auth = inject(Auth);
+  private router = inject(Router);
+
+  async cerrarSesion(): Promise<void> {
+    await this.auth.cerrarSesion();
+    await this.router.navigate(['/log-in']);
+  }
+}

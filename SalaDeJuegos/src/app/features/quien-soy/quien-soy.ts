@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Location } from '@angular/common';
 import { take } from 'rxjs/operators';
 import { Navbar } from '../../layouts/navbar/navbar';
 import { GithubService } from '../../core/services/github/github';
@@ -9,7 +9,7 @@ import { GithubUser } from '../../core/models/github-user';
 @Component({
 selector: 'app-quien-soy',
 standalone: true,
-imports: [CommonModule, RouterLink, Navbar],
+  imports: [CommonModule, Navbar],
 templateUrl: './quien-soy.html',
 styleUrl: './quien-soy.css',
 })
@@ -21,10 +21,14 @@ export class QuienSoy implements OnInit {
 
   githubUsername = 'SantinoCasado';
 
-  constructor(private githubService: GithubService) {}
+  constructor(private githubService: GithubService, private location: Location) {}
 
   ngOnInit(): void {
     this.loadGitHubUser();
+  }
+
+  volver(): void {
+    this.location.back();
   }
 
   loadGitHubUser(): void {

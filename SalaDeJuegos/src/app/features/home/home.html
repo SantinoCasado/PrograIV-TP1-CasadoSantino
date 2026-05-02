@@ -1,1 +1,38 @@
-<p>home works!</p>
+<div class="home-layout">
+  <app-sidebar-menu seccionActiva="home"></app-sidebar-menu>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="home-main">
+    <!-- Topbar con acción de sesión -->
+    <div class="home-topbar">
+      @if (auth.usuario()) {
+        <button class="btn-burn" (click)="cerrarSesion()">Cerrar sesión</button>
+      } @else {
+        <a routerLink="/log-in" class="btn-burn">Iniciar sesión</a>
+        <a routerLink="/registro" class="btn-burn-outline">Registrarse</a>
+      }
+    </div>
+
+    <!-- Hero de bienvenida -->
+    <div class="hero-bienvenida">
+      <h1 class="hero-titulo">
+        Bienvenido a <span>Cyber Burn</span>,
+        {{
+          auth.perfil()?.nombre && auth.perfil()?.apellido
+            ? auth.perfil()!.nombre + ' ' + auth.perfil()!.apellido
+            : 'usuario'
+        }}.
+      </h1>
+      @if (!auth.perfil()) {
+        <p class="hero-subtitulo">El mejor lugar para disfrutar juegos retro individuales.</p>
+      }
+    </div>
+
+    <h2 class="seccion-titulo">Seleccioná tu próximo reto</h2>
+    <app-galeria-juegos-disponibles [modoHome]="true"></app-galeria-juegos-disponibles>
+  </main>
+</div>
+
+<footer class="site-footer text-center py-3">
+  <p>Cyber Burn &copy; 2026 - Play hard. Burn brighter.</p>
+</footer>

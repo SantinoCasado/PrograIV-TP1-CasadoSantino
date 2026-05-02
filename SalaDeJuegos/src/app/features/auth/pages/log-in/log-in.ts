@@ -44,7 +44,7 @@ export class LogIn implements OnInit {
 
     this.cargando = true; // Indicar que se está procesando el inicio de sesión
 
-    const email = this.form.value.email ?? '';  // Obtener el email del formulario, asegurando que no sea null
+    const email = (this.form.value.email ?? '').trim().toLowerCase();  // Obtener y normalizar email
     const password = this.form.value.password ?? '';  // Obtener la contraseña del formulario, asegurando que no sea null
 
     // Intentar iniciar sesión con Supabase
@@ -56,7 +56,7 @@ export class LogIn implements OnInit {
         return;
       }
 
-      await this.router.navigate(['/about-me']);
+      await this.router.navigate(['/home']); // Navegar a la página de home después de iniciar sesión exitosamente
     } catch {
       this.mensajeError = 'No se pudo iniciar sesion. Intenta nuevamente.';
     } finally {
@@ -75,13 +75,13 @@ export class LogIn implements OnInit {
     const texto = mensaje.toLowerCase();
 
     if (texto.includes('invalid login credentials')) {
-      return 'Correo o contrasena incorrectos.';
+      return 'Correo o contraseña incorrectos.';
     }
 
-    if (texto.includes('email not confirmed')) {
-      return 'Debes confirmar tu correo antes de iniciar sesion.';
+    if (texto.includes('email not confirmed') || texto.includes('email_not_confirmed')) {
+      return 'Debés confirmar tu correo antes de iniciar sesión.';
     }
 
-    return 'Ocurrio un error al iniciar sesion.';
+    return 'No se pudo iniciar sesión. Intentá nuevamente.';
   }
 }

@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Navbar } from '../../layouts/navbar/navbar';
-import { Carousel } from '../../shared/components/carousel/carousel';
+import { GaleriaJuegosDisponibles } from '../../shared/components/galeria-juegos-disponibles/galeria-juegos-disponibles';
 
 @Component({
   selector: 'app-bienvenida',
   standalone: true,
-  imports: [CommonModule, Navbar, Carousel],
+  imports: [CommonModule, Navbar, GaleriaJuegosDisponibles],
   templateUrl: './bienvenida.html',
   styleUrl: './bienvenida.css',
 })

@@ -66,6 +66,89 @@
   color: #e01f1f;
 }
 
+/* ── Panel cuando el usuario está logueado ── */
+.panel-usuario {
+  background: linear-gradient(160deg, rgba(26, 26, 26, 0.94), rgba(16, 16, 16, 0.97));
+  border: 1px solid rgba(220, 30, 30, 0.25);
+  border-radius: 18px;
+  padding: 28px 24px;
+  animation: revealUp 900ms ease both;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.panel-usuario p {
+  color: #c9c9c9;
+  margin: 0;
+  font-size: 1rem;
+}
+
+.panel-usuario strong {
+  color: #f3f3f3;
+}
+
+/* Panel cuando NO está logueado */
+.panel-acceso {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: revealUp 900ms ease both;
+}
+
+/* Botón principal rojo */
+.btn-burn {
+  display: inline-block;
+  background: #dc1e1e;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease;
+}
+
+.btn-burn:hover {
+  background: #b81a1a;
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.btn-burn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Botón secundario outline */
+.btn-burn-outline {
+  display: inline-block;
+  background: transparent;
+  color: #e01f1f;
+  border: 2px solid #e01f1f;
+  border-radius: 8px;
+  padding: 10px 24px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.btn-burn-outline:hover {
+  background: rgba(220, 30, 30, 0.12);
+  color: #ff4444;
+}
+
 .site-footer {
   border-top: 1px solid rgba(220, 30, 30, 0.2);
   background: #060606;
