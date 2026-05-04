@@ -15,8 +15,21 @@ export class Home {
   protected auth = inject(Auth);
   private router = inject(Router);
 
+  bloqueoInvitadoVisible = false;
+
   async cerrarSesion(): Promise<void> {
     await this.auth.cerrarSesion();
     await this.router.navigate(['/log-in']);
+  }
+
+  async onIntentarJugar(juego: { rutaJuego?: string }): Promise<void> {
+    if (!this.auth.usuario()) {
+      this.bloqueoInvitadoVisible = true;
+      return;
+    }
+
+    if (juego.rutaJuego) {
+      await this.router.navigate([juego.rutaJuego]);
+    }
   }
 }

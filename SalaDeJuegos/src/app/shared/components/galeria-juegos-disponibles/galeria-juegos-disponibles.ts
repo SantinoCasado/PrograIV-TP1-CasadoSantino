@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 interface JuegoDisponible {
   nombre: string;
@@ -17,7 +17,10 @@ interface JuegoDisponible {
   styleUrl: './galeria-juegos-disponibles.css',
 })
 export class GaleriaJuegosDisponibles {
+  // Verdadero si se muestra en Home, falso si se muestra en Bienvenida, es del tipo Input para que el componente sea reutilizable en ambos contextos
   @Input() modoHome = false;
+
+  @Output() jugarClick = new EventEmitter<JuegoDisponible>();
 
   juegos: JuegoDisponible[] = [
     {
@@ -47,4 +50,9 @@ export class GaleriaJuegosDisponibles {
       rutaJuego: '/juegos/preguntados',
     },
   ];
+
+  // Emitir el evento jugarClick con el juego seleccionado cuando se hace clic en "Jugar"
+  onJugar(juego: JuegoDisponible): void {
+    this.jugarClick.emit(juego);
+  }
 }

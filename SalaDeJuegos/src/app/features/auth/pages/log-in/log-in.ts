@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Supabase } from '../../../../core/services/supabase/supabase';
 import { Bienvenida } from '../../../bienvenida/bienvenida';
 
@@ -19,6 +19,7 @@ export class LogIn implements OnInit {
   form!: FormGroup;
 
   constructor(
+    private route: ActivatedRoute,
     private fb: FormBuilder,  
     private supabase: Supabase,
     private router: Router
@@ -30,6 +31,12 @@ export class LogIn implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
+
+    const motivo = this.route.snapshot.queryParamMap.get('msg');
+
+    if (motivo === 'requiere-login') {
+      this.mensajeError = 'Debés iniciar sesión para acceder a esta página.';
+    }
   }
 
   async enviar(): Promise<void> {
