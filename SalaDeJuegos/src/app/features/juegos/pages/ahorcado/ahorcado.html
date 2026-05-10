@@ -1,0 +1,174 @@
+<div class="ahorcado-container">
+  <!-- FASE 1: SELECCIÓN DE DIFICULTAD -->
+  @if (estado() === 'seleccion') {
+    <div class="ahorcado-seleccion-contenedor">
+      <div class="ahorcado-seleccion-fondo">
+        <img
+          class="ahorcado-fondo-seleccion"
+          src="assets/images/ahorcado/fonde-pizzarra.jpg"
+          alt="Pizarra"
+        />
+
+        <div class="contenido-seleccion">
+          <h1 class="titulo-ahorcado anim-bounce-in">Ahorcado</h1>
+          <p class="subtitulo anim-slide-up-200">Elige el nivel de dificultad:</p>
+
+          <div class="dificultades-grid anim-slide-up-300">
+            <div class="card-dificultad">
+              <button
+                class="btn btn-dificultad btn-facil btn-lg w-100"
+                (click)="elegirDificultad('facil')"
+              >
+                Fácil
+              </button>
+            </div>
+            <div class="card-dificultad">
+              <button
+                class="btn btn-dificultad btn-medio btn-lg w-100"
+                (click)="elegirDificultad('medio')"
+              >
+                Medio
+              </button>
+            </div>
+            <div class="card-dificultad">
+              <button
+                class="btn btn-dificultad btn-dificil btn-lg w-100"
+                (click)="elegirDificultad('dificil')"
+              >
+                Difícil
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- FASE 2: CARGANDO PALABRA -->
+  @if (estado() === 'cargando') {
+    <div class="ahorcado-cargando-contenedor">
+      <div class="ahorcado-cargando-fondo">
+        <img
+          class="ahorcado-fondo-cargando"
+          src="assets/images/ahorcado/fonde-pizzarra.jpg"
+          alt="Pizarra"
+        />
+
+        <div
+          class="position-absolute z-1 d-flex flex-column align-items-center justify-content-center gap-3"
+        >
+          <div class="spinner-border spinner-cargando" role="status">
+            <span class="visually-hidden">Cargando...</span>
+          </div>
+          <p class="text-cargando">Obteniendo palabra...</p>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- FASE 3: PARTIDA EN CURSO -->
+  @if (estado() === 'jugando') {
+    <div class="ahorcado-jugando-contenedor">
+      <!-- Tablero: Fondo + Monigote + Palabra + Teclado + Botón Salir -->
+      <div class="ahorcado-tablero-full">
+        <img
+          class="ahorcado-fondo-full"
+          src="assets/images/ahorcado/fonde-pizzarra.jpg"
+          alt="Pizarra"
+        />
+
+        <!-- Botón Salir (arriba a la derecha) -->
+        <button class="btn btn-salir-posicionado" (click)="salir()">Salir</button>
+
+        <!-- Contenedor: Monigote + Palabra (lado a lado) -->
+        <div class="ahorcado-contenedor-superior">
+          <!-- Monigote -->
+          <img
+            class="ahorcado-monigote anim-bounce-fast"
+            [src]="imagenMonigote()"
+            [alt]="'Estado: ' + errores()"
+          />
+
+          <!-- Palabra a adivinar -->
+          <div class="ahorcado-palabra-contenedor anim-slide-down-300">
+            <div class="ahorcado-palabra">
+              @for (letra of letrasVisibles(); track $index) {
+                <span class="casilla-letra anim-slide-up-fast">{{ letra }}</span>
+              }
+            </div>
+          </div>
+        </div>
+
+        <!-- Teclado DENTRO del fondo -->
+        <div class="ahorcado-teclado-posicionado anim-slide-up-400">
+          @for (letra of letras; track letra) {
+            <button
+              class="btn btn-tecla"
+              [disabled]="letraUsada(letra)"
+              [class.acertada]="letrasAdivinadasComputed().has(letra)"
+              [class.errada]="letrasErradasComputed().has(letra)"
+              (click)="elegirLetra(letra)"
+            >
+              {{ letra }}
+            </button>
+          }
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- FASE 4: RESULTADO -->
+  @if (estado() === 'resultado') {
+    <div class="row justify-content-center py-4">
+      <div class="col-lg-6">
+        @if (resultadoPartida() === 'ganada') {
+          <div class="card-resultado ganada anim-bounce-in">
+            <h2>¡Ganaste!</h2>
+            <p class="mb-1"><strong>Palabra:</strong> {{ state.palabraActual }}</p>
+            <p class="mb-0">
+              <strong>Puntaje:</strong> <span class="badge-resultado">{{ puntajeObtenido() }}</span>
+            </p>
+          </div>
+        } @else if (resultadoPartida() === 'perdida') {
+          <div class="card-resultado perdida anim-bounce-in">
+            <h2>Perdiste</h2>
+            <p class="mb-1"><strong>Palabra:</strong> {{ state.palabraActual }}</p>
+            <p class="mb-0"><strong>Puntaje:</strong> <span class="badge-resultado">0</span></p>
+          </div>
+        } @else if (resultadoPartida() === 'abandonada') {
+          <div class="card-resultado abandonada anim-bounce-in">
+            <h2>Partida Abandonada</h2>
+            <p class="mb-0"><strong>Puntaje:</strong> <span class="badge-resultado">0</span></p>
+          </div>
+        }
+
+        <div class="d-grid gap-2 mt-4">
+          <button class="btn btn-reiniciar btn-lg" (click)="reiniciar()">Jugar de Nuevo</button>
+          <button class="btn btn-home btn-lg" (click)="salir()">Ir al Home</button>
+        </div>
+
+        @if (guardandoScore()) {
+          <div class="guardando-resultado">
+            <span class="spinner-border spinner-border-sm me-2"></span>
+            Guardando resultado...
+          </div>
+        }
+      </div>
+    </div>
+  }
+</div>
+
+<!-- MODAL DE ABANDONO -->
+@if (modalAbandonoVisible()) {
+  <div class="modal-overlay anim-fade-in-fast">
+    <div class="modal-abandono anim-bounce-fast">
+      <h3>Confirmar Abandono</h3>
+      <p>Si abandonas ahora, <strong>perderás los puntos</strong> de esta partida.</p>
+      <p class="text-muted mb-0">¿Estás seguro?</p>
+      <div class="d-flex justify-content-center gap-3 mt-4">
+        <button class="btn btn-modal-cancelar" (click)="cancelarSalida()">Continuar</button>
+        <button class="btn btn-modal-confirmar" (click)="confirmarSalida()">Abandonar</button>
+      </div>
+    </div>
+  </div>
+}

@@ -25,7 +25,7 @@ export class GaleriaJuegosDisponibles {
   juegos: JuegoDisponible[] = [
     {
       nombre: 'Ahorcado',
-      imagen: '/assets/images/ahorcado.png',
+      imagen: '/assets/images/ahorcado.jpg',
       descripcion: 'Adiviná la palabra antes de quedarte sin intentos.',
       rutaJuego: '/juegos/ahorcado',
       evitarRecorte: true,
