@@ -6,7 +6,7 @@ import { AhorcadoState } from '../../services/ahorcado-state/ahorcado-state';
 import { PalabrasApi } from '../../services/palabras-api/palabras-api';
 import { JuegosScore } from '../../services/juego-score/juegos-score';
 import { PartidaAbandonable } from '../../../../core/interfaces/partida-abandonable';
-import { DificultadAhorcado, ResultadoPartidaAhorcado } from '../../models/resultado-juego';
+import { DificultadAhorcado, ResultadoPartidaAhorcado } from '../../models/resultado-ahorcado';
 
 type EstadoJuego = 'seleccion' | 'cargando' | 'jugando' | 'resultado';
 
@@ -100,12 +100,12 @@ export class Ahorcado implements PartidaAbandonable, OnDestroy {
     if (this.palabra().includes(letra)) {
       this._letrasAdivinadasComputed.update(s => new Set([...s, letra]));
       this.state.registrarAcierto();
-    if (this.verificarVictoria()) this.finalizarConResultado('ganada');
+      if (this.verificarVictoria()) this.finalizarConResultado('ganada');
     } else {
-        this._letrasErradasComputed.update(s => new Set([...s, letra]));
-        this._erroresComputed.update(n => n + 1);
-        this.state.registrarError();
-        if (this._erroresComputed() >= 6) this.finalizarConResultado('perdida');
+      this._letrasErradasComputed.update(s => new Set([...s, letra]));
+      this._erroresComputed.update(n => n + 1);
+      this.state.registrarError();
+      if (this._erroresComputed() >= 6) this.finalizarConResultado('perdida');
     }
   }
 
@@ -128,6 +128,16 @@ export class Ahorcado implements PartidaAbandonable, OnDestroy {
   salir(): void {
     this.state.reiniciarTodo();
     this.router.navigate(['/home']);
+  }
+
+  /**
+   * Navega a la guía del juego Ahorcado
+   * Pasa el parámetro de query 'juego' para que se muestre la sección correcta
+   */
+  irAGuia(): void {
+    this.router.navigate(['/guia'], {
+      queryParams: { juego: 'ahorcado' }
+    });
   }
 
   // ----- Privados -------------------------------------------------------------------------------

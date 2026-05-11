@@ -27,6 +27,10 @@ export const routes: Routes = [
         loadComponent: () => import('./features/quien-soy/quien-soy').then((m) => m.QuienSoy)
     },
     {
+        path: "guia",
+        loadComponent: () => import('./features/guia-juegos/guia-juegos').then((m) => m.GuiaJuegos)
+    },
+    {
         path: "juegos",
         loadChildren: () => import('./features/juegos/juegos-module').then((m) => m.JuegosModule),
     },

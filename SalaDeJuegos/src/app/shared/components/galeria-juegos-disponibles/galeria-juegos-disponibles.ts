@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 interface JuegoDisponible {
   nombre: string;
@@ -17,6 +18,8 @@ interface JuegoDisponible {
   styleUrl: './galeria-juegos-disponibles.css',
 })
 export class GaleriaJuegosDisponibles {
+  private router = inject(Router);
+
   // Verdadero si se muestra en Home, falso si se muestra en Bienvenida, es del tipo Input para que el componente sea reutilizable en ambos contextos
   @Input() modoHome = false;
 
@@ -54,5 +57,13 @@ export class GaleriaJuegosDisponibles {
   // Emitir el evento jugarClick con el juego seleccionado cuando se hace clic en "Jugar"
   onJugar(juego: JuegoDisponible): void {
     this.jugarClick.emit(juego);
+  }
+
+  // Navegar a la guía del juego correspondiente
+  onReglas(juego: JuegoDisponible): void {
+    const slug = juego.rutaJuego?.split('/').pop();
+    if (slug) {
+      this.router.navigate(['/guia'], { queryParams: { juego: slug } });
+    }
   }
 }

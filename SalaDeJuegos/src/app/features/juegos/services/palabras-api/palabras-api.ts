@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map, catchError, of } from 'rxjs';
-import { DificultadAhorcado } from '../../models/resultado-juego';
+import { DificultadAhorcado } from '../../models/resultado-ahorcado';
 
 @Injectable({
   providedIn: 'root',

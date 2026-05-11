@@ -13,3 +13,4 @@ export interface ResultadoAhorcado {
     puntaje: number;
     fechaFinIso?: string;
 }
+

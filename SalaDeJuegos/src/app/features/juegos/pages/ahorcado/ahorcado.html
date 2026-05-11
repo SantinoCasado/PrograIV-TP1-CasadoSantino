@@ -1,13 +1,9 @@
 <div class="ahorcado-container">
   <!-- FASE 1: SELECCIÓN DE DIFICULTAD -->
   @if (estado() === 'seleccion') {
-    <div class="ahorcado-seleccion-contenedor">
-      <div class="ahorcado-seleccion-fondo">
-        <img
-          class="ahorcado-fondo-seleccion"
-          src="assets/images/ahorcado/fonde-pizzarra.jpg"
-          alt="Pizarra"
-        />
+    <div class="fase-contenedor">
+      <div class="fase-fondo">
+        <img class="fondo-img" src="assets/images/ahorcado/fonde-pizzarra.jpg" alt="Pizarra" />
 
         <div class="contenido-seleccion">
           <h1 class="titulo-ahorcado anim-bounce-in">Ahorcado</h1>
@@ -46,13 +42,9 @@
 
   <!-- FASE 2: CARGANDO PALABRA -->
   @if (estado() === 'cargando') {
-    <div class="ahorcado-cargando-contenedor">
-      <div class="ahorcado-cargando-fondo">
-        <img
-          class="ahorcado-fondo-cargando"
-          src="assets/images/ahorcado/fonde-pizzarra.jpg"
-          alt="Pizarra"
-        />
+    <div class="fase-contenedor">
+      <div class="fase-fondo">
+        <img class="fondo-img" src="assets/images/ahorcado/fonde-pizzarra.jpg" alt="Pizarra" />
 
         <div
           class="position-absolute z-1 d-flex flex-column align-items-center justify-content-center gap-3"
@@ -68,17 +60,22 @@
 
   <!-- FASE 3: PARTIDA EN CURSO -->
   @if (estado() === 'jugando') {
-    <div class="ahorcado-jugando-contenedor">
+    <div class="fase-contenedor">
       <!-- Tablero: Fondo + Monigote + Palabra + Teclado + Botón Salir -->
       <div class="ahorcado-tablero-full">
-        <img
-          class="ahorcado-fondo-full"
-          src="assets/images/ahorcado/fonde-pizzarra.jpg"
-          alt="Pizarra"
-        />
+        <img class="fondo-img" src="assets/images/ahorcado/fonde-pizzarra.jpg" alt="Pizarra" />
 
-        <!-- Botón Salir (arriba a la derecha) -->
-        <button class="btn btn-salir-posicionado" (click)="salir()">Salir</button>
+        <!-- Botones Salir y Reglas (arriba a la derecha) -->
+        <div class="botones-superiores d-flex gap-2 p-3">
+          <button
+            class="btn btn-info btn-sm fw-bold"
+            (click)="irAGuia()"
+            title="Ver guía del juego"
+          >
+            <i class="bi bi-book me-1"></i>Reglas
+          </button>
+          <button class="btn btn-salir-posicionado" (click)="salir()">Salir</button>
+        </div>
 
         <!-- Contenedor: Monigote + Palabra (lado a lado) -->
         <div class="ahorcado-contenedor-superior">
@@ -119,40 +116,45 @@
 
   <!-- FASE 4: RESULTADO -->
   @if (estado() === 'resultado') {
-    <div class="row justify-content-center py-4">
-      <div class="col-lg-6">
-        @if (resultadoPartida() === 'ganada') {
-          <div class="card-resultado ganada anim-bounce-in">
-            <h2>¡Ganaste!</h2>
-            <p class="mb-1"><strong>Palabra:</strong> {{ state.palabraActual }}</p>
-            <p class="mb-0">
-              <strong>Puntaje:</strong> <span class="badge-resultado">{{ puntajeObtenido() }}</span>
-            </p>
-          </div>
-        } @else if (resultadoPartida() === 'perdida') {
-          <div class="card-resultado perdida anim-bounce-in">
-            <h2>Perdiste</h2>
-            <p class="mb-1"><strong>Palabra:</strong> {{ state.palabraActual }}</p>
-            <p class="mb-0"><strong>Puntaje:</strong> <span class="badge-resultado">0</span></p>
-          </div>
-        } @else if (resultadoPartida() === 'abandonada') {
-          <div class="card-resultado abandonada anim-bounce-in">
-            <h2>Partida Abandonada</h2>
-            <p class="mb-0"><strong>Puntaje:</strong> <span class="badge-resultado">0</span></p>
-          </div>
-        }
+    <div class="fase-contenedor">
+      <div class="fase-fondo">
+        <img class="fondo-img" src="assets/images/ahorcado/fonde-pizzarra.jpg" alt="Pizarra" />
 
-        <div class="d-grid gap-2 mt-4">
-          <button class="btn btn-reiniciar btn-lg" (click)="reiniciar()">Jugar de Nuevo</button>
-          <button class="btn btn-home btn-lg" (click)="salir()">Ir al Home</button>
+        <div class="contenido-resultado">
+          @if (resultadoPartida() === 'ganada') {
+            <div class="card-resultado ganada anim-bounce-in">
+              <h2>¡Ganaste!</h2>
+              <p class="mb-1"><strong>Palabra:</strong> {{ state.palabraActual }}</p>
+              <p class="mb-0">
+                <strong>Puntaje:</strong>
+                <span class="badge-resultado">{{ puntajeObtenido() }}</span>
+              </p>
+            </div>
+          } @else if (resultadoPartida() === 'perdida') {
+            <div class="card-resultado perdida anim-bounce-in">
+              <h2>Perdiste</h2>
+              <p class="mb-1"><strong>Palabra:</strong> {{ state.palabraActual }}</p>
+              <p class="mb-0"><strong>Puntaje:</strong> <span class="badge-resultado">0</span></p>
+            </div>
+          } @else if (resultadoPartida() === 'abandonada') {
+            <div class="card-resultado abandonada anim-bounce-in">
+              <h2>Partida Abandonada</h2>
+              <p class="mb-0"><strong>Puntaje:</strong> <span class="badge-resultado">0</span></p>
+            </div>
+          }
+
+          <div class="d-grid gap-2 mt-4">
+            <button class="btn btn-resultado btn-lg" (click)="reiniciar()">Jugar de Nuevo</button>
+            <button class="btn btn-resultado btn-lg" (click)="salir()">Ir al Home</button>
+          </div>
+
+          @if (guardandoScore()) {
+            <div class="guardando-resultado">
+              <span class="spinner-border spinner-border-sm me-2"></span>
+              Guardando resultado...
+            </div>
+          }
         </div>
-
-        @if (guardandoScore()) {
-          <div class="guardando-resultado">
-            <span class="spinner-border spinner-border-sm me-2"></span>
-            Guardando resultado...
-          </div>
-        }
       </div>
     </div>
   }
@@ -166,8 +168,8 @@
       <p>Si abandonas ahora, <strong>perderás los puntos</strong> de esta partida.</p>
       <p class="text-muted mb-0">¿Estás seguro?</p>
       <div class="d-flex justify-content-center gap-3 mt-4">
-        <button class="btn btn-modal-cancelar" (click)="cancelarSalida()">Continuar</button>
-        <button class="btn btn-modal-confirmar" (click)="confirmarSalida()">Abandonar</button>
+        <button class="btn btn-modal" (click)="cancelarSalida()">Continuar</button>
+        <button class="btn btn-modal" (click)="confirmarSalida()">Abandonar</button>
       </div>
     </div>
   </div>

@@ -18,7 +18,7 @@
         <h3 class="juego-nombre-home">{{ juego.nombre }}</h3>
         <div class="juego-acciones">
           <button class="btn-jugar" (click)="onJugar(juego)">Jugar</button>
-          <button class="btn-reglas" disabled>Reglas</button>
+          <button class="btn-reglas" (click)="onReglas(juego)">Reglas</button>
         </div>
       </div>
     }

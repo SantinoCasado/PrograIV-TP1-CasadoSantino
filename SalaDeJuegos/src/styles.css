@@ -1,4 +1,5 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
 @import './styles/animations.css';
 
 :root {
@@ -7,6 +8,15 @@
   --burn-primary: #e01f1f;
   --burn-text: #f3f3f3;
   --burn-muted: #b7b7b7;
+
+  /* Pizarrón (compartido entre juegos) */
+  --pizarra-oscuro: #2c2c2c;
+  --pizarra-gris: #3d3d3d;
+  --tiza-blanca: #f5f5f0;
+  --tiza-amarilla: #fffacd;
+  --tiza-rosa: #ffb6c1;
+  --tiza-verde: #90ee90;
+  --acento-tierra: #8b6f47;
 }
 
 * {

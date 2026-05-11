@@ -1,1 +1,224 @@
-<p>mayor-menor works!</p>
+<div class="mayor-menor-container min-vh-100 d-flex flex-column position-relative">
+  <!-- FASE 1: CARGANDO -->
+  @if (estado() === 'cargando') {
+    <div class="w-100 h-100 d-flex align-items-center justify-content-center">
+      <div class="text-center text-white">
+        <div class="spinner-border mb-3" role="status">
+          <span class="visually-hidden">Cargando...</span>
+        </div>
+        <p class="fs-5">Preparando mazo...</p>
+      </div>
+    </div>
+  }
+
+  <!-- FASE 3: JUGANDO -->
+  @if (estado() === 'jugando') {
+    <div class="position-relative w-100 h-100 d-flex flex-column">
+      <!-- Botones Salir y Reglas -->
+      <div class="botones-superiores position-absolute top-0 end-0 p-3 d-flex gap-2">
+        <button class="btn btn-info btn-sm fw-bold" (click)="irAGuia()" title="Ver guía del juego">
+          <i class="bi bi-book me-1"></i>Reglas
+        </button>
+        <button class="btn btn-salir-mayor-menor" (click)="salir()">Salir</button>
+      </div>
+
+      <!-- SCORE (Arriba) -->
+      <div class="mayor-menor-score d-flex justify-content-center p-3 anim-slide-down-300">
+        <div class="bg-dark bg-opacity-50 px-5 py-3 rounded text-white">
+          <div class="d-flex gap-5 align-items-center">
+            <div class="text-center">
+              <small class="d-block" style="opacity: 0.8">Acertadas</small>
+              <span class="fs-3" style="color: #fffacd; font-weight: bold"
+                >{{ cartasAcertadas() }}/{{ jugadasTotales() }}</span
+              >
+            </div>
+            <div class="text-center">
+              <small class="d-block" style="opacity: 0.8">Precisión</small>
+              <span class="fs-3" style="color: #fffacd; font-weight: bold">{{ progreso() }}%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOTONES (Debajo del score) -->
+      @if (!proximaCarta()) {
+        <div class="mayor-menor-botones d-flex gap-3 justify-content-center anim-slide-up-200">
+          <button
+            class="btn btn-lg fw-bold btn-prediccion-menor"
+            style="width: 150px"
+            (click)="realizarPrediccion('menor')"
+          >
+            MENOR
+          </button>
+          <button
+            class="btn btn-lg fw-bold btn-prediccion-mayor"
+            style="width: 150px"
+            (click)="realizarPrediccion('mayor')"
+          >
+            MAYOR
+          </button>
+        </div>
+      }
+
+      <!-- CARTAS + VIDAS (Centro-abajo) -->
+      <div
+        class="mayor-menor-cartas-vidas d-flex justify-content-center align-items-center px-3 anim-slide-up-300"
+      >
+        <!-- CARTAS SECTION -->
+        <div class="d-flex justify-content-center align-items-center gap-5">
+          <!-- Carta actual -->
+          @if (cartaActual()) {
+            <img
+              [src]="cartaActual()!.images.svg || cartaActual()!.images.png"
+              [alt]="cartaActual()!.value"
+              class="carta-imagen"
+              style="width: 450px; height: 660px; object-fit: contain"
+            />
+          }
+
+          <!-- Próxima carta (Mazo) -->
+          @if (proximaCarta()) {
+            <img
+              [src]="proximaCarta()!.images.svg || proximaCarta()!.images.png"
+              [alt]="proximaCarta()!.value"
+              class="carta-imagen carta-proxima carta-mazo"
+              style="
+                width: 150px;
+                height: 220px;
+                object-fit: contain;
+                animation: pulse 0.6s ease-in-out;
+              "
+            />
+          } @else {
+            <!-- Dorso de la carta (mazo) -->
+            <img
+              src="assets/images/mayor-menor/carta-dorso.svg"
+              alt="Dorso de carta"
+              class="carta-imagen carta-mazo"
+              style="width: 150px; height: 220px; object-fit: contain"
+            />
+          }
+        </div>
+
+        <!-- VIDAS (A la derecha) -->
+        <div
+          class="ms-5"
+          style="display: flex; flex-direction: column; align-items: center; gap: 15px"
+        >
+          <small style="color: #fffacd; font-weight: bold; opacity: 0.8">Vidas</small>
+          <div style="display: flex; flex-direction: column; gap: 12px">
+            @for (corazon of corazonesVisibles(); track $index) {
+              <img
+                [src]="
+                  corazon === 'lleno'
+                    ? 'assets/images/mayor-menor/corazon-lleno.svg'
+                    : 'assets/images/mayor-menor/corazon-roto.svg'
+                "
+                alt="Vida"
+                width="50"
+                height="50"
+              />
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- HISTORIAL DE CARTAS (orden visual entre botones y cartas) -->
+      @if (historialCartas().length > 0) {
+        <div
+          class="mayor-menor-historial d-flex flex-column align-items-center anim-slide-up-100"
+          style="gap: 0"
+        >
+          <div class="historial-cartas d-flex justify-content-center align-items-end">
+            @for (carta of historialCartas(); track $index) {
+              <div class="historial-carta">
+                <img
+                  [src]="carta.images.svg || carta.images.png"
+                  [alt]="carta.value"
+                  style="width: 194px; height: 292px; object-fit: contain; border-radius: 4px"
+                />
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  }
+
+  <!-- FASE 4: RESULTADO -->
+  @if (estado() === 'resultado') {
+    <div class="w-100 h-100 d-flex align-items-center justify-content-center px-3">
+      <div class="text-center text-white" style="max-width: 500px">
+        @if (resultadoPartida() === 'ganada') {
+          <div class="card resultado-card border-0 p-5 anim-bounce-in mb-4">
+            <h2 class="display-5 mb-4 resultado-titulo-ganada">Ganaste</h2>
+            <p class="fs-5 mb-3">
+              <strong>Cartas acertadas:</strong> {{ cartasAcertadas() }}/{{ jugadasTotales() }}
+            </p>
+            <div class="resultado-puntaje-box p-3 rounded">
+              <small class="d-block" style="opacity: 0.8">PUNTAJE</small>
+              <span class="fs-3 fw-bold" style="color: #fffacd">{{ puntajeObtenido() }}</span>
+            </div>
+          </div>
+        } @else if (resultadoPartida() === 'perdida') {
+          <div class="card resultado-card border-0 p-5 anim-bounce-in mb-4 mt-5">
+            <h2 class="display-5 mb-4 resultado-titulo-perdida">Perdiste</h2>
+            <p class="fs-5 mb-3">
+              <strong>Cartas acertadas:</strong> {{ cartasAcertadas() }}/{{ jugadasTotales() }}
+            </p>
+            <div class="resultado-puntaje-box p-3 rounded">
+              <small class="d-block" style="opacity: 0.8">PUNTAJE</small>
+              <span class="fs-3 fw-bold" style="color: #fffacd">{{ puntajeObtenido() }}</span>
+            </div>
+          </div>
+        } @else if (resultadoPartida() === 'abandonada') {
+          <div class="card resultado-card border-0 p-5 anim-bounce-in mb-4">
+            <h2 class="display-5 mb-4 resultado-titulo-abandonada">Partida Abandonada</h2>
+            <div class="resultado-puntaje-box p-3 rounded">
+              <small class="d-block" style="opacity: 0.8">PUNTAJE</small>
+              <span class="fs-3 fw-bold" style="color: #fffacd">0</span>
+            </div>
+          </div>
+        }
+
+        <div class="d-grid gap-3">
+          <button class="btn btn-lg fw-bold btn-resultado-principal" (click)="reiniciar()">
+            Jugar de Nuevo
+          </button>
+          <button class="btn btn-lg fw-bold btn-resultado-secundario" (click)="salir()">
+            Ir al Home
+          </button>
+        </div>
+
+        @if (guardandoScore()) {
+          <div class="mt-4 text-warning">
+            <div class="spinner-border spinner-border-sm me-2" role="status">
+              <span class="visually-hidden">Guardando...</span>
+            </div>
+            Guardando resultado...
+          </div>
+        }
+      </div>
+    </div>
+  }
+</div>
+
+<!-- MODAL DE ABANDONO -->
+@if (modalAbandonoVisible()) {
+  <div
+    class="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-75 d-flex align-items-center justify-content-center anim-fade-in-fast"
+    style="z-index: 1000"
+  >
+    <div class="card bg-dark text-white border-0 p-4 anim-bounce-fast" style="max-width: 400px">
+      <h3 class="card-title mb-3 text-warning">Confirmar Abandono</h3>
+      <p class="card-text mb-2">
+        Si abandonas ahora, <strong>perderás los puntos</strong> de esta partida.
+      </p>
+      <p class="card-text text-muted mb-4">¿Estás seguro?</p>
+      <div class="d-flex gap-3">
+        <button class="btn btn-info flex-grow-1" (click)="cancelarSalida()">Continuar</button>
+        <button class="btn btn-danger flex-grow-1" (click)="confirmarSalida()">Abandonar</button>
+      </div>
+    </div>
+  </div>
+}

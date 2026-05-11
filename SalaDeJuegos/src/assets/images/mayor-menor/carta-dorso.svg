@@ -1,0 +1,47 @@
+<svg width="150" height="220" viewBox="0 0 150 220" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Gradiente rojo para el fondo de la carta -->
+    <linearGradient id="cardBackGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c0392b;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#a93226;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8b2020;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- Patrón de rombos -->
+    <pattern id="diamondPattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+      <!-- Rombo -->
+      <polygon points="10,0 20,10 10,20 0,10" fill="none" stroke="#d45a4a" stroke-width="1" opacity="0.6"/>
+      <!-- Rombo interior -->
+      <polygon points="10,4 16,10 10,16 4,10" fill="#8b2020" stroke="#b83232" stroke-width="0.5" opacity="0.5"/>
+    </pattern>
+  </defs>
+
+  <!-- Sombra de la carta -->
+  <rect x="4" y="4" width="142" height="212" rx="10" ry="10" fill="rgba(0,0,0,0.3)"/>
+
+  <!-- Cuerpo de la carta - fondo rojo -->
+  <rect x="0" y="0" width="142" height="212" rx="10" ry="10" fill="url(#cardBackGrad)"/>
+
+  <!-- Patrón de rombos -->
+  <rect x="0" y="0" width="142" height="212" rx="10" ry="10" fill="url(#diamondPattern)"/>
+
+  <!-- Marco interior blanco -->
+  <rect x="6" y="6" width="130" height="200" rx="7" ry="7" fill="none" stroke="white" stroke-width="2" opacity="0.9"/>
+
+  <!-- Marco interior rojo más oscuro -->
+  <rect x="10" y="10" width="122" height="192" rx="5" ry="5" fill="none" stroke="#7a1818" stroke-width="1.5" opacity="0.7"/>
+
+  <!-- Rombo central grande decorativo -->
+  <polygon points="71,55 116,110 71,165 26,110" fill="none" stroke="white" stroke-width="2" opacity="0.6"/>
+  <polygon points="71,65 106,110 71,155 36,110" fill="#8b2020" stroke="#d45a4a" stroke-width="1" opacity="0.7"/>
+  <polygon points="71,80 95,110 71,140 47,110" fill="#a03030" stroke="white" stroke-width="1" opacity="0.5"/>
+
+  <!-- Puntos en las esquinas -->
+  <circle cx="20" cy="25" r="4" fill="white" opacity="0.8"/>
+  <circle cx="122" cy="25" r="4" fill="white" opacity="0.8"/>
+  <circle cx="20" cy="187" r="4" fill="white" opacity="0.8"/>
+  <circle cx="122" cy="187" r="4" fill="white" opacity="0.8"/>
+
+  <!-- Brillo superior izquierdo -->
+  <ellipse cx="35" cy="35" rx="25" ry="15" fill="rgba(255,255,255,0.08)" transform="rotate(-30 35 35)"/>
+</svg>

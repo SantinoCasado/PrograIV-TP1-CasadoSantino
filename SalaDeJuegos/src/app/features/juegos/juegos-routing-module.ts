@@ -26,6 +26,8 @@ const routes: Routes = [
   {
     path: 'mayor-menor',
     component: MayorMenor,
+    canActivate: [authGuard],
+    canDeactivate: [partidaAbandonoGuard],
   },
   {
     path: 'preguntados',

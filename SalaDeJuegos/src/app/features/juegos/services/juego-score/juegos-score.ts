@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Supabase } from '../../../../core/services/supabase/supabase';
-import { ResultadoAhorcado } from '../../models/resultado-juego';
+import { ResultadoAhorcado} from '../../models/resultado-ahorcado';
+import { ResultadoMayorMenor } from '../../models/resultado-MayorMenor';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +19,21 @@ export class JuegosScore {
         letras_seleccionadas: data.letrasSeleccionadas,
         aciertos: data.aciertos,
         errores: data.errores,
+        resultado: data.resultado,
+        puntaje: data.puntaje,
+        fecha_fin: data.fechaFinIso ?? new Date().toISOString(),
+      },
+    ]);
+  }
+
+  guardarResultadoMayorMenor(data: ResultadoMayorMenor) {
+    return this.supabase['client'].from('partidas_mayor_menor').insert([
+      {
+        usuario_email: data.emailUsuario,
+        deck_id: data.deckId,
+        cartas_acertadas: data.cartasAcertadas,
+        jugadas_totales: data.jugadasTotales,
+        tiempo_segundos: data.tiempoSegundos,
         resultado: data.resultado,
         puntaje: data.puntaje,
         fecha_fin: data.fechaFinIso ?? new Date().toISOString(),

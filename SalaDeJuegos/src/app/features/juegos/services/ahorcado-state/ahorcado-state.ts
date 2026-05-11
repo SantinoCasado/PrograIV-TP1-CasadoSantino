@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DificultadAhorcado } from '../../models/resultado-juego';
+import { DificultadAhorcado } from '../../models/resultado-ahorcado';
 
 @Injectable({
   providedIn: 'root',

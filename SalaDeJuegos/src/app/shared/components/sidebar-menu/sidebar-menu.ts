@@ -12,7 +12,7 @@ import { GithubService } from '../../../core/services/github/github';
   styleUrl: './sidebar-menu.css',
 })
 export class SidebarMenu implements OnInit {
-  @Input() seccionActiva: 'home' | 'perfil' | 'tabla' | 'chat' | 'about' = 'home';
+  @Input() seccionActiva: 'home' | 'perfil' | 'tabla' | 'chat' | 'about' | 'guia' = 'home';
   @Input() githubUsername = 'SantinoCasado';
   @Input() linkedInUrl = 'https://www.linkedin.com/in/santino-casado-1841902aa/';
 
