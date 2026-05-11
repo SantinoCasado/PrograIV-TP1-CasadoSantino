@@ -24,10 +24,19 @@ export class ChatGlobal {
   private subscription: RealtimeChannel | null = null;
   private ultimoTotalMensajes = 0;
 
-  constructor() {    // Validar si el usuario está loguado al inicializar
-    if (!this.auth.usuario()) {
-      this.bloqueoNoLogueoVisible.set(true);
-    }
+  constructor() {
+    // Reacciona cuando el usuario cambia (incluye carga inicial async de sesión)
+    effect(() => {
+      const usuario = this.auth.usuario();
+      if (usuario && !this.subscription) {
+        this.bloqueoNoLogueoVisible.set(false);
+        this.chat.obtenerMensajes();
+        this.subscription = this.chat.suscribirseMensajes();
+      } else if (!usuario) {
+        this.bloqueoNoLogueoVisible.set(true);
+      }
+    });
+
     // Reacciona al cambio de mensajes y hace scroll al final 
     effect(() => {
       const total = this.chat.mensajes().length;
@@ -45,12 +54,7 @@ export class ChatGlobal {
     });
   }
 
-  ngOnInit(): void {
-    if (this.auth.usuario()) {
-      this.chat.obtenerMensajes();
-      this.subscription = this.chat.suscribirseMensajes();
-    }
-  }
+  ngOnInit(): void {}
 
   actualizarTexto(event: Event): void {
     const target = event.target as HTMLTextAreaElement | null;

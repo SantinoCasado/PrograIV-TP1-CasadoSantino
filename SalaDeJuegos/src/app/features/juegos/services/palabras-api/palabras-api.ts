@@ -7,51 +7,23 @@ import { DificultadAhorcado } from '../../models/resultado-ahorcado';
   providedIn: 'root',
 })
 export class PalabrasApi {
-  private readonly apiBase = 'https://random-word-api.herokuapp.com/word';
-  // fallback en caso de que la API falle o no responda a tiempo
-  private readonly fallback = [
-    'guitarra',
-    'montana',
-    'ventana',
-    'cuaderno',
-    'escalera',
-    'semaforo',
-    'murcielago',
-    'biblioteca',
-    'astronomia',
-  ]
+  private readonly csvUrl = 'assets/data/palabras-ahorcado.csv';
 
   constructor(private http: HttpClient) {}
 
-  // Obtiene una palabra aleatoria de la API según la dificultad, o una palabra de fallback si la API falla
   obtenerPalabra(dificultad: DificultadAhorcado): Observable<string> {
-    const diff = this.mapearDificultad(dificultad);
-    const url = `${this.apiBase}?number=1&lang=es&diff=${diff}`;
+    return this.http.get(this.csvUrl, { responseType: 'text' }).pipe(
+      map((csv) => {
+        const lineas = csv.trim().split('\n').slice(1); // saltar header
+        const filtradas = lineas
+          .map((l) => l.trim().split(','))
+          .filter((cols) => cols[0] === dificultad)
+          .map((cols) => cols[1]);
 
-    // La API devuelve un array de palabras, tomamos la primera, la normalizamos y la convertimos a mayúsculas
-    return this.http.get<string[]>(url).pipe(
-      map((arr) => this.normalizarPalabra((arr?.[0] ?? '').trim())),  // Si la palabra es vacía o nula, usamos el fallback
-      map((palabra) => (palabra ? palabra : this.fallbackAleatoria())), // Si la normalización resultó en una palabra vacía, usamos el fallback
-      catchError(() => of(this.fallbackAleatoria()))
+        if (filtradas.length === 0) return 'MURCIELAGO';
+        return filtradas[Math.floor(Math.random() * filtradas.length)];
+      }),
+      catchError(() => of('MURCIELAGO'))
     );
-  }
-
-  private mapearDificultad(dificultad: DificultadAhorcado): number {
-    if (dificultad === 'facil') return 1;
-    if (dificultad === 'medio') return 3;
-    return 5;
-  }
-
-  private normalizarPalabra(palabra: string): string {
-    return palabra
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')  // Elimina acentos y diacríticos
-      .replace(/[^a-zA-ZñÑ]/g, '')    // Elimina caracteres no alfabéticos (excepto ñ)
-      .toUpperCase();
-  }
-
-  private fallbackAleatoria(): string {
-    const indice = Math.floor(Math.random() * this.fallback.length);
-    return this.fallback[indice].toUpperCase();
   }
 }

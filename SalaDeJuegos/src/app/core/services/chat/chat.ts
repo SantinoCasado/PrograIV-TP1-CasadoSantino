@@ -26,7 +26,8 @@ export class Chat {
       .select('*')
       .order('created_at', { ascending: true });
 
-    if (data) this.mensajes.set(data as MensajeChat[]); // Actualiza la señal con los mensajes obtenidos de la base de datos
+    if (error) console.error('Error al obtener mensajes:', error);
+    if (data) this.mensajes.set(data as MensajeChat[]);
     return { data, error };
   }
 
