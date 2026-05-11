@@ -10,7 +10,7 @@ export class Supabase {
   private SUPABASE_URL = 'https://vjtvmyoduvbfrnhgtker.supabase.co';
   private SUPABASE_KEY = 'sb_publishable_QWvLLqZBo-EU4-b2QbHThQ_AvNz_lX5';
   private client: SupabaseClient;
-  
+
   constructor() {
     this.client = createClient(this.SUPABASE_URL, this.SUPABASE_KEY);
   }
@@ -36,16 +36,16 @@ export class Supabase {
   }
 
   // Método para iniciar sesión del usuario con email y contraseña utilizando Supabase
-  iniciarSesion(email:string, contraseña:string){
+  iniciarSesion(email: string, contraseña: string) {
     const emailNormalizado = this.normalizarEmail(email);
     return this.client.auth.signInWithPassword({
       email: emailNormalizado,
-      password: contraseña
+      password: contraseña,
     });
   }
 
   // Método para cerrar sesión del usuario autenticado
-  cerrarSesion(){
+  cerrarSesion() {
     return this.client.auth.signOut();
   }
 
@@ -97,5 +97,9 @@ export class Supabase {
   // Método para escuchar cambios en el estado de autenticación (inicio/cierre de sesión)
   onAuthStateChange(callback: (event: string, session: any) => void) {
     return this.client.auth.onAuthStateChange(callback);
+  }
+
+  getClient() {
+    return this.client;
   }
 }

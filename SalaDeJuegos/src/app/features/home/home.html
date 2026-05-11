@@ -1,5 +1,8 @@
 <div class="home-layout">
-  <app-sidebar-menu seccionActiva="home"></app-sidebar-menu>
+  <app-sidebar-menu
+    (chatClickSinAuth)="onChatClickSinAuth()"
+    seccionActiva="home"
+  ></app-sidebar-menu>
 
   <main class="home-main">
     <div class="home-topbar">

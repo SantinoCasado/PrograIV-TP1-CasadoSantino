@@ -22,6 +22,7 @@ const routes: Routes = [
   {
     path: 'busca-minas',
     component: BuscaMinas,
+    canActivate: [authGuard],
   },
   {
     path: 'mayor-menor',
@@ -32,6 +33,7 @@ const routes: Routes = [
   {
     path: 'preguntados',
     component: Preguntados,
+    canActivate: [authGuard],
   },
 ];
 

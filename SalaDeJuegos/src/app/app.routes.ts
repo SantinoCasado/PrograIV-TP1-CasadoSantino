@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { noAuthGuard } from './core/guards/no-auth/no-auth-guard';
-import { authGuard } from './core/guards/auth/auth-guard';
+import { authMatchGuard } from './core/guards/auth/auth-guard';
 
 export const routes: Routes = [
     {
@@ -31,7 +31,12 @@ export const routes: Routes = [
         loadComponent: () => import('./features/guia-juegos/guia-juegos').then((m) => m.GuiaJuegos)
     },
     {
+        path: "chat",
+        loadComponent: () => import('./features/chat-global/chat-global').then((m) => m.ChatGlobal)
+    },
+    {
         path: "juegos",
+        canMatch: [authMatchGuard],
         loadChildren: () => import('./features/juegos/juegos-module').then((m) => m.JuegosModule),
     },
     { path: "**", redirectTo: "log-in" }

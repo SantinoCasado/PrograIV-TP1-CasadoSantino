@@ -1,5 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink, Router } from '@angular/router';
+import { Auth } from '../../core/services/auth/auth';
 import { SidebarMenu } from '../../shared/components/sidebar-menu/sidebar-menu';
 
 type JuegoGuia = 'mayor-menor' | 'ahorcado' | 'busca-minas' | 'preguntados';
@@ -7,13 +9,17 @@ type JuegoGuia = 'mayor-menor' | 'ahorcado' | 'busca-minas' | 'preguntados';
 @Component({
   selector: 'app-guia-juegos',
   standalone: true,
-  imports: [CommonModule, SidebarMenu],
+  imports: [CommonModule, SidebarMenu, RouterLink],
   templateUrl: './guia-juegos.html',
   styleUrl: './guia-juegos.css',
 })
 export class GuiaJuegos {
+  protected auth = inject(Auth);
+  private router = inject(Router);
+
   // Signal para controlar qué sección de guía se está mostrando
   readonly juegoActual = signal<JuegoGuia>('mayor-menor');
+  readonly bloqueoInvitadoVisible = signal(false);
 
   // Lista de juegos disponibles
   readonly juegos: JuegoGuia[] = ['mayor-menor', 'ahorcado', 'busca-minas', 'preguntados'];
@@ -30,6 +36,10 @@ export class GuiaJuegos {
 
   cambiarJuego(juego: JuegoGuia): void {
     this.juegoActual.set(juego);
+  }
+
+  onChatClickSinAuth(): void {
+    this.bloqueoInvitadoVisible.set(true);
   }
 
   // Obtiene el título del juego actual

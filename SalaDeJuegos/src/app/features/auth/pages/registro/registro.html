@@ -20,6 +20,10 @@
             <!-- Si el campo nombre no cumple con la longitud mínima -->
             <small class="text-danger">El nombre debe tener al menos 2 caracteres.</small>
           }
+          @if (form.get('nombre')?.hasError('maxlength')) {
+            <!-- Si el campo nombre supera la longitud máxima -->
+            <small class="text-danger">El nombre no puede tener más de 12 caracteres.</small>
+          }
         }
       </div>
 
@@ -42,6 +46,10 @@
             <!-- Si el campo apellido no cumple con la longitud mínima -->
             <small class="text-danger">El apellido debe tener al menos 2 caracteres.</small>
           }
+          @if (form.get('apellido')?.hasError('maxlength')) {
+            <!-- Si el campo apellido supera la longitud máxima -->
+            <small class="text-danger">El apellido no puede tener más de 12 caracteres.</small>
+          }
         }
       </div>
 
@@ -58,7 +66,7 @@
           }
           @if (form.get('edad')?.hasError('min') || form.get('edad')?.hasError('max')) {
             <!-- Si el campo edad no cumple con el rango permitido -->
-            <small class="text-danger">La edad debe estar entre 13 y 120 años.</small>
+            <small class="text-danger">La edad debe estar entre 8 y 99 años.</small>
           }
         }
       </div>
@@ -105,6 +113,10 @@
           @if (form.get('password')?.hasError('minlength')) {
             <!-- Si el campo contraseña no cumple con la longitud mínima -->
             <small class="text-danger">La contraseña debe tener al menos 6 caracteres.</small>
+          }
+          @if (form.get('password')?.hasError('maxlength')) {
+            <!-- Si el campo contraseña supera la longitud máxima -->
+            <small class="text-danger">La contraseña no puede tener más de 15 caracteres.</small>
           }
         }
       </div>

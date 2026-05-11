@@ -35,15 +35,15 @@
     </a>
 
     <a
-      href="#"
-      class="sidebar-link sidebar-link-disabled"
+      (click)="onChatClick($event)"
+      href="javascript:void(0)"
+      class="sidebar-link"
       [class.sidebar-link-active]="seccionActiva === 'chat'"
     >
       <span class="sidebar-link-main">
         <img src="assets/icons/chat-red.svg" alt="" class="sidebar-link-icon" />
         Chat general
       </span>
-      <span class="sidebar-badge">Proximamente</span>
     </a>
 
     <a href="/guia" class="sidebar-link" [class.sidebar-link-active]="seccionActiva === 'guia'">

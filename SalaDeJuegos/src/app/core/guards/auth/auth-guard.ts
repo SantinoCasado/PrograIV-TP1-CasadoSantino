@@ -1,8 +1,8 @@
-import { CanActivateFn, Router } from '@angular/router';
+import { CanActivateFn, CanMatchFn, Router } from '@angular/router';
 import { inject } from '@angular/core';
 import { Auth } from '../../services/auth/auth';
 
-export const authGuard: CanActivateFn = () => {
+function validarAutenticacion() {
   const auth = inject(Auth);
   const router = inject(Router);
 
@@ -10,4 +10,8 @@ export const authGuard: CanActivateFn = () => {
   return auth.usuario()
     ? true
     : router.parseUrl('/log-in?msg=requiere-login');
-};
+}
+
+export const authGuard: CanActivateFn = () => validarAutenticacion();
+
+export const authMatchGuard: CanMatchFn = () => validarAutenticacion();

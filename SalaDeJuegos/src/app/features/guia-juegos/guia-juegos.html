@@ -1,5 +1,8 @@
 <div class="guia-layout">
-  <app-sidebar-menu seccionActiva="guia"></app-sidebar-menu>
+  <app-sidebar-menu
+    (chatClickSinAuth)="onChatClickSinAuth()"
+    seccionActiva="guia"
+  ></app-sidebar-menu>
 
   <main class="guia-main">
     <!-- CONTENEDOR PRINCIPAL -->
@@ -277,3 +280,20 @@
     </div>
   </main>
 </div>
+
+@if (!auth.usuario() && bloqueoInvitadoVisible()) {
+  <div class="bloqueo-overlay" role="dialog" aria-modal="true" aria-labelledby="titulo-bloqueo">
+    <div class="bloqueo-card">
+      <h2 id="titulo-bloqueo">Requerís iniciar sesión</h2>
+      <p>
+        Requerís estar logueado para acceder al chat general. Iniciá sesión para poder participar en
+        la conversación.
+      </p>
+      <a routerLink="/log-in" class="bloqueo-link">Iniciar sesión</a>
+    </div>
+  </div>
+}
+
+<footer class="site-footer text-center py-3">
+  <p>Cyber Burn &copy; 2026 - Play hard. Burn brighter.</p>
+</footer>

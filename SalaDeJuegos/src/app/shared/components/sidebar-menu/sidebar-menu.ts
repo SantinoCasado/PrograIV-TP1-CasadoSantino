@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit, signal } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, inject, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { take } from 'rxjs/operators';
+import { Auth } from '../../../core/services/auth/auth';
 import { GithubUser } from '../../../core/models/github-user';
 import { GithubService } from '../../../core/services/github/github';
 
@@ -15,13 +17,18 @@ export class SidebarMenu implements OnInit {
   @Input() seccionActiva: 'home' | 'perfil' | 'tabla' | 'chat' | 'about' | 'guia' = 'home';
   @Input() githubUsername = 'SantinoCasado';
   @Input() linkedInUrl = 'https://www.linkedin.com/in/santino-casado-1841902aa/';
+  @Output() chatClickSinAuth = new EventEmitter<void>();
+
+  protected auth = inject(Auth);
+  private router = inject(Router);
+  private githubService = inject(GithubService);
 
   user = signal<GithubUser | null>(null);
   loading = signal(false);
   error = signal<string | null>(null);
   socialMenuAbierto = signal(false);
 
-  constructor(private githubService: GithubService) {}
+  constructor() {}
 
   ngOnInit(): void {
     this.cargarUsuarioGithub();
@@ -29,6 +36,15 @@ export class SidebarMenu implements OnInit {
 
   alternarSocialMenu(): void {
     this.socialMenuAbierto.update((estado) => !estado);
+  }
+
+  onChatClick(event: MouseEvent): void {
+    if (!this.auth.usuario()) {
+      event.preventDefault();
+      this.chatClickSinAuth.emit();
+    } else {
+      this.router.navigate(['/chat']);
+    }
   }
 
   private cargarUsuarioGithub(): void {

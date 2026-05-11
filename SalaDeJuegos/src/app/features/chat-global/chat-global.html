@@ -1,0 +1,87 @@
+@if (auth.usuario()) {
+  <div class="chat-layout">
+    <app-sidebar-menu seccionActiva="chat"></app-sidebar-menu>
+
+    <main class="chat-main">
+      <div
+        class="chat-topbar d-flex justify-content-end align-items-center gap-2 anim-fade-in-fast"
+      >
+        <button class="btn-burn d-inline-flex align-items-center gap-2" (click)="cerrarSesion()">
+          <i class="bi bi-box-arrow-right" aria-hidden="true"></i>
+          <span>Cerrar sesión</span>
+        </button>
+      </div>
+
+      <section class="chat-panel anim-slide-up-fast" aria-label="Chat global en tiempo real">
+        <header class="chat-header">
+          <h1>Chat General</h1>
+          <p>Conversá en tiempo real con toda la comunidad.</p>
+        </header>
+
+        <div id="chat-container" class="chat-mensajes">
+          @if (chat.mensajes().length === 0) {
+            <div class="chat-vacio anim-fade-in-fast">
+              <i class="bi bi-chat-dots"></i>
+              <p>Todavía no hay mensajes. Mandá el primero.</p>
+            </div>
+          } @else {
+            @for (mensaje of chat.mensajes(); track mensaje.id) {
+              <div
+                class="mensaje-fila"
+                [class.mensaje-fila-propia]="esMensajePropio(mensaje.user_id)"
+              >
+                <article
+                  class="mensaje-burbuja"
+                  [class.mensaje-burbuja-propia]="esMensajePropio(mensaje.user_id)"
+                >
+                  <header class="mensaje-meta">
+                    <span class="mensaje-autor">{{ mensaje.user_name || mensaje.user_email }}</span>
+                    <time class="mensaje-hora">{{ formatearHora(mensaje.created_at) }}</time>
+                  </header>
+                  <p class="mensaje-contenido">{{ mensaje.user_message }}</p>
+                </article>
+              </div>
+            }
+          }
+        </div>
+
+        <form class="chat-form" (submit)="onSubmit($event)">
+          <label for="mensaje" class="visually-hidden">Escribí tu mensaje</label>
+          <textarea
+            id="mensaje"
+            rows="2"
+            maxlength="255"
+            placeholder="Escribí tu mensaje..."
+            [value]="textoMensaje()"
+            (input)="actualizarTexto($event)"
+            [disabled]="enviando()"
+          ></textarea>
+
+          <button
+            type="submit"
+            class="btn-enviar d-inline-flex align-items-center justify-content-center gap-2"
+            [disabled]="enviando() || !textoMensaje().trim()"
+          >
+            <i class="bi bi-send-fill"></i>
+            <span>{{ enviando() ? 'Enviando...' : 'Enviar' }}</span>
+          </button>
+        </form>
+      </section>
+    </main>
+  </div>
+} @else if (bloqueoNoLogueoVisible()) {
+  <div class="bloqueo-overlay" role="dialog" aria-modal="true" aria-labelledby="titulo-bloqueo">
+    <div class="bloqueo-card">
+      <h2 id="titulo-bloqueo">Requerís iniciar sesión</h2>
+      <p>
+        Requerís estar logueado para acceder al chat general. Iniciá sesión para poder participar en
+        la conversación.
+      </p>
+      <a routerLink="/log-in" class="bloqueo-link">Iniciar sesión</a>
+    </div>
+  </div>
+}
+
+<footer class="site-footer text-center py-3">
+  <p>Cyber Burn &copy; 2026 - Play hard. Burn brighter.</p>
+</footer>

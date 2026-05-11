@@ -28,11 +28,11 @@ export class Registro implements OnInit {
   ngOnInit(): void {
     // Inicializar el formulario con validaciones
     this.form = this.fb.group({
-      nombre: ['', [Validators.required, Validators.minLength(2)]], // Campo nombre, requerido y con longitud mínima de 2 caracteres
-        apellido: ['', [Validators.required, Validators.minLength(2)]], // Campo apellido, requerido y con longitud mínima de 2 caracteres
-        edad: ['', [Validators.required, Validators.min(13), Validators.max(99)]], // Campo edad, requerido y con valor mínimo de 13
+      nombre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(12)]], // Campo nombre, requerido y con longitud mínima de 2 caracteres
+        apellido: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(12)]], // Campo apellido, requerido y con longitud mínima de 2 caracteres
+        edad: ['', [Validators.required, Validators.min(8), Validators.max(99)]], // Campo edad, requerido y con valor mínimo de 8
         email: ['', [Validators.required, Validators.email]], // Campo email, requerido y con formato de email válido
-        password: ['', [Validators.required, Validators.minLength(6)]], // Campo contraseña, requerido y con longitud mínima de 6 caracteres
+        password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(15)]], // Campo contraseña, requerido y con longitud mínima de 6 caracteres
     });
   }
 

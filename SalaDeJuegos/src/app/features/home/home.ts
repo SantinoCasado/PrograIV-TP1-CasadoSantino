@@ -32,4 +32,8 @@ export class Home {
       await this.router.navigate([juego.rutaJuego]);
     }
   }
+
+  onChatClickSinAuth(): void {
+    this.bloqueoInvitadoVisible = true;
+  }
 }
