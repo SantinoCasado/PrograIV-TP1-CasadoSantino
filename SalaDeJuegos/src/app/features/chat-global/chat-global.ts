@@ -26,26 +26,26 @@ export class ChatGlobal {
 
   constructor() {
     // Reacciona cuando el usuario cambia (incluye carga inicial async de sesión)
-    effect(() => {
+    effect(() => {    // El effect se ejecutará cada vez que cambie el estado de autenticación del usuario
       const usuario = this.auth.usuario();
-      if (usuario && !this.subscription) {
-        this.bloqueoNoLogueoVisible.set(false);
-        this.chat.obtenerMensajes();
-        this.subscription = this.chat.suscribirseMensajes();
+      if (usuario && !this.subscription) {  // Si hay un usuario autenticado y aún no estamos suscritos a los mensajes, procedemos
+        this.bloqueoNoLogueoVisible.set(false); // Oculta el mensaje de bloqueo por no logueo
+        this.chat.obtenerMensajes();  // Carga los mensajes actuales del chat
+        this.subscription = this.chat.suscribirseMensajes();  // Establece la suscripción para recibir nuevos mensajes en tiempo real
       } else if (!usuario) {
-        this.bloqueoNoLogueoVisible.set(true);
+        this.bloqueoNoLogueoVisible.set(true);  // Muestra el mensaje de bloqueo por no logueo si no hay usuario autenticado
       }
     });
 
     // Reacciona al cambio de mensajes y hace scroll al final 
     effect(() => {
-      const total = this.chat.mensajes().length;
+      const total = this.chat.mensajes().length;  // Obtiene la cantidad total de mensajes actuales
 
-      if (total > this.ultimoTotalMensajes) {
-        requestAnimationFrame(() => {
+      if (total > this.ultimoTotalMensajes) { // Si el total de mensajes ha aumentado desde la última vez que se verificó, hacemos scroll al final del contenedor de chat
+        requestAnimationFrame(() => { // Use requestAnimationFrame para asegurarme de que el DOM se haya actualizado con el nuevo mensaje antes de intentar hacer scroll
           const chatContainer = document.getElementById('chat-container');
           if (chatContainer) {
-            chatContainer.scrollTop = chatContainer.scrollHeight;
+            chatContainer.scrollTop = chatContainer.scrollHeight; // Establece el scrollTop al scrollHeight para hacer scroll al final del contenedor
           }
         });
       }
@@ -56,7 +56,7 @@ export class ChatGlobal {
 
   ngOnInit(): void {}
 
-  actualizarTexto(event: Event): void {
+  actualizarTexto(event: Event): void { // Actualiza el estado del texto del mensaje a medida que el usuario escribe en el textarea
     const target = event.target as HTMLTextAreaElement | null;
     this.textoMensaje.set(target?.value ?? '');
   }
@@ -64,6 +64,13 @@ export class ChatGlobal {
   onSubmit(event: Event): void {
     event.preventDefault();
     void this.enviarMensaje();
+  }
+
+  onMensajeKeydown(event: KeyboardEvent): void {
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault();
+      void this.enviarMensaje();
+    }
   }
 
   async cerrarSesion(): Promise<void> {
@@ -106,6 +113,19 @@ export class ChatGlobal {
       hour: '2-digit',
       minute: '2-digit',
     });
+  }
+
+  formatearFechaHora(isoFecha: string): string {
+    const fecha = new Date(isoFecha);
+    if (Number.isNaN(fecha.getTime())) return '--/--/---- --:--';
+
+    const fechaTexto = fecha.toLocaleDateString('es-AR', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+    });
+
+    return `${fechaTexto} ${this.formatearHora(isoFecha)}`;
   }
 
   ngOnDestroy(): void {

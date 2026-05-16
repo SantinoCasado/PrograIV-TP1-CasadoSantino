@@ -1,1 +1,260 @@
-<p>preguntados works!</p>
+<div class="preguntados-page d-flex align-items-center justify-content-center p-3 p-md-4">
+  @if (estado() === 'seleccion-modo') {
+    <section class="card border-0 shadow-lg w-100 glass-card anim-bounce-in">
+      <div class="card-body p-3 p-md-4 p-lg-5 text-center">
+        <span class="badge rounded-pill text-bg-warning fw-semibold">Sprint 4</span>
+        <h1 class="display-6 fw-bold mt-3 mb-2">Preguntados</h1>
+        <p class="text-light-emphasis mb-0 mx-auto subtitle-maxw">
+          Elegi el modo y responde 10 preguntas antes de quedarte sin vidas.
+        </p>
+
+        <div class="row g-3 mt-3">
+          <div class="col-12 col-md-6">
+            <button
+              class="btn modo-btn modo-btn--banderas w-100 d-flex flex-column align-items-center justify-content-center gap-2 anim-slide-up-200"
+              (click)="elegirModo('banderas')"
+            >
+              <i class="bi bi-flag-fill fs-2"></i>
+              <span class="fs-5 fw-bold">Modo Banderas</span>
+              <small class="opacity-75">Reconoce paises por su bandera</small>
+            </button>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <button
+              class="btn modo-btn modo-btn--pokemon w-100 d-flex flex-column align-items-center justify-content-center gap-2 anim-slide-up-300"
+              (click)="elegirModo('pokemon')"
+            >
+              <i class="bi bi-lightning-charge-fill fs-2"></i>
+              <span class="fs-5 fw-bold">Modo Pokemon</span>
+              <small class="opacity-75">Adivina el nombre por su imagen</small>
+            </button>
+          </div>
+        </div>
+
+        <div class="d-flex flex-wrap gap-2 justify-content-center mt-4">
+          <button class="btn btn-outline-light" (click)="irAGuia()">
+            <i class="bi bi-book me-1"></i> Ver reglas
+          </button>
+          <button class="btn btn-outline-danger" (click)="salir()">Salir</button>
+        </div>
+      </div>
+    </section>
+  }
+
+  @if (estado() === 'cargando') {
+    <section
+      class="card border-0 shadow-lg w-100 glass-card loading-card text-center anim-fade-in-fast"
+    >
+      <div class="card-body py-5">
+        <div class="spinner-border text-warning" role="status">
+          <span class="visually-hidden">Cargando...</span>
+        </div>
+        <p class="mb-0 mt-3">Generando una nueva pregunta...</p>
+      </div>
+    </section>
+  }
+
+  @if (estado() === 'jugando') {
+    <section class="card border-0 shadow-lg w-100 glass-card anim-slide-up-fast">
+      <div class="card-body p-3 p-md-4">
+        <header class="row g-2">
+          <div class="col-6 col-md-4 col-lg">
+            <div class="card metric-card h-100 text-center">
+              <div class="card-body p-2">
+                <span class="text-light-emphasis small d-block">Modo</span>
+                <strong>{{ modo() === 'banderas' ? 'Banderas' : 'Pokemon' }}</strong>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-4 col-lg">
+            <div class="card metric-card h-100 text-center">
+              <div class="card-body p-2">
+                <span class="text-light-emphasis small d-block">Progreso</span>
+                <strong>{{ preguntasJugadas() }}/{{ maxPreguntas }}</strong>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-4 col-lg">
+            <div class="card metric-card h-100 text-center">
+              <div class="card-body p-2">
+                <span class="text-light-emphasis small d-block">Aciertos</span>
+                <strong>{{ aciertos() }}</strong>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-4 col-lg">
+            <div class="card metric-card h-100 text-center">
+              <div class="card-body p-2">
+                <span class="text-light-emphasis small d-block">Puntaje</span>
+                <strong>{{ puntajeEnCurso() }}</strong>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-8 col-lg">
+            <div class="card metric-card h-100 text-center">
+              <div
+                class="card-body p-2 d-flex align-items-center justify-content-center gap-2 hearts"
+              >
+                @for (h of corazonesVisibles(); track $index) {
+                  <i
+                    class="bi fs-5"
+                    [class.bi-heart-fill]="h === 'lleno'"
+                    [class.bi-heartbreak-fill]="h === 'roto'"
+                  ></i>
+                }
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <div class="card bg-dark-subtle border-secondary-subtle mt-3">
+          <div class="card-body p-3 p-md-4">
+            <p class="fs-5 fw-bold text-center mb-3">
+              {{
+                modo() === 'banderas' ? '¿De que pais es esta bandera?' : '¿Que Pokemon es este?'
+              }}
+            </p>
+
+            <div
+              class="imagen-wrap rounded-4 border border-secondary-subtle p-3 p-md-4 anim-bounce-fast"
+            >
+              @if (imagenUrl()) {
+                <img
+                  [src]="imagenUrl()!"
+                  [alt]="'Imagen de ' + nombreCorrecto()"
+                  class="preg-img"
+                />
+              } @else {
+                <div class="d-flex flex-column align-items-center gap-2 text-light-emphasis">
+                  <i class="bi bi-image fs-2"></i>
+                  <span>No se pudo cargar la imagen</span>
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-2 g-md-3 mt-3">
+          @for (opcion of opciones(); track opcion) {
+            <div class="col-12 col-md-6">
+              <button
+                class="btn w-100 opcion-btn"
+                [class.opcion-correcta]="seleccionada() === opcion && opcion === nombreCorrecto()"
+                [class.opcion-incorrecta]="seleccionada() === opcion && opcion !== nombreCorrecto()"
+                [class.opcion-revelada]="seleccionada() !== null && opcion === nombreCorrecto()"
+                [disabled]="seleccionada() !== null"
+                (click)="responder(opcion)"
+              >
+                {{ opcion }}
+              </button>
+            </div>
+          }
+        </div>
+
+        @if (seleccionada() !== null) {
+          <div
+            class="alert d-flex align-items-center gap-2 mt-3 mb-0 anim-slide-up-fast feedback"
+            [class.ok]="esCorrecta()"
+            [class.bad]="esCorrecta() === false"
+            role="status"
+          >
+            @if (esCorrecta()) {
+              <i class="bi bi-check-circle-fill"></i>
+              <span>Respuesta correcta</span>
+            } @else {
+              <i class="bi bi-x-circle-fill"></i>
+              <span>Incorrecta. La respuesta era {{ nombreCorrecto() }}</span>
+            }
+          </div>
+        }
+
+        <footer class="d-flex flex-wrap gap-2 justify-content-center mt-4">
+          @if (seleccionada() !== null && vidas() > 0 && preguntasJugadas() < maxPreguntas) {
+            <button class="btn btn-warning fw-semibold" (click)="siguientePregunta()">
+              Siguiente pregunta
+            </button>
+          }
+          <button class="btn btn-outline-light" (click)="irAGuia()">Reglas</button>
+          <button class="btn btn-outline-danger" (click)="salir()">Salir</button>
+        </footer>
+      </div>
+    </section>
+  }
+
+  @if (estado() === 'resultado') {
+    <section class="card border-0 shadow-lg w-100 glass-card anim-bounce-in">
+      <div class="card-body p-3 p-md-4 text-center">
+        @if (resultadoPartida() === 'ganada') {
+          <h2 class="fw-bold mb-0 text-success-emphasis">Partida completada</h2>
+        } @else if (resultadoPartida() === 'perdida') {
+          <h2 class="fw-bold mb-0 text-danger-emphasis">Te quedaste sin vidas</h2>
+        } @else {
+          <h2 class="fw-bold mb-0 text-warning-emphasis">Partida abandonada</h2>
+        }
+
+        <div class="row g-2 mt-3">
+          <div class="col-12 col-md-6">
+            <div class="card metric-card h-100">
+              <div class="card-body p-3 text-center">
+                <span class="text-light-emphasis small d-block">Modo</span>
+                <strong>{{ modo() === 'banderas' ? 'Banderas' : 'Pokemon' }}</strong>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="card metric-card h-100">
+              <div class="card-body p-3 text-center">
+                <span class="text-light-emphasis small d-block">Aciertos</span>
+                <strong>{{ aciertos() }}</strong>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="card metric-card h-100">
+              <div class="card-body p-3 text-center">
+                <span class="text-light-emphasis small d-block">Preguntas</span>
+                <strong>{{ preguntasJugadas() }}/{{ maxPreguntas }}</strong>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="card metric-card h-100">
+              <div class="card-body p-3 text-center">
+                <span class="text-light-emphasis small d-block">Puntaje final</span>
+                <strong>{{ puntajeObtenido() }}</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        @if (guardandoScore()) {
+          <p class="text-light-emphasis mt-3 mb-0">
+            <span class="spinner-border spinner-border-sm me-2"></span>Guardando resultado...
+          </p>
+        }
+
+        <div class="d-flex flex-wrap gap-2 justify-content-center mt-4">
+          <button class="btn btn-warning fw-semibold" (click)="reiniciar()">Jugar de nuevo</button>
+          <button class="btn btn-outline-light" (click)="irAGuia()">Reglas</button>
+          <button class="btn btn-outline-danger" (click)="salir()">Ir al Home</button>
+        </div>
+      </div>
+    </section>
+  }
+</div>
+
+@if (modalAbandonoVisible()) {
+  <div class="modal-overlay d-flex align-items-center justify-content-center p-3 anim-fade-in-fast">
+    <div class="card border-0 shadow-lg glass-card modal-abandono anim-bounce-fast">
+      <div class="card-body text-center p-4">
+        <h3 class="h4">Confirmar abandono</h3>
+        <p class="text-light-emphasis mb-0">Si salis ahora se guardara como partida abandonada.</p>
+        <div class="d-flex justify-content-center gap-2 mt-4">
+          <button class="btn btn-light" (click)="cancelarSalida()">Continuar</button>
+          <button class="btn btn-danger" (click)="confirmarSalida()">Abandonar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+}

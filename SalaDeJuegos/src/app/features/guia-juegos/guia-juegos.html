@@ -228,11 +228,80 @@
               </div>
 
               <article class="articulo">
-                <h3 class="subtitulo"><i class="bi bi-tools me-2"></i>En construcción...</h3>
-                <div class="alert alert-warning border-0" role="alert">
-                  <i class="bi bi-exclamation-triangle me-2"></i>
-                  Esta sección se completará próximamente. ¡Vuelve pronto!
+                <h3 class="subtitulo"><i class="bi bi-clipboard-list me-2"></i>¿Cómo se juega?</h3>
+                <p>
+                  Preguntados tiene dos modos: <strong>Banderas</strong> y <strong>Pokémon</strong>.
+                  En cada ronda debes elegir la opción correcta entre botones de respuesta.
+                </p>
+                <ol class="lista-pasos">
+                  <li>Elige el modo de juego (Banderas o Pokémon)</li>
+                  <li>Se muestra una imagen y 4 opciones posibles</li>
+                  <li>Haz clic en una opción para responder</li>
+                  <li>Si aciertas, sumas acierto; si fallas, pierdes una vida</li>
+                  <li>Tienes 3 vidas y un máximo de 10 preguntas por partida</li>
+                  <li>Al finalizar, se guarda tu resultado en Supabase</li>
+                </ol>
+              </article>
+
+              <article class="articulo">
+                <h3 class="subtitulo"><i class="bi bi-shield-check me-2"></i>Reglas</h3>
+                <ul class="lista-reglas">
+                  <li>
+                    <strong>Opciones por botones:</strong> Todas las respuestas se eligen con
+                    botones
+                  </li>
+                  <li><strong>3 vidas iniciales:</strong> Cada error consume una vida</li>
+                  <li>
+                    <strong>10 preguntas máximas:</strong> Si llegas al tope, la partida termina
+                  </li>
+                  <li>
+                    <strong>Sin doble respuesta:</strong> Una vez respondida una ronda, no se puede
+                    cambiar
+                  </li>
+                  <li>
+                    <strong>Fin por derrota:</strong> Si tus vidas llegan a 0, terminas en derrota
+                  </li>
+                  <li>
+                    <strong>Abandono:</strong> Si sales en medio de la partida, se registra como
+                    abandonada
+                  </li>
+                </ul>
+              </article>
+
+              <article class="articulo">
+                <h3 class="subtitulo"><i class="bi bi-trophy me-2"></i>Sistema de Puntaje</h3>
+                <div class="puntaje-box">
+                  <p class="formula">
+                    Puntos = (Aciertos × 100) - (Errores × 30) - Max(0, Segundos - 60)
+                  </p>
                 </div>
+
+                <p><strong>Desglose:</strong></p>
+                <ul class="lista-puntaje">
+                  <li><strong>Aciertos × 100:</strong> Cada respuesta correcta suma 100 puntos</li>
+                  <li><strong>Errores × 30:</strong> Cada respuesta incorrecta resta 30 puntos</li>
+                  <li>
+                    <strong>Penalización por tiempo:</strong> Después de 60 segundos de partida, se
+                    descuentan puntos gradualmente
+                  </li>
+                  <li>
+                    <strong>Puntaje mínimo:</strong> Si hubo al menos un acierto, el sistema asegura
+                    un mínimo de 10 puntos
+                  </li>
+                  <li><strong>Partida abandonada:</strong> Puntaje final 0</li>
+                </ul>
+              </article>
+
+              <article class="articulo">
+                <h3 class="subtitulo"><i class="bi bi-cloud-check me-2"></i>Registro de Partida</h3>
+                <p>Al finalizar cada partida se guarda en base de datos:</p>
+                <ul class="lista-reglas">
+                  <li>Usuario que jugó (email)</li>
+                  <li>Modo elegido (banderas o pokemon)</li>
+                  <li>Cantidad de aciertos y errores</li>
+                  <li>Total de preguntas respondidas</li>
+                  <li>Tiempo de partida, resultado y puntaje final</li>
+                </ul>
               </article>
             </section>
           }

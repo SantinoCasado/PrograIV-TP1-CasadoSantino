@@ -96,9 +96,18 @@
   padding: 12px 20px !important;
 }
 
-.btn-facil   { background-color: var(--tiza-verde);    color: #1a1a1a; }
-.btn-medio   { background-color: var(--tiza-amarilla); color: #1a1a1a; }
-.btn-dificil { background-color: var(--tiza-rosa);     color: #1a1a1a; }
+.btn-facil {
+  background-color: var(--tiza-verde);
+  color: #1a1a1a;
+}
+.btn-medio {
+  background-color: var(--tiza-amarilla);
+  color: #1a1a1a;
+}
+.btn-dificil {
+  background-color: var(--tiza-rosa);
+  color: #1a1a1a;
+}
 
 /* ========== FASE CARGANDO ========== */
 .spinner-cargando {
@@ -153,6 +162,24 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 1rem;
+}
+
+.ahorcado-stats-panel {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(140px, 1fr));
+  gap: 0.5rem 0.8rem;
+  padding: 0.9rem;
+  background: rgba(20, 20, 20, 0.55);
+  border: 1px solid rgba(245, 245, 240, 0.35);
+  border-radius: 10px;
+  color: var(--tiza-blanca);
+  font-size: 0.95rem;
+  min-width: 320px;
+}
+
+.ahorcado-stats-panel strong {
+  color: var(--tiza-amarilla);
 }
 
 .ahorcado-palabra {
@@ -179,7 +206,9 @@
   transition: all 0.2s ease;
 }
 
-.casilla-letra:hover { transform: scale(1.05); }
+.casilla-letra:hover {
+  transform: scale(1.05);
+}
 
 .ahorcado-teclado-posicionado {
   position: relative;
@@ -216,7 +245,10 @@
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
-.btn-tecla:disabled { opacity: 0.3; cursor: not-allowed; }
+.btn-tecla:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
 
 .btn-tecla.acertada {
   background-color: var(--tiza-verde);
@@ -279,14 +311,30 @@
   width: 100%;
 }
 
-.card-resultado h2 { font-size: 2.5rem; font-weight: 800; margin: 0 0 1rem; }
+.card-resultado h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0 0 1rem;
+}
 
-.card-resultado.ganada    { border-color: var(--tiza-verde); }
-.card-resultado.ganada h2 { color: var(--tiza-verde); }
-.card-resultado.perdida    { border-color: var(--tiza-rosa); }
-.card-resultado.perdida h2 { color: var(--tiza-rosa); }
-.card-resultado.abandonada    { border-color: var(--tiza-amarilla); }
-.card-resultado.abandonada h2 { color: var(--tiza-amarilla); }
+.card-resultado.ganada {
+  border-color: var(--tiza-verde);
+}
+.card-resultado.ganada h2 {
+  color: var(--tiza-verde);
+}
+.card-resultado.perdida {
+  border-color: var(--tiza-rosa);
+}
+.card-resultado.perdida h2 {
+  color: var(--tiza-rosa);
+}
+.card-resultado.abandonada {
+  border-color: var(--tiza-amarilla);
+}
+.card-resultado.abandonada h2 {
+  color: var(--tiza-amarilla);
+}
 
 .badge-resultado {
   background-color: var(--acento-tierra);
@@ -305,9 +353,14 @@
   color: var(--tiza-blanca);
 }
 
-.btn-resultado:hover  { transform: scale(1.04); }
+.btn-resultado:hover {
+  transform: scale(1.04);
+}
 .btn-resultado:focus,
-.btn-resultado:active { background-color: #6f9a76; color: var(--tiza-blanca); }
+.btn-resultado:active {
+  background-color: #6f9a76;
+  color: var(--tiza-blanca);
+}
 
 .guardando-resultado {
   background-color: rgba(144, 238, 144, 0.2);
@@ -343,8 +396,17 @@
   color: var(--tiza-blanca);
 }
 
-.modal-abandono h3 { font-size: 1.8rem; font-weight: 800; color: var(--tiza-rosa); margin: 0 0 1rem; }
-.modal-abandono p  { font-size: 1rem; line-height: 1.6; margin: 0.5rem 0; }
+.modal-abandono h3 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--tiza-rosa);
+  margin: 0 0 1rem;
+}
+.modal-abandono p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0.5rem 0;
+}
 
 .btn-modal {
   background-color: rgba(139, 111, 71, 0.7);
@@ -358,54 +420,168 @@
   font-size: 1rem;
 }
 
-.btn-modal:hover { transform: scale(1.08); }
+.btn-modal:hover {
+  transform: scale(1.08);
+}
 
 /* ========== RESPONSIVE ========== */
 @media (max-width: 1024px) {
-  .ahorcado-monigote       { width: 120px; height: 140px; }
-  .casilla-letra           { width: 44px; height: 44px; font-size: 1.3rem; }
-  .btn-tecla               { font-size: 0.8rem; padding: 0.45rem 0.7rem; }
-  .btn-salir-posicionado   { padding: 0.7rem 1.3rem; font-size: 1rem; top: 15px; right: 15px; }
-  .titulo-ahorcado         { font-size: 4rem; }
-  .subtitulo               { font-size: 1.6rem; }
-  .btn-dificultad          { font-size: 1.2rem; padding: 10px 18px !important; }
+  .ahorcado-monigote {
+    width: 120px;
+    height: 140px;
+  }
+  .casilla-letra {
+    width: 44px;
+    height: 44px;
+    font-size: 1.3rem;
+  }
+  .btn-tecla {
+    font-size: 0.8rem;
+    padding: 0.45rem 0.7rem;
+  }
+  .btn-salir-posicionado {
+    padding: 0.7rem 1.3rem;
+    font-size: 1rem;
+    top: 15px;
+    right: 15px;
+  }
+  .titulo-ahorcado {
+    font-size: 4rem;
+  }
+  .subtitulo {
+    font-size: 1.6rem;
+  }
+  .btn-dificultad {
+    font-size: 1.2rem;
+    padding: 10px 18px !important;
+  }
 }
 
 @media (max-width: 768px) {
-  .ahorcado-monigote           { width: 110px; height: 130px; }
-  .casilla-letra               { width: 40px; height: 40px; font-size: 1.2rem; }
-  .ahorcado-palabra            { gap: 0.6rem; }
-  .btn-tecla                   { font-size: 0.75rem; padding: 0.4rem 0.6rem; }
-  .ahorcado-teclado-posicionado{ gap: 0.5rem; padding: 0.8rem; }
-  .btn-salir-posicionado       { padding: 0.6rem 1.1rem; font-size: 0.95rem; top: 12px; right: 12px; }
-  .titulo-ahorcado             { font-size: 3.2rem; }
-  .subtitulo                   { font-size: 1.4rem; }
-  .dificultades-grid           { gap: 18px; max-width: 600px; }
-  .card-dificultad             { padding: 16px; }
-  .btn-dificultad              { font-size: 1.1rem; padding: 9px 16px !important; }
+  .ahorcado-monigote {
+    width: 110px;
+    height: 130px;
+  }
+  .casilla-letra {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+  .ahorcado-palabra {
+    gap: 0.6rem;
+  }
+  .btn-tecla {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.6rem;
+  }
+  .ahorcado-teclado-posicionado {
+    gap: 0.5rem;
+    padding: 0.8rem;
+  }
+  .btn-salir-posicionado {
+    padding: 0.6rem 1.1rem;
+    font-size: 0.95rem;
+    top: 12px;
+    right: 12px;
+  }
+  .titulo-ahorcado {
+    font-size: 3.2rem;
+  }
+  .subtitulo {
+    font-size: 1.4rem;
+  }
+  .dificultades-grid {
+    gap: 18px;
+    max-width: 600px;
+  }
+  .card-dificultad {
+    padding: 16px;
+  }
+  .btn-dificultad {
+    font-size: 1.1rem;
+    padding: 9px 16px !important;
+  }
 }
 
 @media (max-width: 576px) {
-  .ahorcado-container          { padding: 0; }
-  .ahorcado-monigote           { width: 95px; height: 110px; }
-  .casilla-letra               { width: 36px; height: 36px; font-size: 1.1rem; border: 1px solid var(--tiza-blanca); }
-  .ahorcado-palabra            { gap: 0.5rem; }
-  .ahorcado-palabra-contenedor { width: 95%; }
-  .btn-tecla                   { font-size: 0.7rem; padding: 0.35rem 0.5rem; border-radius: 4px; }
-  .ahorcado-teclado-posicionado{ gap: 0.35rem; padding: 0.6rem; width: 98%; }
-  .btn-salir-posicionado       { padding: 0.5rem 0.9rem; font-size: 0.85rem; top: 10px; right: 10px; }
-  .titulo-ahorcado             { font-size: 2.5rem; }
-  .subtitulo                   { font-size: 1.2rem; }
-  .dificultades-grid           { gap: 12px; max-width: 90%; }
-  .card-dificultad             { padding: 12px; }
-  .btn-dificultad              { font-size: 1rem; padding: 8px 14px !important; }
-  .contenido-resultado         { max-width: 95%; padding: 20px; }
+  .ahorcado-container {
+    padding: 0;
+  }
+  .ahorcado-monigote {
+    width: 95px;
+    height: 110px;
+  }
+  .casilla-letra {
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
+    border: 1px solid var(--tiza-blanca);
+  }
+  .ahorcado-palabra {
+    gap: 0.5rem;
+  }
+  .ahorcado-palabra-contenedor {
+    width: 95%;
+  }
+  .btn-tecla {
+    font-size: 0.7rem;
+    padding: 0.35rem 0.5rem;
+    border-radius: 4px;
+  }
+  .ahorcado-teclado-posicionado {
+    gap: 0.35rem;
+    padding: 0.6rem;
+    width: 98%;
+  }
+  .btn-salir-posicionado {
+    padding: 0.5rem 0.9rem;
+    font-size: 0.85rem;
+    top: 10px;
+    right: 10px;
+  }
+  .titulo-ahorcado {
+    font-size: 2.5rem;
+  }
+  .subtitulo {
+    font-size: 1.2rem;
+  }
+  .dificultades-grid {
+    gap: 12px;
+    max-width: 90%;
+  }
+  .card-dificultad {
+    padding: 12px;
+  }
+  .btn-dificultad {
+    font-size: 1rem;
+    padding: 8px 14px !important;
+  }
+  .contenido-resultado {
+    max-width: 95%;
+    padding: 20px;
+  }
 }
 
 @media (max-height: 800px) {
-  .ahorcado-monigote           { width: 100px; height: 120px; }
-  .casilla-letra               { width: 40px; height: 40px; font-size: 1.2rem; }
-  .ahorcado-teclado-posicionado{ gap: 0.5rem; padding: 0.7rem; }
-  .btn-tecla                   { font-size: 0.75rem; padding: 0.4rem 0.6rem; }
-  .btn-salir-posicionado       { top: 12px; right: 12px; }
+  .ahorcado-monigote {
+    width: 100px;
+    height: 120px;
+  }
+  .casilla-letra {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+  .ahorcado-teclado-posicionado {
+    gap: 0.5rem;
+    padding: 0.7rem;
+  }
+  .btn-tecla {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.6rem;
+  }
+  .btn-salir-posicionado {
+    top: 12px;
+    right: 12px;
+  }
 }

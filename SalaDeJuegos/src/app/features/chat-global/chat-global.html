@@ -36,7 +36,7 @@
                 >
                   <header class="mensaje-meta">
                     <span class="mensaje-autor">{{ mensaje.user_name || mensaje.user_email }}</span>
-                    <time class="mensaje-hora">{{ formatearHora(mensaje.created_at) }}</time>
+                    <time class="mensaje-hora">{{ formatearFechaHora(mensaje.created_at) }}</time>
                   </header>
                   <p class="mensaje-contenido">{{ mensaje.user_message }}</p>
                 </article>
@@ -54,6 +54,7 @@
             placeholder="Escribí tu mensaje..."
             [value]="textoMensaje()"
             (input)="actualizarTexto($event)"
+            (keydown)="onMensajeKeydown($event)"
             [disabled]="enviando()"
           ></textarea>
 

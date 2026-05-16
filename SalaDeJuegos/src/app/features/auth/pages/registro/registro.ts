@@ -31,7 +31,7 @@ export class Registro implements OnInit {
       nombre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(12)]], // Campo nombre, requerido y con longitud mínima de 2 caracteres
         apellido: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(12)]], // Campo apellido, requerido y con longitud mínima de 2 caracteres
         edad: ['', [Validators.required, Validators.min(8), Validators.max(99)]], // Campo edad, requerido y con valor mínimo de 8
-        email: ['', [Validators.required, Validators.email]], // Campo email, requerido y con formato de email válido
+        email: ['', [Validators.required, Validators.email, Validators.minLength(5), Validators.maxLength(30)]], // Campo email, requerido y con formato de email válido
         password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(15)]], // Campo contraseña, requerido y con longitud mínima de 6 caracteres
     });
   }

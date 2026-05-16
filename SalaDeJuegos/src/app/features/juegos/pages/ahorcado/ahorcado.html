@@ -88,6 +88,12 @@
 
           <!-- Palabra a adivinar -->
           <div class="ahorcado-palabra-contenedor anim-slide-down-300">
+            <div class="ahorcado-stats-panel">
+              <span><strong>Puntaje:</strong> {{ puntajeEnCurso() }}</span>
+              <span><strong>Aciertos:</strong> {{ aciertosCount() }}</span>
+              <span><strong>Erradas:</strong> {{ erradasCount() }}</span>
+              <span><strong>Precisión:</strong> {{ precision() }}%</span>
+            </div>
             <div class="ahorcado-palabra">
               @for (letra of letrasVisibles(); track $index) {
                 <span class="casilla-letra anim-slide-up-fast">{{ letra }}</span>

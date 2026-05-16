@@ -25,7 +25,7 @@
       <!-- SCORE (Arriba) -->
       <div class="mayor-menor-score d-flex justify-content-center p-3 anim-slide-down-300">
         <div class="bg-dark bg-opacity-50 px-5 py-3 rounded text-white">
-          <div class="d-flex gap-5 align-items-center">
+          <div class="d-flex gap-5 align-items-center flex-wrap justify-content-center">
             <div class="text-center">
               <small class="d-block" style="opacity: 0.8">Acertadas</small>
               <span class="fs-3" style="color: #fffacd; font-weight: bold"
@@ -35,6 +35,12 @@
             <div class="text-center">
               <small class="d-block" style="opacity: 0.8">Precisión</small>
               <span class="fs-3" style="color: #fffacd; font-weight: bold">{{ progreso() }}%</span>
+            </div>
+            <div class="text-center">
+              <small class="d-block" style="opacity: 0.8">Puntaje</small>
+              <span class="fs-3" style="color: #fffacd; font-weight: bold">{{
+                puntajeEnCurso()
+              }}</span>
             </div>
           </div>
         </div>

@@ -6,7 +6,12 @@ function validarAutenticacion() {
   const auth = inject(Auth);
   const router = inject(Router);
 
-  // Si el usuario está autenticado, permite la navegación. Si no, redirige al login con un mensaje indicando que se requiere autenticación.
+  // Si sesión aún se está restaurando, permite navegación (el componente decidirá qué mostrar)
+  // Si sesión ya se restauró pero no hay usuario, redirige al login
+  if (!auth.sesionRestaurada()) {
+    return true; // Permite la ruta, componente esperará sesión restaurada
+  }
+
   return auth.usuario()
     ? true
     : router.parseUrl('/log-in?msg=requiere-login');

@@ -1,0 +1,180 @@
+.preguntados-page {
+  min-height: 100dvh;
+  background:
+    radial-gradient(circle at 14% 12%, rgba(224, 31, 31, 0.2), transparent 34%),
+    radial-gradient(circle at 82% 84%, rgba(139, 111, 71, 0.18), transparent 36%),
+    linear-gradient(140deg, var(--burn-bg) 0%, #161212 46%, #1f1b17 100%);
+  color: var(--burn-text);
+}
+
+.glass-card {
+  width: min(960px, 100%);
+  border-radius: 1.35rem;
+  border: 1px solid rgba(245, 245, 240, 0.12);
+  background: rgba(21, 21, 21, 0.86);
+  backdrop-filter: blur(10px);
+}
+
+.loading-card {
+  max-width: 440px;
+}
+
+.subtitle-maxw {
+  max-width: 700px;
+}
+
+.modo-btn {
+  border: 0 !important;
+  border-radius: 1rem;
+  color: var(--burn-text);
+  min-height: 180px;
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    filter 0.22s ease;
+}
+
+.modo-btn:hover {
+  transform: translateY(-4px);
+  filter: brightness(1.05);
+}
+
+.modo-btn--banderas {
+  background: linear-gradient(135deg, #194f97, #2a7ab3);
+  box-shadow: 0 12px 24px rgba(24, 73, 139, 0.34);
+}
+
+.modo-btn--pokemon {
+  background: linear-gradient(135deg, #7a221c, #c3482e);
+  box-shadow: 0 12px 24px rgba(156, 61, 35, 0.36);
+}
+
+.metric-card {
+  background: rgba(61, 61, 61, 0.35);
+  border: 1px solid rgba(245, 245, 240, 0.12);
+  color: var(--burn-text);
+}
+
+.hearts .bi-heart-fill {
+  color: #ff6a6a;
+}
+
+.hearts .bi-heartbreak-fill {
+  color: rgba(245, 245, 240, 0.34);
+}
+
+.imagen-wrap {
+  min-height: 200px;
+  display: grid;
+  place-items: center;
+  background: rgba(44, 44, 44, 0.44);
+}
+
+.preg-img {
+  max-width: min(360px, 100%);
+  max-height: 220px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.4));
+}
+
+.opcion-btn {
+  min-height: 52px;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(245, 245, 240, 0.18);
+  background: rgba(245, 245, 240, 0.07);
+  color: var(--burn-text);
+  font-weight: 600;
+  transition:
+    transform 0.16s ease,
+    border-color 0.16s ease,
+    background 0.16s ease;
+}
+
+.opcion-btn:hover:enabled {
+  transform: translateY(-2px);
+  border-color: rgba(255, 182, 71, 0.7);
+  background: rgba(255, 182, 71, 0.2);
+}
+
+.opcion-btn:disabled {
+  opacity: 1;
+}
+
+.opcion-correcta,
+.opcion-revelada {
+  background: rgba(25, 135, 84, 0.35);
+  border-color: rgba(76, 209, 55, 0.85);
+  animation: popOk 0.35s ease;
+}
+
+.opcion-incorrecta {
+  background: rgba(220, 53, 69, 0.32);
+  border-color: rgba(255, 92, 112, 0.9);
+  animation: shakeX 0.42s ease;
+}
+
+.feedback {
+  border-width: 1px;
+  border-style: solid;
+  color: var(--burn-text);
+  font-weight: 600;
+}
+
+.feedback.ok {
+  background: rgba(25, 135, 84, 0.26);
+  border: 1px solid rgba(76, 209, 55, 0.45);
+}
+
+.feedback.bad {
+  background: rgba(220, 53, 69, 0.24);
+  border: 1px solid rgba(255, 92, 112, 0.5);
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.62);
+  z-index: 1200;
+}
+
+.modal-abandono {
+  width: min(420px, 100%);
+  border: 1px solid rgba(245, 245, 240, 0.14);
+  background: rgba(23, 22, 22, 0.95);
+}
+
+@keyframes popOk {
+  0% {
+    transform: scale(0.94);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes shakeX {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-5px);
+  }
+  40% {
+    transform: translateX(5px);
+  }
+  60% {
+    transform: translateX(-3px);
+  }
+  80% {
+    transform: translateX(3px);
+  }
+}
+
+@media (max-width: 680px) {
+  .modo-btn {
+    min-height: 150px;
+  }
+}

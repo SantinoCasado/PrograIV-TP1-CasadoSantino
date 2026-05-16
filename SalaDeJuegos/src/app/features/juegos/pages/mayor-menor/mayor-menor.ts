@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, computed, signal } from '@angular/core';
+import { Component, OnDestroy, OnInit, computed, effect, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Auth } from '../../../../core/services/auth/auth';
@@ -49,6 +49,12 @@ export class MayorMenor implements PartidaAbandonable, OnInit, OnDestroy {
     return total > 0 ? Math.round((this.cartasAcertadasSig() / total) * 100) : 0;
   });
 
+  readonly puntajeEnCurso = computed(() => {
+    if (this.estado() !== 'jugando') return 0;
+    if (this.jugadasTotalesSig() === 0) return 0;
+    return this.calcularPuntaje();
+  });
+
   // ---- Modal abandono ----------------------------------------------------------------
   private resolverAbandono!: (v: boolean) => void;
   private sub: Subscription | null = null;
@@ -59,7 +65,14 @@ export class MayorMenor implements PartidaAbandonable, OnInit, OnDestroy {
     private cartasApi: CartasApi,
     private score: JuegosScore,
     private router: Router,
-  ) {}
+  ) {
+    // Verifica que después de restaurar sesión haya usuario; si no, redirige a login
+    effect(() => {
+      if (this.auth.sesionRestaurada() && !this.auth.usuario()) {
+        this.router.navigate(['/log-in'], { queryParams: { msg: 'requiere-login' } });
+      }
+    });
+  }
   
   ngOnInit(): void {
     this.iniciarPartida();
@@ -131,9 +144,16 @@ export class MayorMenor implements PartidaAbandonable, OnInit, OnDestroy {
     const valorActual  = this.cartasApi.valorNumerico(this.cartaActualSig()!.value);
     const valorProximo = this.cartasApi.valorNumerico(proxima.value);
 
+    // Caso especial: cartas iguales (evento neutro, sin ganar ni perder)
+    if (valorProximo === valorActual) {
+      this.cartaActualSig.set(proxima);
+      this.proximaCartaSig.set(null);
+      return;
+    }
+
     const esCorrecta = prediccion === 'mayor'
-      ? valorProximo > valorActual  // Si el usuario predijo "mayor", la próxima carta debe ser mayor que la actual
-      : valorProximo < valorActual; // Si el usuario predijo "menor", la próxima carta debe ser menor que la actual
+      ? valorProximo > valorActual
+      : valorProximo < valorActual;
 
     // Guardar la carta actual en el historial (máximo 5)
     const cartaActualJugada = this.cartaActualSig();
@@ -144,14 +164,14 @@ export class MayorMenor implements PartidaAbandonable, OnInit, OnDestroy {
       });
     }
 
-    this.jugadasTotalesSig.update(j => j + 1);  // Incrementamos el conteo de jugadas totales
-    this.cartaActualSig.set(proxima); // La carta actual ahora es la que acabamos de robar
-    this.proximaCartaSig.set(null); // Limpiamos la próxima carta para que no se muestre hasta que el usuario haga otra predicción
+    this.jugadasTotalesSig.update(j => j + 1);
+    this.cartaActualSig.set(proxima);
+    this.proximaCartaSig.set(null);
 
     if (esCorrecta) {
-      this.cartasAcertadasSig.update(a => a + 1); // Incrementamos el conteo de cartas acertadas
+      this.cartasAcertadasSig.update(a => a + 1);
     } else {
-      this.vidasSig.update(v => v - 1); // Decrementamos las vidas restantes
+      this.vidasSig.update(v => v - 1);
       if (this.vidasSig() <= 0) this.finalizarConResultado('perdida');
     }
   }

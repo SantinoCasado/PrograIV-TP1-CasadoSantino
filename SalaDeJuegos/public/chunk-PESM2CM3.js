@@ -1,0 +1,1 @@
+import{a as n}from"./chunk-4TUQ7XI6.js";import{t,xa as a}from"./chunk-C6ZQVHV4.js";function o(){let r=t(n),e=t(a);return r.sesionRestaurada()?r.usuario()?!0:e.parseUrl("/log-in?msg=requiere-login"):!0}var m=()=>o(),p=()=>o();export{m as a,p as b};

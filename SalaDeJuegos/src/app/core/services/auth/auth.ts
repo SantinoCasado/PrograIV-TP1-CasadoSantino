@@ -14,12 +14,16 @@ export class Auth {
   // Signal con los datos del perfil (nombre, apellido, etc.) obtenidos de la BD
   readonly perfil = signal<PerfilUsuario | null>(null);
 
+  // Signal que indica si la restauración de sesión ya completó
+  readonly sesionRestaurada = signal(false);
+
   constructor(private supabase: Supabase) {
     // Carga la sesion actual cuando la app arranca para mantener el estado de autenticación
     this.supabase.getSesion().then(({ data }) => {
       const user = data.session?.user ?? null;
       this.usuario.set(user);
       if (user?.email) this.cargarPerfil(user.email);
+      this.sesionRestaurada.set(true);
     });
 
     // Escucha cambios en el estado de autenticación (inicio/cierre de sesión) para actualizar la señal
@@ -31,6 +35,7 @@ export class Auth {
       } else {
         this.perfil.set(null);
       }
+      this.sesionRestaurada.set(true);
     });
   }
 
