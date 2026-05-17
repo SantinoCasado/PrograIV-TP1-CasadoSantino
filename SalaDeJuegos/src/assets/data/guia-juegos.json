@@ -1,0 +1,370 @@
+{
+  "mayor-menor": {
+    "titulo": "Mayor o Menor",
+    "descripcion": "Predice si la siguiente carta será mayor o menor que la actual",
+    "icono": "bi-suit-heart",
+    "secciones": [
+      {
+        "titulo": "¿Cómo se juega?",
+        "icono": "bi-clipboard-list",
+        "parrafos": [
+          "En Mayor o Menor, tu objetivo es predecir correctamente si la siguiente carta será mayor o menor que la carta actual."
+        ],
+        "pasos": [
+          "Se te muestra una carta inicial del mazo",
+          "Debes elegir si crees que la próxima será mayor o menor",
+          "Si aciertas, ganas puntos y tienes otra oportunidad",
+          "Si fallas, pierdes una vida (tienes 3 vidas)",
+          "El juego termina cuando pierdes las 3 vidas o decides salir"
+        ]
+      },
+      {
+        "titulo": "Reglas",
+        "icono": "bi-shield-check",
+        "listaClase": "lista-reglas",
+        "items": [
+          {
+            "texto": "3 vidas iniciales: Cada error consume una vida"
+          },
+          {
+            "texto": "Mazo completo: Se usan todas las cartas del mazo (52 cartas)"
+          },
+          {
+            "texto": "Comparación: Las cartas se comparan por valor (A=1, J=11, Q=12, K=13)"
+          },
+          {
+            "texto": "Precisión: Se muestra tu porcentaje de aciertos en tiempo real"
+          },
+          {
+            "texto": "Sin límite de tiempo: Tómate el tiempo que necesites para pensar"
+          }
+        ]
+      },
+      {
+        "titulo": "Sistema de Puntaje",
+        "icono": "bi-trophy",
+        "formula": "Puntos = (Aciertos × 50) + Bonus - (Vidas perdidas × 30) - Max(0, Segundos - 60)",
+        "parrafos": [
+          "Desglose:"
+        ],
+        "listaClase": "lista-puntaje",
+        "items": [
+          {
+            "texto": "Aciertos × 50: Cada predicción correcta suma 50 puntos base"
+          },
+          {
+            "texto": "Bonus: Cada 5 aciertos consecutivos ganas un bonus adicional que se incrementa (5 aciertos = 10 bonus, 10 aciertos = 40 bonus, 15 aciertos = 90 bonus, etc.)"
+          },
+          {
+            "texto": "Vidas perdidas × 30: Se restan 30 puntos por cada vida perdida"
+          },
+          {
+            "texto": "Penalización de tiempo: Si tardas más de 60 segundos, se restan puntos extras"
+          }
+        ],
+        "nota": {
+          "tipo": "secondary",
+          "icono": "bi-lightbulb",
+          "texto": "Consejo: Mantén una alta precisión y haz predicciones rápidas para maximizar tu puntuación."
+        }
+      },
+      {
+        "titulo": "Estrategias",
+        "icono": "bi-brain",
+        "listaClase": "lista-estrategias",
+        "items": [
+          {
+            "texto": "Observa patrones: Algunas cartas altas o bajas aparecen seguidas"
+          },
+          {
+            "texto": "Estadística: Hay más cartas en el rango medio que en extremos"
+          },
+          {
+            "texto": "Memoriza: Intenta recordar las cartas ya jugadas"
+          },
+          {
+            "texto": "Cálculo de probabilidades: Si ya viste muchas cartas altas, es menos probable otra"
+          },
+          {
+            "texto": "No te precipites: Tómate un momento para analizar antes de hacer tu predicción"
+          }
+        ]
+      }
+    ]
+  },
+  "ahorcado": {
+    "titulo": "Ahorcado",
+    "descripcion": "Adivina la palabra antes de que se complete el dibujo del ahorcado",
+    "icono": "bi-alphabet",
+    "secciones": [
+      {
+        "titulo": "¿Cómo se juega?",
+        "icono": "bi-clipboard-list",
+        "parrafos": [
+          "El Ahorcado es un clásico juego de adivinanza donde debes descubrir la palabra oculta antes de completar el dibujo del ahorcado."
+        ],
+        "pasos": [
+          "Elige una dificultad (Fácil, Medio, Difícil)",
+          "Se te mostrará una palabra oculta representada por guiones (_____)",
+          "Haz clic en las letras para revelarlas",
+          "Si la letra está en la palabra, se revela en su posición",
+          "Si cometes 7 errores, el juego termina y pierdes",
+          "Si adivinas la palabra antes de 7 errores, ¡ganas!"
+        ]
+      },
+      {
+        "titulo": "Reglas",
+        "icono": "bi-shield-check",
+        "listaClase": "lista-reglas",
+        "items": [
+          {
+            "texto": "7 errores permitidos: Al séptimo error, pierdes la partida"
+          },
+          {
+            "texto": "Una letra por turno: Selecciona una letra a la vez"
+          },
+          {
+            "texto": "Sin repetición: No puedes seleccionar la misma letra dos veces"
+          },
+          {
+            "texto": "Sensibilidad a mayúsculas: Las letras se ignoran en caso"
+          },
+          {
+            "texto": "Dificultad afecta palabras:",
+            "subItems": [
+              "Fácil: Palabras cortas y comunes (3-6 letras)",
+              "Medio: Palabras medianas (7-10 letras)",
+              "Difícil: Palabras largas y menos comunes (11+ letras)"
+            ]
+          }
+        ]
+      },
+      {
+        "titulo": "Sistema de Puntaje",
+        "icono": "bi-trophy",
+        "formula": "Puntos = (Letras correctas × 100) + (Dificultad bonus) - (Errores × 50)",
+        "parrafos": [
+          "Desglose:"
+        ],
+        "listaClase": "lista-puntaje",
+        "items": [
+          {
+            "texto": "Letras correctas × 100: Cada letra correcta suma 100 puntos"
+          },
+          {
+            "texto": "Bonus por dificultad:",
+            "subItems": [
+              "Fácil: +100 bonus",
+              "Medio: +300 bonus",
+              "Difícil: +500 bonus"
+            ]
+          },
+          {
+            "texto": "Errores × 50: Se restan 50 puntos por cada error cometido"
+          }
+        ],
+        "nota": {
+          "tipo": "secondary",
+          "icono": "bi-lightbulb",
+          "texto": "Consejo: Juega en dificultad alta para ganar más puntos, pero requiere más concentración."
+        }
+      }
+    ]
+  },
+  "busca-minas": {
+    "titulo": "Busca Minas",
+    "descripcion": "Desactiva las minas sin hacer explotar ninguna",
+    "icono": "bi-grid-3x3",
+    "secciones": [
+      {
+        "titulo": "¿Cómo se juega?",
+        "icono": "bi-clipboard-list",
+        "parrafos": [
+          "En Busca Minas debes revelar todas las celdas seguras del tablero sin tocar una mina. Usa banderas para marcar posiciones peligrosas y ayudarte a deducir las zonas seguras."
+        ],
+        "pasos": [
+          "Ingresa al juego y elige una dificultad: Fácil, Medio, Difícil o Experto",
+          "Se genera un tablero con un tamaño y cantidad de minas según la dificultad",
+          "Haz click izquierdo para revelar una celda",
+          "Haz click derecho para poner o quitar una bandera",
+          "Si revelas una mina, pierdes la partida",
+          "Si revelas todas las celdas seguras, ganas la partida"
+        ]
+      },
+      {
+        "titulo": "Reglas",
+        "icono": "bi-shield-check",
+        "listaClase": "lista-reglas",
+        "items": [
+          {
+            "texto": "Primera jugada segura: Si la primera celda elegida era mina, el sistema la recoloca"
+          },
+          {
+            "texto": "Sin límite de tiempo para perder: El tiempo afecta el bonus, no define derrota automática"
+          },
+          {
+            "texto": "Banderas limitadas: El stock de banderas coincide con la cantidad de minas del tablero"
+          },
+          {
+            "texto": "Reinicio durante partida: Reiniciar vuelve a generar el tablero actual sin cerrar la corrida activa"
+          },
+          {
+            "texto": "Partida abandonable: Puedes abandonar manualmente o al salir de la ruta con confirmación"
+          }
+        ]
+      },
+      {
+        "titulo": "Sistema de Puntaje",
+        "icono": "bi-trophy",
+        "formula": "Puntos = Banderas correctas + Números revelados + Celdas vacías + Jackpot de dificultad + Bonus de tiempo",
+        "parrafos": [
+          "Desglose:"
+        ],
+        "listaClase": "lista-puntaje",
+        "items": [
+          {
+            "texto": "Bandera correcta: Suma más puntos que revelar una celda numérica"
+          },
+          {
+            "texto": "Número revelado: Suma puntos por cada celda con adyacencia mayor a 0"
+          },
+          {
+            "texto": "Celda vacía: Suma puntos menores por descubrimiento"
+          },
+          {
+            "texto": "Bandera incorrecta: Aplica penalización de puntaje"
+          },
+          {
+            "texto": "Jackpot por dificultad: Al ganar se agrega un bonus fijo según Fácil, Medio, Difícil o Experto"
+          },
+          {
+            "texto": "Bonus por tiempo: Cuanto más rápido ganes, mayor bonus final"
+          }
+        ]
+      },
+      {
+        "titulo": "Registro de Partida",
+        "icono": "bi-cloud-check",
+        "parrafos": [
+          "Al finalizar cada corrida se guarda en base de datos:"
+        ],
+        "listaClase": "lista-reglas",
+        "items": [
+          {
+            "texto": "Usuario que jugó (email)"
+          },
+          {
+            "texto": "Dificultad elegida"
+          },
+          {
+            "texto": "Puntaje final"
+          },
+          {
+            "texto": "Resultado (ganada, perdida o abandonada)"
+          },
+          {
+            "texto": "Fecha y hora de finalización"
+          }
+        ]
+      }
+    ]
+  },
+  "preguntados": {
+    "titulo": "Preguntados",
+    "descripcion": "Responde trivia de preguntas y demuestra tu conocimiento general",
+    "icono": "bi-question-circle",
+    "secciones": [
+      {
+        "titulo": "¿Cómo se juega?",
+        "icono": "bi-clipboard-list",
+        "parrafos": [
+          "Preguntados tiene dos modos: Banderas y Pokémon. En cada ronda debes elegir la opción correcta entre botones de respuesta."
+        ],
+        "pasos": [
+          "Elige el modo de juego (Banderas o Pokémon)",
+          "Se muestra una imagen y 4 opciones posibles",
+          "Haz clic en una opción para responder",
+          "Si aciertas, sumas acierto; si fallas, pierdes una vida",
+          "Tienes 3 vidas y un máximo de 10 preguntas por partida",
+          "Al finalizar, se guarda tu resultado en Supabase"
+        ]
+      },
+      {
+        "titulo": "Reglas",
+        "icono": "bi-shield-check",
+        "listaClase": "lista-reglas",
+        "items": [
+          {
+            "texto": "Opciones por botones: Todas las respuestas se eligen con botones"
+          },
+          {
+            "texto": "3 vidas iniciales: Cada error consume una vida"
+          },
+          {
+            "texto": "10 preguntas máximas: Si llegas al tope, la partida termina"
+          },
+          {
+            "texto": "Sin doble respuesta: Una vez respondida una ronda, no se puede cambiar"
+          },
+          {
+            "texto": "Fin por derrota: Si tus vidas llegan a 0, terminas en derrota"
+          },
+          {
+            "texto": "Abandono: Si sales en medio de la partida, se registra como abandonada"
+          }
+        ]
+      },
+      {
+        "titulo": "Sistema de Puntaje",
+        "icono": "bi-trophy",
+        "formula": "Puntos = (Aciertos × 100) - (Errores × 30) - Max(0, Segundos - 60)",
+        "parrafos": [
+          "Desglose:"
+        ],
+        "listaClase": "lista-puntaje",
+        "items": [
+          {
+            "texto": "Aciertos × 100: Cada respuesta correcta suma 100 puntos"
+          },
+          {
+            "texto": "Errores × 30: Cada respuesta incorrecta resta 30 puntos"
+          },
+          {
+            "texto": "Penalización por tiempo: Después de 60 segundos de partida, se descuentan puntos gradualmente"
+          },
+          {
+            "texto": "Puntaje mínimo: Si hubo al menos un acierto, el sistema asegura un mínimo de 10 puntos"
+          },
+          {
+            "texto": "Partida abandonada: Puntaje final 0"
+          }
+        ]
+      },
+      {
+        "titulo": "Registro de Partida",
+        "icono": "bi-cloud-check",
+        "parrafos": [
+          "Al finalizar cada partida se guarda en base de datos:"
+        ],
+        "listaClase": "lista-reglas",
+        "items": [
+          {
+            "texto": "Usuario que jugó (email)"
+          },
+          {
+            "texto": "Modo elegido (banderas o pokemon)"
+          },
+          {
+            "texto": "Cantidad de aciertos y errores"
+          },
+          {
+            "texto": "Total de preguntas respondidas"
+          },
+          {
+            "texto": "Tiempo de partida, resultado y puntaje final"
+          }
+        ]
+      }
+    ]
+  }
+}

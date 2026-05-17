@@ -1,1 +1,155 @@
-<p>busca-minas works!</p>
+<section class="busca-page d-flex align-items-start justify-content-center p-2 p-md-3">
+  @if (estado === 'seleccion') {
+    <article class="card border-0 shadow-lg w-100 buscaminas-card buscaminas-card--select">
+      <div class="card-body p-3 p-md-4 p-lg-5 text-center">
+        <h1 class="display-6 fw-bold mb-2">Busca Minas</h1>
+        <p class="text-light-emphasis mb-0 mx-auto select-subtitle">
+          Elegi la dificultad para comenzar la partida.
+        </p>
+
+        <div class="row g-3 mt-3">
+          @for (dificultad of dificultades; track dificultad.id) {
+            <div class="col-12 col-md-6">
+              <button
+                class="btn btn-dificultad w-100 anim-hover-lift-md"
+                [class.is-active]="dificultad.id === dificultadSeleccionadaId"
+                (click)="elegirDificultad(dificultad.id)"
+              >
+                <span class="d-block fs-5 fw-bold">{{ dificultad.nombre }}</span>
+                <small class="opacity-75"
+                  >{{ dificultad.tamanio }}x{{ dificultad.tamanio }} -
+                  {{ dificultad.minas }} minas</small
+                >
+              </button>
+            </div>
+          }
+        </div>
+
+        <div class="d-flex justify-content-center mt-4">
+          <button class="btn btn-outline-danger fw-semibold px-4" (click)="salir()">Salir</button>
+        </div>
+      </div>
+    </article>
+  } @else {
+    <article class="card border-0 shadow-lg w-100 buscaminas-card">
+      <div class="card-body p-2 p-md-3">
+        <header class="d-flex justify-content-end">
+          <div class="d-flex align-items-center gap-2 flex-wrap justify-content-end">
+            <span class="badge rounded-pill text-bg-danger border border-danger-subtle px-3 py-2">
+              {{ dificultadSeleccionada.nombre }}
+            </span>
+            <button class="btn btn-outline-light btn-sm fw-semibold" (click)="irASeleccion()">
+              Cambiar dificultad
+            </button>
+            <button class="btn btn-outline-warning btn-sm fw-semibold" (click)="nuevaPartida()">
+              Reiniciar
+            </button>
+            <button
+              class="btn btn-outline-danger btn-sm fw-semibold"
+              (click)="solicitarAbandonoManual()"
+            >
+              Abandonar
+            </button>
+          </div>
+        </header>
+
+        <section class="hud mt-2 p-2">
+          <div class="hud__item">
+            <small>Minas restantes</small>
+            <strong>{{ minasRestantes }}</strong>
+          </div>
+
+          <div class="hud__item">
+            <small>Stock banderas</small>
+            <strong>{{ stockBanderas }}</strong>
+          </div>
+
+          <button
+            type="button"
+            class="hud__smile anim-hover-scale-sm"
+            [attr.aria-label]="'Reiniciar partida, estado ' + estadoMensaje"
+            [title]="estadoMensaje"
+            (click)="nuevaPartida()"
+          >
+            <img [src]="caritaRuta" [alt]="caritaAlt" class="hud__smile-img" />
+          </button>
+
+          <div class="hud__item">
+            <small>Puntaje</small>
+            <strong>{{ puntaje }}</strong>
+          </div>
+
+          <div class="hud__item">
+            <small>Tiempo</small>
+            <strong>{{ tiempoJuegoSeg }}s</strong>
+          </div>
+        </section>
+
+        <p class="estado-text mt-1 mb-0">{{ estadoMensaje }}</p>
+
+        <div class="tablero-wrap mt-2">
+          <div
+            class="tablero"
+            [style.grid-template-columns]="'repeat(' + tamanioTablero + ', auto)'"
+          >
+            @for (celda of celdasPlanas; track celda.x + '-' + celda.y) {
+              <button
+                class="celda anim-hover-lift-sm"
+                type="button"
+                [class.revelada]="celda.revelada"
+                [class.marcada]="celda.marcada && !celda.revelada"
+                [class.mina]="celda.revelada && celda.tieneMina"
+                (click)="clickIzquierdo(celda)"
+                (contextmenu)="clickDerecho($event, celda)"
+              >
+                @if (celda.revelada) {
+                  @if (celda.tieneMina) {
+                    <img src="assets/images/buscaMinas/mina.svg" alt="Mina" class="celda-icon" />
+                  } @else if (celda.adyacentes > 0) {
+                    @if (rutaNumero(celda); as ruta) {
+                      <img [src]="ruta" [alt]="'Numero ' + celda.adyacentes" class="celda-icon" />
+                    } @else {
+                      <span
+                        class="numero-texto"
+                        [class]="'numero-texto numero-' + celda.adyacentes"
+                      >
+                        {{ celda.adyacentes }}
+                      </span>
+                    }
+                  }
+                } @else if (celda.marcada) {
+                  <img
+                    src="assets/images/buscaMinas/bandera.svg"
+                    alt="Bandera"
+                    class="celda-icon"
+                  />
+                }
+              </button>
+            }
+          </div>
+        </div>
+
+        <footer class="mt-2 small text-light-emphasis">
+          Click izquierdo: revelar celda. Click derecho: poner o sacar bandera.
+        </footer>
+      </div>
+    </article>
+  }
+</section>
+
+@if (modalAbandonoVisible) {
+  <div class="modal-overlay d-flex align-items-center justify-content-center p-3">
+    <div class="card border-0 shadow-lg buscaminas-card modal-abandono">
+      <div class="card-body text-center p-4">
+        <h3 class="h4">Confirmar abandono</h3>
+        <p class="text-light-emphasis mb-0">
+          Si salis ahora se cerrara la partida actual y se guardara como abandonada.
+        </p>
+        <div class="d-flex justify-content-center gap-2 mt-4">
+          <button class="btn btn-light" (click)="cancelarSalida()">Continuar</button>
+          <button class="btn btn-danger" (click)="confirmarSalida()">Abandonar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+}

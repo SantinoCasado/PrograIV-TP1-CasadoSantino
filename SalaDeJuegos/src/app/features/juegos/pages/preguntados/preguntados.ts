@@ -35,6 +35,7 @@ export class Preguntados implements PartidaAbandonable, OnDestroy {
   readonly guardandoScore      = signal(false);
   readonly modalAbandonoVisible= signal(false);
   readonly corazonesVisibles   = signal<('lleno' | 'roto')[]>(['lleno', 'lleno', 'lleno']);
+  readonly letrasOpciones      = ['A', 'B', 'C', 'D'] as const;
    readonly maxPreguntas = MAX_PREGUNTAS; // expuesto para la UI
 
   //----- Estados internos privados ----------------------------------------------------------------

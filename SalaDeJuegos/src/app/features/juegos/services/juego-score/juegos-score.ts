@@ -3,6 +3,7 @@ import { Supabase } from '../../../../core/services/supabase/supabase';
 import { ResultadoAhorcado} from '../../models/resultado-ahorcado';
 import { ResultadoMayorMenor } from '../../models/resultado-MayorMenor';
 import { ResultadoPreguntados } from '../../models/resultado-preguntados';
+import { ResultadoBuscaMinas } from '../../models/resultado-busca-minas';
 
 @Injectable({
   providedIn: 'root',
@@ -53,6 +54,18 @@ export class JuegosScore {
         tiempo_segundos: data.tiempoSegundos,
         resultado: data.resultado,
         puntaje: data.puntaje,
+        fecha_fin: data.fechaFinIso ?? new Date().toISOString(),
+      },
+    ]);
+  }
+
+  guardarResultadoBuscaMinas(data: ResultadoBuscaMinas) {
+    return this.supabase['client'].from('partidas_busca_minas').insert([
+      {
+        usuario_email: data.emailUsuario,
+        dificultad: data.dificultad,
+        puntaje: data.puntaje,
+        resultado: data.resultado,
         fecha_fin: data.fechaFinIso ?? new Date().toISOString(),
       },
     ]);

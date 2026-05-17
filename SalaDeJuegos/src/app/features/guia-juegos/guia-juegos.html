@@ -5,310 +5,91 @@
   ></app-sidebar-menu>
 
   <main class="guia-main">
-    <!-- CONTENEDOR PRINCIPAL -->
     <div class="guia-contenedor">
-      <!-- CONTENIDO DE CADA JUEGO -->
       <div class="guia-contenido">
-        @switch (juegoActual()) {
-          @case ('mayor-menor') {
-            <section class="guia-seccion">
-              <div class="seccion-header">
-                <h2 class="titulo-juego"><i class="bi bi-suit-heart me-2"></i>{{ tituloJuego }}</h2>
-                <p class="descripcion-rapida">{{ descripcionJuego }}</p>
-              </div>
+        @if (cargandoGuia()) {
+          <section class="guia-seccion">
+            <div class="alert alert-secondary border-0 mb-0" role="status">
+              <span class="spinner-border spinner-border-sm me-2"></span>Cargando guía...
+            </div>
+          </section>
+        } @else if (errorGuia()) {
+          <section class="guia-seccion">
+            <div class="alert alert-danger border-0 mb-0" role="alert">
+              No se pudo cargar la guía de juegos. Intenta nuevamente más tarde.
+            </div>
+          </section>
+        } @else if (guiaActual(); as guia) {
+          <section class="guia-seccion">
+            <div class="seccion-header">
+              <h2 class="titulo-juego">
+                <i class="bi me-2" [class]="'bi me-2 ' + guia.icono"></i>{{ guia.titulo }}
+              </h2>
+              <p class="descripcion-rapida">{{ guia.descripcion }}</p>
+            </div>
 
-              <!-- COMO SE JUEGA -->
+            @for (seccion of guia.secciones; track seccion.titulo) {
               <article class="articulo">
-                <h3 class="subtitulo"><i class="bi bi-clipboard-list me-2"></i>¿Cómo se juega?</h3>
-                <p>
-                  En Mayor o Menor, tu objetivo es <strong>predecir correctamente</strong> si la
-                  siguiente carta será <strong>mayor</strong> o <strong>menor</strong> que la carta
-                  actual.
-                </p>
-                <ol class="lista-pasos">
-                  <li>Se te muestra una carta inicial del mazo</li>
-                  <li>Debes elegir si crees que la próxima será mayor o menor</li>
-                  <li>Si aciertas, ganas puntos y tienes otra oportunidad</li>
-                  <li>Si fallas, pierdes una vida (tienes 3 vidas)</li>
-                  <li>El juego termina cuando pierdes las 3 vidas o decides salir</li>
-                </ol>
-              </article>
+                <h3 class="subtitulo">
+                  <i class="bi me-2" [class]="'bi me-2 ' + seccion.icono"></i>{{ seccion.titulo }}
+                </h3>
 
-              <!-- REGLAS mayor-menor -->
-              <article class="articulo">
-                <h3 class="subtitulo"><i class="bi bi-shield-check me-2"></i>Reglas</h3>
-                <ul class="lista-reglas">
-                  <li><strong>3 Vidas iniciales:</strong> Cada error consume una vida</li>
-                  <li>
-                    <strong>Mazo completo:</strong> Se usan todas las cartas del mazo (52 cartas)
-                  </li>
-                  <li>
-                    <strong>Comparación:</strong> Las cartas se comparan por valor (A=1, J=11, Q=12,
-                    K=13)
-                  </li>
-                  <li>
-                    <strong>Precisión:</strong> Se muestra tu porcentaje de aciertos en tiempo real
-                  </li>
-                  <li>
-                    <strong>Sin límite de tiempo:</strong> Tómate el tiempo que necesites para
-                    pensar
-                  </li>
-                </ul>
-              </article>
+                @if (seccion.formula) {
+                  <div class="puntaje-box">
+                    <p class="formula">{{ seccion.formula }}</p>
+                  </div>
+                }
 
-              <!-- PUNTAJE mayor-menor -->
-              <article class="articulo">
-                <h3 class="subtitulo"><i class="bi bi-trophy me-2"></i>Sistema de Puntaje</h3>
-                <div class="puntaje-box">
-                  <p class="formula">
-                    Puntos = (Aciertos × 50) + Bonus - (Vidas perdidas × 30) - Max(0, Segundos - 60)
-                  </p>
-                </div>
+                @if (seccion.parrafos) {
+                  @for (parrafo of seccion.parrafos; track $index) {
+                    <p>{{ parrafo }}</p>
+                  }
+                }
 
-                <p><strong>Desglose:</strong></p>
-                <ul class="lista-puntaje">
-                  <li>
-                    <strong>Aciertos × 50:</strong> Cada predicción correcta suma 50 puntos base
-                  </li>
-                  <li>
-                    <strong>Bonus:</strong> Cada 5 aciertos consecutivos ganas un bonus adicional
-                    que se incrementa (5 aciertos = 10 bonus, 10 aciertos = 40 bonus, 15 aciertos =
-                    90 bonus, etc.)
-                  </li>
-                  <li>
-                    <strong>Vidas perdidas × 30:</strong> Se restan 30 puntos por cada vida perdida
-                  </li>
-                  <li>
-                    <strong>Penalización de tiempo:</strong> Si tardas más de 60 segundos, se restan
-                    puntos extras
-                  </li>
-                </ul>
+                @if (seccion.pasos) {
+                  <ol class="lista-pasos">
+                    @for (paso of seccion.pasos; track $index) {
+                      <li>{{ paso }}</li>
+                    }
+                  </ol>
+                }
 
-                <div class="alert alert-secondary border-0 mt-3" role="note">
-                  <i class="bi bi-lightbulb me-2"></i>
-                  <strong>Consejo:</strong> Mantén una alta precisión y haz predicciones rápidas
-                  para maximizar tu puntuación.
-                </div>
-              </article>
-
-              <!-- ESTRATEGIA -->
-              <article class="articulo">
-                <h3 class="subtitulo"><i class="bi bi-brain me-2"></i>Estrategias</h3>
-                <ul class="lista-estrategias">
-                  <li>
-                    <strong>Observa patrones:</strong> Algunas cartas altas o bajas aparecen
-                    seguidas
-                  </li>
-                  <li>
-                    <strong>Estadística:</strong> Hay más cartas en el rango medio que en extremos
-                  </li>
-                  <li><strong>Memoriza:</strong> Intenta recordar las cartas ya jugadas</li>
-                  <li>
-                    <strong>Cálculo de probabilidades:</strong> Si ya viste muchas cartas altas, es
-                    menos probable otra
-                  </li>
-                  <li>
-                    <strong>No te precipites:</strong> Tómate un momento para analizar antes de
-                    hacer tu predicción
-                  </li>
-                </ul>
-              </article>
-            </section>
-          }
-
-          @case ('ahorcado') {
-            <section class="guia-seccion">
-              <div class="seccion-header">
-                <h2 class="titulo-juego"><i class="bi bi-alphabet me-2"></i>{{ tituloJuego }}</h2>
-                <p class="descripcion-rapida">{{ descripcionJuego }}</p>
-              </div>
-
-              <!-- COMO SE JUEGA -->
-              <article class="articulo">
-                <h3 class="subtitulo"><i class="bi bi-clipboard-list me-2"></i>¿Cómo se juega?</h3>
-                <p>
-                  El Ahorcado es un clásico juego de adivinanza donde debes descubrir la palabra
-                  oculta antes de completar el dibujo del ahorcado.
-                </p>
-                <ol class="lista-pasos">
-                  <li>Elige una dificultad (Fácil, Medio, Difícil)</li>
-                  <li>Se te mostrará una palabra oculta representada por guiones (_____)</li>
-                  <li>Haz clic en las letras para revelarlas</li>
-                  <li>Si la letra está en la palabra, se revela en su posición</li>
-                  <li>Si cometes 7 errores, el juego termina y pierdes</li>
-                  <li>Si adivinas la palabra antes de 7 errores, ¡ganas!</li>
-                </ol>
-              </article>
-
-              <!-- REGLAS -->
-              <article class="articulo">
-                <h3 class="subtitulo"><i class="bi bi-shield-check me-2"></i>Reglas</h3>
-                <ul class="lista-reglas">
-                  <li>
-                    <strong>7 Errores permitidos:</strong> Al séptimo error, pierdes la partida
-                  </li>
-                  <li><strong>Una letra por turno:</strong> Selecciona una letra a la vez</li>
-                  <li>
-                    <strong>Sin repetición:</strong> No puedes seleccionar la misma letra dos veces
-                  </li>
-                  <li><strong>Sensibilidad a mayúsculas:</strong> Las letras se ignoran en caso</li>
-                  <li>
-                    <strong>Dificultad afecta palabras:</strong>
-                    <ul>
-                      <li><strong>Fácil:</strong> Palabras cortas y comunes (3-6 letras)</li>
-                      <li><strong>Medio:</strong> Palabras medianas (7-10 letras)</li>
+                @if (seccion.items && seccion.listaClase) {
+                  <ul [class]="seccion.listaClase">
+                    @for (item of seccion.items; track item.texto) {
                       <li>
-                        <strong>Difícil:</strong> Palabras largas y menos comunes (11+ letras)
+                        {{ item.texto }}
+                        @if (item.subItems) {
+                          <ul>
+                            @for (subItem of item.subItems; track subItem) {
+                              <li>{{ subItem }}</li>
+                            }
+                          </ul>
+                        }
                       </li>
-                    </ul>
-                  </li>
-                </ul>
+                    }
+                  </ul>
+                }
+
+                @if (seccion.nota) {
+                  <div
+                    class="alert border-0 mt-3"
+                    [class]="'alert-' + (seccion.nota.tipo ?? 'secondary')"
+                    role="note"
+                  >
+                    <i
+                      class="bi me-2"
+                      [class]="'bi me-2 ' + (seccion.nota.icono ?? 'bi-lightbulb')"
+                    ></i>
+                    {{ seccion.nota.texto }}
+                  </div>
+                }
               </article>
-
-              <!-- SISTEMA DE PUNTAJE -->
-              <article class="articulo">
-                <h3 class="subtitulo"><i class="bi bi-trophy me-2"></i>Sistema de Puntaje</h3>
-                <div class="puntaje-box">
-                  <p class="formula">
-                    Puntos = (Letras correctas × 100) + (Dificultad bonus) - (Errores × 50)
-                  </p>
-                </div>
-
-                <p><strong>Desglose:</strong></p>
-                <ul class="lista-puntaje">
-                  <li>
-                    <strong>Letras correctas × 100:</strong> Cada letra correcta suma 100 puntos
-                  </li>
-                  <li>
-                    <strong>Bonus por dificultad:</strong>
-                    <ul>
-                      <li>Fácil: +100 bonus</li>
-                      <li>Medio: +300 bonus</li>
-                      <li>Difícil: +500 bonus</li>
-                    </ul>
-                  </li>
-                  <li>
-                    <strong>Errores × 50:</strong> Se restan 50 puntos por cada error cometido
-                  </li>
-                </ul>
-
-                <div class="alert alert-secondary border-0 mt-3" role="note">
-                  <i class="bi bi-lightbulb me-2"></i>
-                  <strong>Consejo:</strong> Juega en dificultad alta para ganar más puntos, pero
-                  requiere más concentración.
-                </div>
-              </article>
-            </section>
-          }
-
-          @case ('busca-minas') {
-            <section class="guia-seccion">
-              <div class="seccion-header">
-                <h2 class="titulo-juego"><i class="bi bi-grid-3x3 me-2"></i>{{ tituloJuego }}</h2>
-                <p class="descripcion-rapida">{{ descripcionJuego }}</p>
-              </div>
-
-              <article class="articulo">
-                <h3 class="subtitulo"><i class="bi bi-tools me-2"></i>En construcción...</h3>
-                <div class="alert alert-warning border-0" role="alert">
-                  <i class="bi bi-exclamation-triangle me-2"></i>
-                  Esta sección se completará próximamente. ¡Vuelve pronto!
-                </div>
-              </article>
-            </section>
-          }
-
-          @case ('preguntados') {
-            <section class="guia-seccion">
-              <div class="seccion-header">
-                <h2 class="titulo-juego">
-                  <i class="bi bi-question-circle me-2"></i>{{ tituloJuego }}
-                </h2>
-                <p class="descripcion-rapida">{{ descripcionJuego }}</p>
-              </div>
-
-              <article class="articulo">
-                <h3 class="subtitulo"><i class="bi bi-clipboard-list me-2"></i>¿Cómo se juega?</h3>
-                <p>
-                  Preguntados tiene dos modos: <strong>Banderas</strong> y <strong>Pokémon</strong>.
-                  En cada ronda debes elegir la opción correcta entre botones de respuesta.
-                </p>
-                <ol class="lista-pasos">
-                  <li>Elige el modo de juego (Banderas o Pokémon)</li>
-                  <li>Se muestra una imagen y 4 opciones posibles</li>
-                  <li>Haz clic en una opción para responder</li>
-                  <li>Si aciertas, sumas acierto; si fallas, pierdes una vida</li>
-                  <li>Tienes 3 vidas y un máximo de 10 preguntas por partida</li>
-                  <li>Al finalizar, se guarda tu resultado en Supabase</li>
-                </ol>
-              </article>
-
-              <article class="articulo">
-                <h3 class="subtitulo"><i class="bi bi-shield-check me-2"></i>Reglas</h3>
-                <ul class="lista-reglas">
-                  <li>
-                    <strong>Opciones por botones:</strong> Todas las respuestas se eligen con
-                    botones
-                  </li>
-                  <li><strong>3 vidas iniciales:</strong> Cada error consume una vida</li>
-                  <li>
-                    <strong>10 preguntas máximas:</strong> Si llegas al tope, la partida termina
-                  </li>
-                  <li>
-                    <strong>Sin doble respuesta:</strong> Una vez respondida una ronda, no se puede
-                    cambiar
-                  </li>
-                  <li>
-                    <strong>Fin por derrota:</strong> Si tus vidas llegan a 0, terminas en derrota
-                  </li>
-                  <li>
-                    <strong>Abandono:</strong> Si sales en medio de la partida, se registra como
-                    abandonada
-                  </li>
-                </ul>
-              </article>
-
-              <article class="articulo">
-                <h3 class="subtitulo"><i class="bi bi-trophy me-2"></i>Sistema de Puntaje</h3>
-                <div class="puntaje-box">
-                  <p class="formula">
-                    Puntos = (Aciertos × 100) - (Errores × 30) - Max(0, Segundos - 60)
-                  </p>
-                </div>
-
-                <p><strong>Desglose:</strong></p>
-                <ul class="lista-puntaje">
-                  <li><strong>Aciertos × 100:</strong> Cada respuesta correcta suma 100 puntos</li>
-                  <li><strong>Errores × 30:</strong> Cada respuesta incorrecta resta 30 puntos</li>
-                  <li>
-                    <strong>Penalización por tiempo:</strong> Después de 60 segundos de partida, se
-                    descuentan puntos gradualmente
-                  </li>
-                  <li>
-                    <strong>Puntaje mínimo:</strong> Si hubo al menos un acierto, el sistema asegura
-                    un mínimo de 10 puntos
-                  </li>
-                  <li><strong>Partida abandonada:</strong> Puntaje final 0</li>
-                </ul>
-              </article>
-
-              <article class="articulo">
-                <h3 class="subtitulo"><i class="bi bi-cloud-check me-2"></i>Registro de Partida</h3>
-                <p>Al finalizar cada partida se guarda en base de datos:</p>
-                <ul class="lista-reglas">
-                  <li>Usuario que jugó (email)</li>
-                  <li>Modo elegido (banderas o pokemon)</li>
-                  <li>Cantidad de aciertos y errores</li>
-                  <li>Total de preguntas respondidas</li>
-                  <li>Tiempo de partida, resultado y puntaje final</li>
-                </ul>
-              </article>
-            </section>
-          }
+            }
+          </section>
         }
       </div>
 
-      <!-- NAVEGACIÓN ENTRE JUEGOS -->
       <div class="guia-nav-juegos">
         <h3 class="nav-titulo">Selecciona un juego:</h3>
         <div class="nav-botones">
@@ -317,31 +98,13 @@
               class="btn-nav-juego"
               [class.activo]="juegoActual() === juego"
               (click)="cambiarJuego(juego)"
-              [title]="
-                'Ver guía: ' +
-                (juego === 'mayor-menor'
-                  ? 'Mayor o Menor'
-                  : juego === 'ahorcado'
-                    ? 'Ahorcado'
-                    : juego === 'busca-minas'
-                      ? 'Busca Minas'
-                      : 'Preguntados')
-              "
+              [title]="'Ver guía: ' + (obtenerGuiaJuego(juego)?.titulo ?? juego)"
             >
-              @switch (juego) {
-                @case ('mayor-menor') {
-                  <i class="bi bi-suit-heart me-2"></i>Mayor o Menor
-                }
-                @case ('ahorcado') {
-                  <i class="bi bi-alphabet me-2"></i>Ahorcado
-                }
-                @case ('busca-minas') {
-                  <i class="bi bi-grid-3x3 me-2"></i>Busca Minas
-                }
-                @case ('preguntados') {
-                  <i class="bi bi-question-circle me-2"></i>Preguntados
-                }
-              }
+              <i
+                class="bi me-2"
+                [class]="'bi me-2 ' + (obtenerGuiaJuego(juego)?.icono ?? 'bi-controller')"
+              ></i>
+              {{ obtenerGuiaJuego(juego)?.titulo ?? juego }}
             </button>
           }
         </div>

@@ -23,6 +23,7 @@ const routes: Routes = [
     path: 'busca-minas',
     component: BuscaMinas,
     canActivate: [authGuard],
+    canDeactivate: [partidaAbandonoGuard],
   },
   {
     path: 'mayor-menor',

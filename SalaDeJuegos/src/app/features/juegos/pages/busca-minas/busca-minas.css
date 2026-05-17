@@ -1,0 +1,204 @@
+.busca-page {
+  min-height: 100dvh;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(255, 46, 46, 0.18), transparent 36%),
+    radial-gradient(circle at 82% 84%, rgba(173, 40, 40, 0.16), transparent 38%),
+    linear-gradient(145deg, #1a0f0f 0%, #130c0c 48%, #0b0909 100%);
+}
+
+.buscaminas-card {
+  width: min(1080px, 100%);
+  border-radius: 1.25rem;
+  border: 1px solid rgba(255, 245, 245, 0.12);
+  background: rgba(20, 18, 18, 0.88);
+  color: #f7efef;
+  backdrop-filter: blur(8px);
+}
+
+.buscaminas-card--select {
+  width: min(860px, 100%);
+}
+
+.select-subtitle {
+  max-width: 620px;
+}
+
+.btn-dificultad {
+  border: 1px solid rgba(255, 150, 150, 0.34);
+  border-radius: 0.95rem;
+  min-height: 108px;
+  color: #fff2f2;
+  background: linear-gradient(180deg, rgba(70, 12, 12, 0.9), rgba(30, 8, 8, 0.92));
+  box-shadow:
+    0 0 8px rgba(255, 68, 68, 0.26),
+    inset 0 0 8px rgba(255, 90, 90, 0.16);
+}
+
+.btn-dificultad.is-active {
+  border-color: rgba(255, 170, 170, 0.56);
+  box-shadow:
+    0 0 8px rgba(255, 72, 72, 0.34),
+    inset 0 0 8px rgba(255, 96, 96, 0.18);
+}
+
+.btn-dificultad:focus,
+.btn-dificultad:focus-visible {
+  box-shadow:
+    0 0 8px rgba(255, 72, 72, 0.34),
+    inset 0 0 8px rgba(255, 96, 96, 0.18);
+}
+
+.dificultad-select {
+  min-width: 210px;
+  background: rgba(50, 12, 12, 0.85);
+  border-color: rgba(255, 130, 130, 0.35);
+  color: #fff;
+}
+
+.hud {
+  display: grid;
+  gap: 0.35rem;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  border: 1px solid rgba(255, 120, 120, 0.35);
+  border-radius: 0.9rem;
+  background: linear-gradient(180deg, rgba(40, 12, 12, 0.9), rgba(22, 9, 9, 0.92));
+  box-shadow: inset 0 0 12px rgba(255, 78, 78, 0.2);
+}
+
+.hud__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+}
+
+.hud__item small {
+  color: rgba(255, 220, 220, 0.75);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.hud__item strong {
+  color: #fff5f5;
+  font-size: 0.98rem;
+}
+
+.hud__smile {
+  width: 52px;
+  height: 52px;
+  margin-inline: auto;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 170, 170, 0.45);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 30% 24%,
+    rgba(255, 230, 120, 0.95),
+    rgba(240, 178, 44, 0.95)
+  );
+  box-shadow:
+    0 0 10px rgba(255, 176, 58, 0.42),
+    inset 0 0 6px rgba(255, 255, 255, 0.38);
+  padding: 0;
+}
+
+.hud__smile-img {
+  width: 36px;
+  height: 36px;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+.estado-text {
+  color: rgba(255, 212, 212, 0.82);
+  font-weight: 600;
+}
+
+.tablero-wrap {
+  width: 100%;
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+}
+
+.tablero {
+  display: grid;
+  gap: 0.06rem;
+  width: max-content;
+  margin-inline: auto;
+}
+
+.celda {
+  aspect-ratio: 1 / 1;
+  width: clamp(24px, 2.6vw, 36px);
+  border: 1px solid rgba(255, 138, 138, 0.28);
+  border-radius: 0.35rem;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(180deg, rgba(66, 18, 18, 0.95), rgba(32, 10, 10, 0.95));
+  box-shadow: inset 0 0 8px rgba(255, 84, 84, 0.16);
+}
+
+.celda.revelada {
+  background: linear-gradient(180deg, rgba(22, 18, 18, 0.95), rgba(16, 12, 12, 0.95));
+  border-color: rgba(255, 210, 210, 0.2);
+  box-shadow: inset 0 0 4px rgba(255, 250, 250, 0.12);
+}
+
+.celda.marcada {
+  border-color: rgba(255, 205, 95, 0.62);
+  box-shadow: inset 0 0 8px rgba(255, 194, 81, 0.26);
+}
+
+.celda.mina {
+  background: linear-gradient(180deg, rgba(88, 16, 16, 0.95), rgba(44, 8, 8, 0.95));
+  border-color: rgba(255, 115, 115, 0.6);
+}
+
+.celda-icon {
+  width: 72%;
+  height: 72%;
+  object-fit: contain;
+}
+
+.numero-texto {
+  font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+  font-weight: 900;
+}
+
+.numero-7 {
+  color: #ffdc72;
+}
+
+.numero-8 {
+  color: #ffd6d6;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  background: rgba(0, 0, 0, 0.62);
+}
+
+.modal-abandono {
+  width: min(460px, 100%);
+}
+
+@media (max-width: 860px) {
+  .hud {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hud__smile {
+    order: -1;
+    grid-column: 1 / -1;
+  }
+
+  .celda {
+    width: clamp(22px, 6.2vw, 34px);
+  }
+}

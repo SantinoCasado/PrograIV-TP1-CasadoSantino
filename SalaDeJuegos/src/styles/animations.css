@@ -171,3 +171,28 @@
 .anim-slide-down-300 {
   animation: slideInDown 0.6s ease-out 0.3s both;
 }
+
+/* Hover utilities (reutilizables) */
+.anim-hover-lift-sm {
+  transition: transform 0.12s ease;
+}
+
+.anim-hover-lift-sm:hover {
+  transform: translateY(-1px);
+}
+
+.anim-hover-lift-md {
+  transition: transform 0.16s ease;
+}
+
+.anim-hover-lift-md:hover {
+  transform: translateY(-2px);
+}
+
+.anim-hover-scale-sm {
+  transition: transform 0.15s ease;
+}
+
+.anim-hover-scale-sm:hover {
+  transform: scale(1.04);
+}

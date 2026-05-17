@@ -96,6 +96,34 @@
   background: rgba(44, 44, 44, 0.44);
 }
 
+.qa-neon {
+  border-radius: 1rem;
+}
+
+.pregunta-neon {
+  position: relative;
+  padding: 0.9rem 1.3rem;
+  clip-path: polygon(4% 0, 96% 0, 100% 50%, 96% 100%, 4% 100%, 0 50%);
+  border: 2px solid rgba(255, 70, 70, 0.95);
+  background: linear-gradient(180deg, rgba(35, 8, 8, 0.92), rgba(16, 4, 4, 0.92));
+  box-shadow:
+    0 0 10px rgba(255, 56, 56, 0.65),
+    0 0 24px rgba(255, 40, 40, 0.38),
+    inset 0 0 10px rgba(255, 75, 75, 0.25);
+}
+
+.pregunta-neon__text {
+  color: #ffe9e9;
+  text-shadow: 0 0 8px rgba(255, 90, 90, 0.55);
+}
+
+.qa-neon__media {
+  border: 1px solid rgba(255, 70, 70, 0.5);
+  background:
+    linear-gradient(180deg, rgba(34, 8, 8, 0.45), rgba(10, 4, 4, 0.78)), rgba(18, 10, 10, 0.5);
+  box-shadow: inset 0 0 14px rgba(255, 60, 60, 0.16);
+}
+
 .preg-img {
   max-width: min(360px, 100%);
   max-height: 220px;
@@ -118,10 +146,44 @@
     background 0.16s ease;
 }
 
+.opcion-neon {
+  position: relative;
+  overflow: hidden;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.85rem 1.2rem;
+  border: 2px solid rgba(255, 70, 70, 0.92);
+  clip-path: polygon(6% 0, 94% 0, 100% 50%, 94% 100%, 6% 100%, 0 50%);
+  background: linear-gradient(180deg, rgba(30, 8, 8, 0.95), rgba(14, 5, 5, 0.95));
+  color: #ffecec;
+  box-shadow:
+    0 0 10px rgba(255, 56, 56, 0.52),
+    inset 0 0 10px rgba(255, 60, 60, 0.16);
+}
+
+.opcion-neon__label {
+  font-size: 1.8rem;
+  font-weight: 800;
+  line-height: 1;
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(255, 94, 94, 0.65);
+}
+
+.opcion-neon__text {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
 .opcion-btn:hover:enabled {
   transform: translateY(-2px);
-  border-color: rgba(255, 182, 71, 0.7);
-  background: rgba(255, 182, 71, 0.2);
+  border-color: rgba(255, 116, 116, 1);
+  background: linear-gradient(180deg, rgba(44, 12, 12, 0.96), rgba(20, 6, 6, 0.96));
+  box-shadow:
+    0 0 12px rgba(255, 78, 78, 0.62),
+    inset 0 0 12px rgba(255, 74, 74, 0.24);
 }
 
 .opcion-btn:disabled {
@@ -130,14 +192,20 @@
 
 .opcion-correcta,
 .opcion-revelada {
-  background: rgba(25, 135, 84, 0.35);
-  border-color: rgba(76, 209, 55, 0.85);
+  background: linear-gradient(180deg, rgba(34, 92, 51, 0.9), rgba(14, 48, 25, 0.92));
+  border-color: rgba(108, 255, 158, 0.95);
+  box-shadow:
+    0 0 12px rgba(88, 235, 141, 0.68),
+    inset 0 0 10px rgba(103, 232, 149, 0.24);
   animation: popOk 0.35s ease;
 }
 
 .opcion-incorrecta {
-  background: rgba(220, 53, 69, 0.32);
-  border-color: rgba(255, 92, 112, 0.9);
+  background: linear-gradient(180deg, rgba(112, 25, 36, 0.95), rgba(58, 10, 16, 0.95));
+  border-color: rgba(255, 120, 130, 0.98);
+  box-shadow:
+    0 0 12px rgba(255, 88, 103, 0.62),
+    inset 0 0 10px rgba(255, 95, 109, 0.22);
   animation: shakeX 0.42s ease;
 }
 
@@ -202,5 +270,14 @@
 @media (max-width: 680px) {
   .modo-btn {
     min-height: 150px;
+  }
+
+  .opcion-neon {
+    min-height: 58px;
+    padding: 0.75rem 1rem;
+  }
+
+  .opcion-neon__label {
+    font-size: 1.55rem;
   }
 }
