@@ -68,48 +68,46 @@ Construir una Sala de Juegos donde usuarios autenticados puedan:
 
 ## 📸 Capturas de pantalla
 
-> Coloca tus imagenes en: `SalaDeJuegos/src/assets/img/readme/`
-
 ### 🏠 Home
 
-![Home](./SalaDeJuegos/src/assets/img/readme/home.png)
+![Home](./SalaDeJuegos/src/assets/imgenes/readme/home.png)
 
 ### 🔐 Login
 
-![Login](./SalaDeJuegos/src/assets/img/readme/login.png)
+![Login](./SalaDeJuegos/src/assets/imgenes/readme/login.png)
 
 ### 📝 Registro
 
-![Registro](./SalaDeJuegos/src/assets/img/readme/registro.png)
+![Registro](./SalaDeJuegos/src/assets/imgenes/readme/registro.png)
 
 ### 🪢 Juego: Ahorcado
 
-![Ahorcado](./SalaDeJuegos/src/assets/img/readme/ahorcado.png)
+![Ahorcado](./SalaDeJuegos/src/assets/imgenes/readme/ahorcado.png)
 
 ### 🃏 Juego: Mayor o Menor
 
-![Mayor o Menor](./SalaDeJuegos/src/assets/img/readme/mayor-menor.png)
+![Mayor o Menor](./SalaDeJuegos/src/assets/imgenes/readme/mayor-menor.png)
 
 ### 🌍 Juego: Preguntados
 
-![Preguntados](./SalaDeJuegos/src/assets/img/readme/preguntados.png)
+![Preguntados](./SalaDeJuegos/src/assets/imgenes/readme/preguntados.png)
 
 ### 💣 Juego propio: Busca Minas
 
-![Busca Minas](./SalaDeJuegos/src/assets/img/readme/busca-minas.png)
+![Busca Minas](./SalaDeJuegos/src/assets/imgenes/readme/busca-minas.png)
 
 ### 💬 Chat global
 
-![Chat](./SalaDeJuegos/src/assets/img/readme/chat.png)
+![Chat](./SalaDeJuegos/src/assets/imgenes/readme/chat.png)
 
 ### 📊 Estadisticas y ranking
 
-![RankingPersonal](./SalaDeJuegos/src/assets/img/readme/estadisticas.png)
-![RankingGeneral](./SalaDeJuegos/src/assets/img/readme/ranking.png)
+![RankingPersonal](./SalaDeJuegos/src/assets/imgenes/readme/estadisticas.png)
+![RankingGeneral](./SalaDeJuegos/src/assets/imgenes/readme/ranking.png)
 
 ### 👤 Quien soy
 
-![Quien Soy](./SalaDeJuegos/src/assets/img/readme/quien-soy.png)
+![Quien Soy](./SalaDeJuegos/src/assets/imgenes/readme/quien-soy.png)
 
 ---
 
