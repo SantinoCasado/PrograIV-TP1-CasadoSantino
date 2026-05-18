@@ -140,7 +140,7 @@ export class BuscaMinas implements PartidaAbandonable, OnDestroy {
 
         this.registrarAbandono();
         this.modalAbandonoVisible = false;
-        this.router.navigate(['/juegos']);
+        this.router.navigate(['/home']);
     }
 
     cancelarSalida(): void {

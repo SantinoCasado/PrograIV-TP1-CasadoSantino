@@ -1,1 +1,0 @@
-import{a as n}from"./chunk-QGFXTOP7.js";import{s as t,wa as r}from"./chunk-T5HLOJNO.js";function a(){let o=t(n),u=t(r);return o.usuario()?!0:u.parseUrl("/log-in?msg=requiere-login")}var s=()=>a(),p=()=>a();export{s as a,p as b};
