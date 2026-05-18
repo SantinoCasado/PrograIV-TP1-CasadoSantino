@@ -122,6 +122,11 @@ export class Preguntados implements PartidaAbandonable, OnDestroy {
     this.estado.set('seleccion-modo');
   }
 
+  onSinTiempo() {
+    if (this.seleccionada() !== null || this.estado() !== 'jugando') return;
+    this.responder(''); // Cuenta como incorrecta por tiempo
+  }
+
   salir(): void { this.router.navigate(['/home']); }
 
   irAGuia(): void { this.router.navigate(['/guia'], { queryParams: { juego: 'preguntados' } }); }
@@ -166,8 +171,10 @@ export class Preguntados implements PartidaAbandonable, OnDestroy {
   responder(opcion: string): void {
     if (this.estado() !== 'jugando' || this.seleccionada() !== null) return;
 
-    const correcto = opcion === this.nombreCorrecto();
-    this.seleccionada.set(opcion);
+    // Si la opción es string vacío, es timeout: cuenta como incorrecta
+    const esTimeout = opcion === '';
+    const correcto = !esTimeout && opcion === this.nombreCorrecto();
+    this.seleccionada.set(esTimeout ? null : opcion);
     this.esCorrecta.set(correcto);
     this.preguntasJugadas.update(n => n + 1);
 

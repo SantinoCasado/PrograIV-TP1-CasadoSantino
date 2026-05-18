@@ -1,0 +1,22 @@
+.timer-bar-outer {
+  width: 100%;
+  height: 18px;
+  background: #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+.timer-bar-inner {
+  height: 100%;
+  background: linear-gradient(90deg, #4caf50, #ffeb3b, #f44336);
+  transition: width 0.5s linear;
+}
+.timer-bar-inner.danger {
+  background: #f44336;
+}
+.timer-bar-label {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #333;
+}

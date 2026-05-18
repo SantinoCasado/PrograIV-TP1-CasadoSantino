@@ -7,6 +7,7 @@ import { Preguntados } from './pages/preguntados/preguntados';
 import { authGuard } from '../../core/guards/auth/auth-guard';
 import { partidaAbandonoGuard } from '../../core/guards/partida/partida-abandono-guard';
 
+
 const routes: Routes = [
   {
     path: '',

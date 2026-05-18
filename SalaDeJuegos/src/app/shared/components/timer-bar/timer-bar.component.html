@@ -1,0 +1,8 @@
+<div class="timer-bar-outer">
+  <div
+    class="timer-bar-inner"
+    [style.width.%]="(timeLeft / duracion) * 100"
+    [ngClass]="{ danger: timeLeft <= 3 }"
+  ></div>
+</div>
+<div class="timer-bar-label">⏳ {{ timeLeft }}s</div>
