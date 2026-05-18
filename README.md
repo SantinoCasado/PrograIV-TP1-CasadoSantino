@@ -104,7 +104,8 @@ Construir una Sala de Juegos donde usuarios autenticados puedan:
 
 ### 📊 Estadisticas y ranking
 
-![Ranking](./SalaDeJuegos/src/assets/img/readme/ranking.png)
+![RankingPersonal](./SalaDeJuegos/src/assets/img/readme/estadisticas.png)
+![RankingGeneral](./SalaDeJuegos/src/assets/img/readme/ranking.png)
 
 ### 👤 Quien soy
 

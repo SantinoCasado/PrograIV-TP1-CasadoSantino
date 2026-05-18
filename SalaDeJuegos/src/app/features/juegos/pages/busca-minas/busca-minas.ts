@@ -140,6 +140,7 @@ export class BuscaMinas implements PartidaAbandonable, OnDestroy {
 
         this.registrarAbandono();
         this.modalAbandonoVisible = false;
+        this.router.navigate(['/juegos']);
     }
 
     cancelarSalida(): void {
@@ -388,10 +389,12 @@ export class BuscaMinas implements PartidaAbandonable, OnDestroy {
     }
 
     private registrarAbandono(): void {
-        if (this.estado !== 'jugando' || this.inicioMs === null) return;
-        this.guardarScore('abandonada');
-        this.detenerTimer();
-        this.inicioMs = null;
+        if (this.estado !== 'jugando') return;
+        if (this.inicioMs !== null) {
+            this.guardarScore('abandonada');
+            this.detenerTimer();
+            this.inicioMs = null;
+        }
         this.estado = 'seleccion';
     }
 
