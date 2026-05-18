@@ -12,7 +12,7 @@ export class JuegosScore {
   constructor(private supabase: Supabase) {}
 
   guardarResultadoAhorcado(data: ResultadoAhorcado) {
-    return this.supabase['client'].from('partidas_ahorcado').insert([
+    return this.supabase.client.from('partidas_ahorcado').insert([
       {
         usuario_email: data.emailUsuario,
         dificultad: data.dificultad,
@@ -29,7 +29,7 @@ export class JuegosScore {
   }
 
   guardarResultadoMayorMenor(data: ResultadoMayorMenor) {
-    return this.supabase['client'].from('partidas_mayor_menor').insert([
+    return this.supabase.client.from('partidas_mayor_menor').insert([
       {
         usuario_email: data.emailUsuario,
         deck_id: data.deckId,
@@ -44,7 +44,7 @@ export class JuegosScore {
   }
 
   guardarResultadoPreguntados(data: ResultadoPreguntados) {
-    return this.supabase['client'].from('partidas_preguntados').insert([
+    return this.supabase.client.from('partidas_preguntados').insert([
       {
         usuario_email: data.emailUsuario,
         modo: data.modo,
@@ -60,7 +60,7 @@ export class JuegosScore {
   }
 
   guardarResultadoBuscaMinas(data: ResultadoBuscaMinas) {
-    return this.supabase['client'].from('partidas_busca_minas').insert([
+    return this.supabase.client.from('partidas_busca_minas').insert([
       {
         usuario_email: data.emailUsuario,
         dificultad: data.dificultad,

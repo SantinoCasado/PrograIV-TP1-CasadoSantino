@@ -117,7 +117,7 @@ export class BuscaMinas implements PartidaAbandonable, OnDestroy {
     // --------- Lógica ----------------------------------------------------------------------
 
     hayPartidaEnCurso(): boolean {
-        return this.estado === 'jugando' && this.inicioMs !== null;
+        return this.estado === 'jugando';
     }
 
     pedirConfirmacionAbandono(): Promise<boolean> {
@@ -129,16 +129,16 @@ export class BuscaMinas implements PartidaAbandonable, OnDestroy {
         this.modalAbandonoVisible = true;
     }
 
-    confirmarSalida(): void {
+    async confirmarSalida(): Promise<void> {
         if (this.resolverAbandono) {
-            this.registrarAbandono();
+            await this.registrarAbandono();
             this.modalAbandonoVisible = false;
             this.resolverAbandono(true);
             this.resolverAbandono = null;
             return;
         }
 
-        this.registrarAbandono();
+        await this.registrarAbandono();
         this.modalAbandonoVisible = false;
         this.router.navigate(['/home']);
     }
@@ -150,7 +150,7 @@ export class BuscaMinas implements PartidaAbandonable, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.registrarAbandono();
+        void this.registrarAbandono();
         this.detenerTimer();
     }
 
@@ -169,7 +169,7 @@ export class BuscaMinas implements PartidaAbandonable, OnDestroy {
     }
 
     irASeleccion(): void {
-        this.registrarAbandono();
+        void this.registrarAbandono();
         this.detenerTimer();
         this.estado = 'seleccion';
     }
@@ -189,7 +189,7 @@ export class BuscaMinas implements PartidaAbandonable, OnDestroy {
     }
 
     private iniciarPartida(): void {
-        this.registrarAbandono();
+        void this.registrarAbandono();
         this.detenerTimer();
 
         const dificultad = this.dificultadSeleccionada;
@@ -388,13 +388,12 @@ export class BuscaMinas implements PartidaAbandonable, OnDestroy {
         this.guardarScore('ganada');
     }
 
-    private registrarAbandono(): void {
+    private async registrarAbandono(): Promise<void> {
         if (this.estado !== 'jugando') return;
-        if (this.inicioMs !== null) {
-            this.guardarScore('abandonada');
-            this.detenerTimer();
-            this.inicioMs = null;
-        }
+
+        await this.guardarScore('abandonada');
+        this.detenerTimer();
+        this.inicioMs = null;
         this.estado = 'seleccion';
     }
 
@@ -405,28 +404,32 @@ export class BuscaMinas implements PartidaAbandonable, OnDestroy {
         this.estado = 'reiniciada';
     }
 
-    private guardarScore(resultado: ResultadoPartidaBuscaMinas): void {
+    private async guardarScore(resultado: ResultadoPartidaBuscaMinas): Promise<void> {
         if (this.scoreGuardado) return;
 
         const email = this.auth.usuario()?.email;
-        if (!email) return;
+        if (!email) {
+            return;
+        }
 
         this.scoreGuardado = true;
-        this.score.guardarResultadoBuscaMinas({
-            emailUsuario: email,
-            dificultad: this.dificultadSeleccionadaId,
-            puntaje: this.puntaje,
-            resultado,
-        }).then(({ error }) => {
+        try {
+            const { error } = await this.score.guardarResultadoBuscaMinas({
+                emailUsuario: email,
+                dificultad: this.dificultadSeleccionadaId,
+                puntaje: this.puntaje,
+                resultado,
+            });
             if (error) {
+                this.scoreGuardado = false;
                 console.error('[BUSCA-MINAS] Error guardando partida:', error);
                 return;
             }
-
             console.log('[BUSCA-MINAS] Partida guardada');
-        }, (err: unknown) => {
+        } catch (err: unknown) {
+            this.scoreGuardado = false;
             console.error('[BUSCA-MINAS] Error inesperado guardando partida:', err);
-        });
+        }
     }
 
     // Calcula el bonus de tiempo al ganar

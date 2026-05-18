@@ -9,10 +9,14 @@ import { PerfilUsuario } from '../../models/perfil-usuario';
 export class Supabase {
   private SUPABASE_URL = 'https://vjtvmyoduvbfrnhgtker.supabase.co';
   private SUPABASE_KEY = 'sb_publishable_QWvLLqZBo-EU4-b2QbHThQ_AvNz_lX5';
-  private client: SupabaseClient;
+  private _client: SupabaseClient;
 
   constructor() {
-    this.client = createClient(this.SUPABASE_URL, this.SUPABASE_KEY);
+    this._client = createClient(this.SUPABASE_URL, this.SUPABASE_KEY);
+  }
+
+  public get client(): SupabaseClient {
+    return this._client;
   }
 
   private normalizarEmail(email: string): string {
