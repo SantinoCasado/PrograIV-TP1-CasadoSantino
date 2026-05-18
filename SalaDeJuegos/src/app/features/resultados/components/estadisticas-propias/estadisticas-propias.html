@@ -1,0 +1,36 @@
+<article class="card mb-4">
+  <div class="card-body">
+    <h2 class="h5 mb-3">Mis estadísticas</h2>
+
+    <p class="mb-3">Usuario: {{ emailActual() ?? 'No logueado' }}</p>
+
+    <ul class="list-group">
+      <li class="list-group-item d-flex justify-content-between">
+        <span>Ahorcado</span>
+        <span>#{{ ahorcado()?.posicion ?? '-' }} | {{ ahorcado()?.mejor_puntaje ?? 0 }} pts</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between">
+        <span>Mayor o Menor</span>
+        <span
+          >#{{ mayorMenor()?.posicion ?? '-' }} | {{ mayorMenor()?.mejor_puntaje ?? 0 }} pts</span
+        >
+      </li>
+      <li class="list-group-item d-flex justify-content-between">
+        <span>Preguntados</span>
+        <span
+          >#{{ preguntados()?.posicion ?? '-' }} | {{ preguntados()?.mejor_puntaje ?? 0 }} pts</span
+        >
+      </li>
+      <li class="list-group-item d-flex justify-content-between">
+        <span>Busca Minas</span>
+        <span
+          >#{{ buscaMinas()?.posicion ?? '-' }} | {{ buscaMinas()?.mejor_puntaje ?? 0 }} pts</span
+        >
+      </li>
+      <li class="list-group-item d-flex justify-content-between fw-bold">
+        <span>Global</span>
+        <span>#{{ global()?.posicion ?? '-' }} | {{ global()?.total_puntos ?? 0 }} pts</span>
+      </li>
+    </ul>
+  </div>
+</article>

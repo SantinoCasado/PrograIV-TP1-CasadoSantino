@@ -25,12 +25,15 @@
           }
         </div>
 
-        <div class="d-flex justify-content-center mt-4">
+        <div class="d-flex justify-content-center gap-2 mt-4 flex-wrap">
+          <button class="btn btn-outline-info fw-semibold px-4" (click)="irAGuia()">
+            <i class="bi bi-book me-1"></i>Reglas
+          </button>
           <button class="btn btn-outline-danger fw-semibold px-4" (click)="salir()">Salir</button>
         </div>
       </div>
     </article>
-  } @else {
+  } @else if (estado === 'jugando' || estado === 'perdida') {
     <article class="card border-0 shadow-lg w-100 buscaminas-card">
       <div class="card-body p-2 p-md-3">
         <header class="d-flex justify-content-end">
@@ -38,6 +41,9 @@
             <span class="badge rounded-pill text-bg-danger border border-danger-subtle px-3 py-2">
               {{ dificultadSeleccionada.nombre }}
             </span>
+            <button class="btn btn-outline-info btn-sm fw-semibold" (click)="irAGuia()">
+              <i class="bi bi-book me-1"></i>Reglas
+            </button>
             <button class="btn btn-outline-light btn-sm fw-semibold" (click)="irASeleccion()">
               Cambiar dificultad
             </button>
@@ -132,6 +138,45 @@
         <footer class="mt-2 small text-light-emphasis">
           Click izquierdo: revelar celda. Click derecho: poner o sacar bandera.
         </footer>
+      </div>
+    </article>
+  } @else if (estado === 'ganada' || estado === 'reiniciada') {
+    <article class="card border-0 shadow-lg w-100 buscaminas-card buscaminas-card--result">
+      <div class="card-body p-4 p-md-5 text-center">
+        @if (estado === 'ganada') {
+          <h2 class="display-6 fw-bold text-success-emphasis mb-2">Ganaste la partida</h2>
+          <p class="text-light-emphasis mb-0">Completaste el tablero sin explotar minas.</p>
+        } @else {
+          <h2 class="display-6 fw-bold text-warning-emphasis mb-2">Partida reiniciada</h2>
+          <p class="text-light-emphasis mb-0">Este fue tu resultado antes de reiniciar.</p>
+        }
+
+        <div class="resultado-box mx-auto mt-4">
+          <div class="resultado-row">
+            <small>Dificultad</small>
+            <strong>{{ dificultadSeleccionada.nombre }}</strong>
+          </div>
+          <div class="resultado-row">
+            <small>Tiempo</small>
+            <strong>{{ tiempoJuegoSeg }}s</strong>
+          </div>
+          <div class="resultado-row resultado-row--score">
+            <small>Puntaje final</small>
+            <strong>{{ puntaje }}</strong>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-center gap-2 mt-4 flex-wrap">
+          <button class="btn btn-outline-info fw-semibold px-4" (click)="irAGuia()">
+            <i class="bi bi-book me-1"></i>Reglas
+          </button>
+          <button class="btn btn-warning fw-semibold px-4" (click)="nuevaPartida()">
+            Jugar de nuevo
+          </button>
+          <button class="btn btn-outline-danger fw-semibold px-4" (click)="salir()">
+            Ir al Home
+          </button>
+        </div>
       </div>
     </article>
   }

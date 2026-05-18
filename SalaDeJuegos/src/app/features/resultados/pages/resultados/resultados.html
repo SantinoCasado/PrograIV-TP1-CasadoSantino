@@ -1,0 +1,25 @@
+<section class="container py-4">
+  <h1 class="mb-3">Resultados</h1>
+
+  @if (cargando()) {
+    <p>Cargando resultados...</p>
+  }
+
+  <app-estadisticas-propias
+    [emailActual]="emailActual()"
+    [ahorcado]="propiaAhorcado()"
+    [mayorMenor]="propiaMayorMenor()"
+    [preguntados]="propiaPreguntados()"
+    [buscaMinas]="propiaBuscaMinas()"
+    [global]="propiaGlobal()"
+  ></app-estadisticas-propias>
+
+  <app-tabla-general
+    [emailActual]="emailActual()"
+    [topAhorcado]="topAhorcado()"
+    [topMayorMenor]="topMayorMenor()"
+    [topPreguntados]="topPreguntados()"
+    [topBuscaMinas]="topBuscaMinas()"
+    [topGlobal]="topGlobal()"
+  ></app-tabla-general>
+</section>

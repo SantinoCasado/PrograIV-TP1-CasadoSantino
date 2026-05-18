@@ -11,7 +11,7 @@ import { PartidaAbandonable } from '../../../../core/interfaces/partida-abandona
     https://github.com/javimontoto/Buscaminas
 */
 
-type EstadoPartida = 'seleccion' | 'jugando' | 'ganada' | 'perdida';
+type EstadoPartida = 'seleccion' | 'jugando' | 'ganada' | 'perdida' | 'reiniciada';
 @Component({
   selector: 'app-busca-minas',
   standalone: false,
@@ -89,6 +89,10 @@ export class BuscaMinas implements PartidaAbandonable, OnDestroy {
             return 'Pisaste una mina';
         }
 
+        if (this.estado === 'reiniciada') {
+            return 'Partida reiniciada';
+        }
+
         if (this.estado === 'jugando') {
             return this.inicioMs === null ? 'Hace tu primer movimiento' : 'Partida en curso';
         }
@@ -126,13 +130,16 @@ export class BuscaMinas implements PartidaAbandonable, OnDestroy {
     }
 
     confirmarSalida(): void {
+        if (this.resolverAbandono) {
+            this.registrarAbandono();
+            this.modalAbandonoVisible = false;
+            this.resolverAbandono(true);
+            this.resolverAbandono = null;
+            return;
+        }
+
         this.registrarAbandono();
-        this.detenerTimer();
-        this.inicioMs = null;
-        this.estado = 'seleccion';
         this.modalAbandonoVisible = false;
-        this.resolverAbandono?.(true);
-        this.resolverAbandono = null;
     }
 
     cancelarSalida(): void {
@@ -156,6 +163,10 @@ export class BuscaMinas implements PartidaAbandonable, OnDestroy {
         this.router.navigate(['/home']);
     }
 
+    irAGuia(): void {
+        this.router.navigate(['/guia'], { queryParams: { juego: 'busca-minas' } });
+    }
+
     irASeleccion(): void {
         this.registrarAbandono();
         this.detenerTimer();
@@ -168,8 +179,8 @@ export class BuscaMinas implements PartidaAbandonable, OnDestroy {
             return;
         }
 
-        if (this.estado === 'jugando') {
-            this.reiniciarTableroSinReiniciarProgreso();
+        if (this.estado === 'jugando' || this.estado === 'perdida') {
+            this.finalizarPartidaReiniciada();
             return;
         }
 
@@ -196,20 +207,8 @@ export class BuscaMinas implements PartidaAbandonable, OnDestroy {
         this.calcularAdyacencias();
     }
 
-    private reiniciarTableroSinReiniciarProgreso(): void {
-        const dificultad = this.dificultadSeleccionada;
-        this.minasTotales = dificultad.minas;
-        this.banderasColocadas = 0;
-        this.banderasCorrectas = 0;
-        this.celdasSegurasReveladas = 0;
-        this.celdasSegurasObjetivo = dificultad.tamanio * dificultad.tamanio - dificultad.minas;
-
-        this.tablero = this.generarTablero(dificultad.tamanio, dificultad.minas);
-        this.calcularAdyacencias();
-    }
-
     clickIzquierdo(celda: Celda): void {
-        if (this.estado === 'ganada' || this.estado === 'perdida') return;
+        if (this.estado !== 'jugando') return;
         if (celda.revelada || celda.marcada) return;
 
         if (this.inicioMs === null) {
@@ -233,7 +232,7 @@ export class BuscaMinas implements PartidaAbandonable, OnDestroy {
 
     clickDerecho(evento: MouseEvent, celda: Celda): void {
         evento.preventDefault();
-        if (this.estado === 'ganada' || this.estado === 'perdida') return;
+        if (this.estado !== 'jugando') return;
         if (celda.revelada) return;
 
         const quiereMarcar = !celda.marcada;
@@ -394,6 +393,13 @@ export class BuscaMinas implements PartidaAbandonable, OnDestroy {
         this.detenerTimer();
         this.inicioMs = null;
         this.estado = 'seleccion';
+    }
+
+    private finalizarPartidaReiniciada(): void {
+        if (this.estado !== 'jugando' && this.estado !== 'perdida') return;
+        this.detenerTimer();
+        this.inicioMs = null;
+        this.estado = 'reiniciada';
     }
 
     private guardarScore(resultado: ResultadoPartidaBuscaMinas): void {

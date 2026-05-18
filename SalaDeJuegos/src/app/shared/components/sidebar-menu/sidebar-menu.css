@@ -211,6 +211,65 @@
   font-weight: 600;
 }
 
+.bloqueo-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.78);
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.18s ease;
+}
+
+.bloqueo-card {
+  width: min(560px, 100%);
+  background: #121212;
+  border: 1px solid rgba(220, 30, 30, 0.4);
+  border-radius: 14px;
+  padding: 26px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  animation: revealUp 0.22s ease;
+}
+
+.bloqueo-card h2 {
+  margin: 0 0 12px;
+  color: #f3f3f3;
+  text-transform: uppercase;
+  font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+}
+
+.bloqueo-card p {
+  margin: 0 0 22px;
+  color: #d0d0d0;
+  line-height: 1.5;
+}
+
+.bloqueo-link {
+  display: inline-block;
+  background: #dc1e1e;
+  color: #fff;
+  border: 2px solid #dc1e1e;
+  border-radius: 10px;
+  padding: 11px 22px;
+  text-decoration: none;
+  font-weight: 700;
+  transition:
+    transform 0.15s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.bloqueo-link:hover {
+  background: #b81a1a;
+  color: #fff;
+  box-shadow: 0 0 18px rgba(220, 30, 30, 0.45);
+  transform: translateY(-1px);
+}
+
 @media (max-width: 900px) {
   .sidebar {
     width: 100%;

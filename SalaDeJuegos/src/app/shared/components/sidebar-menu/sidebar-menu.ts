@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output, inject, signal } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { take } from 'rxjs/operators';
 import { Auth } from '../../../core/services/auth/auth';
 import { GithubUser } from '../../../core/models/github-user';
@@ -9,7 +9,7 @@ import { GithubService } from '../../../core/services/github/github';
 @Component({
   selector: 'app-sidebar-menu',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './sidebar-menu.html',
   styleUrl: './sidebar-menu.css',
 })
@@ -27,6 +27,7 @@ export class SidebarMenu implements OnInit {
   loading = signal(false);
   error = signal<string | null>(null);
   socialMenuAbierto = signal(false);
+  bloqueoNoLogueoVisible = signal(false);
 
   constructor() {}
 
@@ -45,6 +46,21 @@ export class SidebarMenu implements OnInit {
     } else {
       this.router.navigate(['/chat']);
     }
+  }
+
+  onRutaProtegidaClick(event: MouseEvent, ruta: '/perfil' | '/tabla-general'): void {
+    event.preventDefault();
+
+    if (!this.auth.usuario()) {
+      this.bloqueoNoLogueoVisible.set(true);
+      return;
+    }
+
+    this.router.navigate([ruta]);
+  }
+
+  cerrarBloqueoNoLogueo(): void {
+    this.bloqueoNoLogueoVisible.set(false);
   }
 
   private cargarUsuarioGithub(): void {

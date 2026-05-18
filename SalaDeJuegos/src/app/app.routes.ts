@@ -39,5 +39,18 @@ export const routes: Routes = [
         canMatch: [authMatchGuard],
         loadChildren: () => import('./features/juegos/juegos-module').then((m) => m.JuegosModule),
     },
-    { path: "**", redirectTo: "log-in" }
+    {
+        path: "perfil",
+        canMatch: [authMatchGuard],
+        loadComponent: () => import('./features/resultados/pages/perfil/perfil').then((m) => m.Perfil)
+    },
+    {
+        path: "tabla-general",
+        canMatch: [authMatchGuard],
+        loadComponent: () => import('./features/resultados/pages/tabla-general-page/tabla-general-page').then((m) => m.TablaGeneralPage)
+    },
+    {
+        path: "**",
+        loadComponent: () => import('./features/error/not-found/not-found').then((m) => m.NotFound)
+    }
 ];

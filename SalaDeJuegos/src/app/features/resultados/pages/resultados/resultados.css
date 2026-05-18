@@ -1,0 +1,96 @@
+/* ============= RESULTADOS PAGE COMPONENT ============= */
+
+section.container {
+  animation: fadeUp 0.6s ease-out;
+  padding-top: 2rem;
+  padding-bottom: 3rem;
+}
+
+section.container h1 {
+  color: #f5f5f5;
+  font-weight: 900;
+  font-size: 2.5rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 2.5rem;
+  animation: slideInLeft 0.6s ease-out;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+section.container h1::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, #e01f1f, #ff3333);
+  border-radius: 2px;
+  animation: slideInRight 0.8s ease-out 0.2s both;
+}
+
+/* Cargando */
+section.container p {
+  color: #afafaf;
+  font-size: 1rem;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* ============= COMPONENTES HIJO ============= */
+
+app-estadisticas-propias {
+  display: block;
+  margin-bottom: 2.5rem;
+}
+
+app-tabla-general {
+  display: block;
+}
+
+/* ============= RESPONSIVE ============= */
+
+@media (max-width: 768px) {
+  section.container {
+    padding-top: 1.5rem;
+    padding-bottom: 2.5rem;
+  }
+
+  section.container h1 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    padding-bottom: 0.75rem;
+  }
+
+  section.container h1::after {
+    width: 50px;
+    height: 3px;
+  }
+
+  app-estadisticas-propias {
+    margin-bottom: 2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  section.container {
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  section.container h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  section.container h1::after {
+    width: 40px;
+    height: 2px;
+  }
+
+  app-estadisticas-propias {
+    margin-bottom: 1.5rem;
+  }
+}

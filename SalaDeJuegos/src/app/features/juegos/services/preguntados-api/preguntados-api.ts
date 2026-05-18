@@ -4,6 +4,11 @@ import { Observable, catchError, map, of, timeout, switchMap } from 'rxjs';
 import { BanderaImagen, PaisDevuelto } from '../../models/banderas-api';
 import { PokemonApi,  ListaPokemonApi, NombreApiRecurso, PokemonImagen } from '../../models/pokemon-api';
 
+/*
+API PARA LAS BANDERAS: https://api-ninjas.com/api/countryflag
+API PARA LOS POKEMON: https://pokeapi.co/
+*/
+
 interface Pais {
   code: string;
   nombre: string;

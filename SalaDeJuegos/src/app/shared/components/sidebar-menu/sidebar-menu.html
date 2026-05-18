@@ -11,27 +11,27 @@
     </a>
 
     <a
-      href="#"
-      class="sidebar-link sidebar-link-disabled"
+      href="javascript:void(0)"
+      (click)="onRutaProtegidaClick($event, '/perfil')"
+      class="sidebar-link"
       [class.sidebar-link-active]="seccionActiva === 'perfil'"
     >
       <span class="sidebar-link-main">
         <img src="assets/icons/perfil-red.svg" alt="" class="sidebar-link-icon" />
-        Perfil / Estadisticas
+        Estadisticas Personales
       </span>
-      <span class="sidebar-badge">Proximamente</span>
     </a>
 
     <a
-      href="#"
-      class="sidebar-link sidebar-link-disabled"
+      href="javascript:void(0)"
+      (click)="onRutaProtegidaClick($event, '/tabla-general')"
+      class="sidebar-link"
       [class.sidebar-link-active]="seccionActiva === 'tabla'"
     >
       <span class="sidebar-link-main">
         <img src="assets/icons/tabla-red.svg" alt="" class="sidebar-link-icon" />
         Tabla general
       </span>
-      <span class="sidebar-badge">Proximamente</span>
     </a>
 
     <a
@@ -108,3 +108,15 @@
     }
   </div>
 </aside>
+
+@if (bloqueoNoLogueoVisible()) {
+  <div class="bloqueo-overlay" role="dialog" aria-modal="true" aria-labelledby="titulo-bloqueo">
+    <div class="bloqueo-card">
+      <h2 id="titulo-bloqueo">Requerís iniciar sesión</h2>
+      <p>Requerís estar logueado para acceder a esta sección.</p>
+      <a routerLink="/log-in" class="bloqueo-link" (click)="cerrarBloqueoNoLogueo()"
+        >Iniciar sesión</a
+      >
+    </div>
+  </div>
+}

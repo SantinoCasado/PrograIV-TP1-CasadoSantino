@@ -1,0 +1,32 @@
+@if (auth.usuario()) {
+  <div class="resultados-layout">
+    <app-sidebar-menu seccionActiva="perfil"></app-sidebar-menu>
+
+    <main class="resultados-main">
+      <section class="container py-4">
+        <h1 class="mb-4">Mi Perfil</h1>
+
+        @if (cargando()) {
+          <p>Cargando estadísticas...</p>
+        }
+
+        <app-estadisticas-propias
+          [emailActual]="emailActual()"
+          [ahorcado]="propiaAhorcado()"
+          [mayorMenor]="propiaMayorMenor()"
+          [preguntados]="propiaPreguntados()"
+          [buscaMinas]="propiaBuscaMinas()"
+          [global]="propiaGlobal()"
+        ></app-estadisticas-propias>
+      </section>
+    </main>
+  </div>
+} @else if (auth.sesionRestaurada()) {
+  <div class="bloqueo-overlay" role="dialog" aria-modal="true" aria-labelledby="titulo-bloqueo">
+    <div class="bloqueo-card">
+      <h2 id="titulo-bloqueo">Requerís iniciar sesión</h2>
+      <p>Requerís estar logueado para acceder a tus estadísticas personales.</p>
+      <a routerLink="/log-in" class="bloqueo-link">Iniciar sesión</a>
+    </div>
+  </div>
+}

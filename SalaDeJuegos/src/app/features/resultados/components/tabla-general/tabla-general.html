@@ -1,0 +1,161 @@
+<div class="tabla-general-container">
+  <!-- Card Global (ancho completo) - PRIMERO -->
+  <div class="row mb-5">
+    <div class="col-12">
+      <div class="card border-danger tabla-card tabla-card--global">
+        <div class="card-header bg-danger bg-opacity-25 border-bottom border-danger">
+          <h3 class="card-title mb-0 text-white fw-bold">Ranking Global</h3>
+        </div>
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table table-sm table-hover align-middle mb-0 table-dark">
+              <thead class="table-danger text-white">
+                <tr>
+                  <th class="text-center">Pos</th>
+                  <th>Usuario</th>
+                  <th class="text-end">Puntos</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (fila of topGlobal(); track fila.usuario_email + '-' + fila.posicion) {
+                  <tr [class.fila-actual]="fila.usuario_email === emailActual()">
+                    <td class="text-center fw-bold">{{ fila.posicion }}</td>
+                    <td>{{ fila.usuario_email }}</td>
+                    <td class="text-end fw-bold text-success">{{ fila.total_puntos }}</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Grid: 2 columnas x 2 filas para juegos -->
+  <div class="row g-4">
+    <!-- Ahorcado -->
+    <div class="col-md-6">
+      <div class="card border-danger tabla-card h-100">
+        <div class="card-header bg-danger bg-opacity-10 border-bottom border-danger">
+          <h5 class="card-title mb-0 text-white fw-bold">Ahorcado</h5>
+        </div>
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table table-sm table-hover align-middle mb-0 table-dark">
+              <thead class="table-danger text-white">
+                <tr>
+                  <th class="text-center">Pos</th>
+                  <th>Usuario</th>
+                  <th class="text-end">Puntos</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (fila of topAhorcado(); track fila.usuario_email + '-' + fila.posicion) {
+                  <tr [class.fila-actual]="fila.usuario_email === emailActual()">
+                    <td class="text-center fw-bold">{{ fila.posicion }}</td>
+                    <td>{{ fila.usuario_email }}</td>
+                    <td class="text-end fw-bold text-success">{{ fila.mejor_puntaje }}</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mayor o Menor -->
+    <div class="col-md-6">
+      <div class="card border-danger tabla-card h-100">
+        <div class="card-header bg-danger bg-opacity-10 border-bottom border-danger">
+          <h5 class="card-title mb-0 text-white fw-bold">Mayor o Menor</h5>
+        </div>
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table table-sm table-hover align-middle mb-0 table-dark">
+              <thead class="table-danger text-white">
+                <tr>
+                  <th class="text-center">Pos</th>
+                  <th>Usuario</th>
+                  <th class="text-end">Puntos</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (fila of topMayorMenor(); track fila.usuario_email + '-' + fila.posicion) {
+                  <tr [class.fila-actual]="fila.usuario_email === emailActual()">
+                    <td class="text-center fw-bold">{{ fila.posicion }}</td>
+                    <td>{{ fila.usuario_email }}</td>
+                    <td class="text-end fw-bold text-success">{{ fila.mejor_puntaje }}</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Preguntados -->
+    <div class="col-md-6">
+      <div class="card border-danger tabla-card h-100">
+        <div class="card-header bg-danger bg-opacity-10 border-bottom border-danger">
+          <h5 class="card-title mb-0 text-white fw-bold">Preguntados</h5>
+        </div>
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table table-sm table-hover align-middle mb-0 table-dark">
+              <thead class="table-danger text-white">
+                <tr>
+                  <th class="text-center">Pos</th>
+                  <th>Usuario</th>
+                  <th class="text-end">Puntos</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (fila of topPreguntados(); track fila.usuario_email + '-' + fila.posicion) {
+                  <tr [class.fila-actual]="fila.usuario_email === emailActual()">
+                    <td class="text-center fw-bold">{{ fila.posicion }}</td>
+                    <td>{{ fila.usuario_email }}</td>
+                    <td class="text-end fw-bold text-success">{{ fila.mejor_puntaje }}</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Busca Minas -->
+    <div class="col-md-6">
+      <div class="card border-danger tabla-card h-100">
+        <div class="card-header bg-danger bg-opacity-10 border-bottom border-danger">
+          <h5 class="card-title mb-0 text-white fw-bold">Busca Minas</h5>
+        </div>
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table table-sm table-hover align-middle mb-0 table-dark">
+              <thead class="table-danger text-white">
+                <tr>
+                  <th class="text-center">Pos</th>
+                  <th>Usuario</th>
+                  <th class="text-end">Puntos</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (fila of topBuscaMinas(); track fila.usuario_email + '-' + fila.posicion) {
+                  <tr [class.fila-actual]="fila.usuario_email === emailActual()">
+                    <td class="text-center fw-bold">{{ fila.posicion }}</td>
+                    <td>{{ fila.usuario_email }}</td>
+                    <td class="text-end fw-bold text-success">{{ fila.mejor_puntaje }}</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

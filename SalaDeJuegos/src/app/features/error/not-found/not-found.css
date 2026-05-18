@@ -1,0 +1,82 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #0a0a0a;
+  color: #f3f3f3;
+}
+
+.not-found-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.not-found-card {
+  width: min(560px, 100%);
+  border: 1px solid rgba(220, 30, 30, 0.35);
+  border-radius: 14px;
+  padding: 30px 24px;
+  text-align: center;
+  background: linear-gradient(180deg, #141414 0%, #101010 100%);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.4);
+}
+
+.not-found-code {
+  margin: 0;
+  color: #e01f1f;
+  font-size: clamp(2.6rem, 9vw, 4.8rem);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.not-found-card h1 {
+  margin: 6px 0 10px;
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  text-transform: uppercase;
+}
+
+.not-found-text {
+  margin: 0;
+  color: #c9c9c9;
+}
+
+.not-found-actions {
+  margin-top: 24px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-burn,
+.btn-burn-outline {
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.btn-burn {
+  background: #dc1e1e;
+  color: #fff;
+  border: 2px solid #dc1e1e;
+}
+
+.btn-burn:hover {
+  background: #b81a1a;
+  color: #fff;
+}
+
+.btn-burn-outline {
+  background: transparent;
+  color: #e01f1f;
+  border: 2px solid #e01f1f;
+}
+
+.btn-burn-outline:hover {
+  background: rgba(220, 30, 30, 0.12);
+  color: #ff4444;
+}
