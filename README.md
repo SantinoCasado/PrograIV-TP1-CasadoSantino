@@ -1,207 +1,206 @@
-# PrograIV-TP1-CasadoSantino
+# 🎮 Cyber Burn — Sala de Juegos
 
-Sala de juegos desarrollada en Angular para la materia Programacion IV.
-La aplicacion permite registro/login de usuarios, juegos con logica propia,
-chat global en tiempo real y estadisticas por juego y globales.
-
----
-
-## Demo
-
-- Deploy: https://TU-URL-DE-DEPLOY.com
+> Plataforma de minijuegos con autenticación, rankings en tiempo real y chat global.  
+> Proyecto universitario desarrollado en Angular para la materia **Programación IV**.
 
 ---
 
-## Autor
+## 🚀 Demo en vivo
 
-- Nombre y apellido: TU NOMBRE COMPLETO
-- LinkedIn: https://www.linkedin.com/in/TU-PERFIL
-- GitHub: https://github.com/TU-USUARIO
-- Email: mailto:tu.email@dominio.com
+[![Ver demo](https://img.shields.io/badge/Demo-Live-brightgreen?style=for-the-badge)](https://TU-URL-DE-DEPLOY.com)
 
 ---
 
-## Vista general del proyecto
+## 👤 Autor
 
-### Objetivo
+|              |                                                                                                   |
+| ------------ | ------------------------------------------------------------------------------------------------- |
+| **Nombre**   | Santino Casado                                                                                    |
+| **LinkedIn** | [linkedin.com/in/santino-casado-1841902aa](https://www.linkedin.com/in/santino-casado-1841902aa/) |
+| **GitHub**   | [github.com/SantinoCasado](https://github.com/SantinoCasado)                                      |
+| **Email**    | [santino.casado05@gmail.com](mailto:santino.casado05@gmail.com)                                   |
+
+---
+
+## 📋 Descripcion general
+
+Cyber Burn es una sala de juegos web donde los jugadores se registran, eligen su juego favorito, acumulan puntos y compiten en rankings globales. Todo en una interfaz oscura, animada y responsive.
+
+### 🎯 Objetivo
 
 Construir una Sala de Juegos donde usuarios autenticados puedan:
 
-- jugar distintos minijuegos,
-- medir rendimiento cognitivo y motriz,
-- guardar resultados en base de datos,
-- comparar desempeno con otros jugadores,
-- interactuar en una sala de chat en tiempo real.
+- 🕹️ jugar distintos minijuegos,
+- 🧠 medir rendimiento cognitivo y motriz,
+- 💾 guardar resultados en base de datos,
+- 🏆 comparar desempeño con otros jugadores,
+- 💬 interactuar en una sala de chat en tiempo real.
 
-### Funcionalidades principales
+### ✅ Funcionalidades principales
 
-- Autenticacion de usuarios (login y registro).
-- Guardias de ruta para proteger pantallas y juegos.
-- Juegos implementados:
-  - Ahorcado
-  - Mayor o Menor
-  - Preguntados
-  - Busca Minas (juego propio)
-- Guardado de partidas y puntajes en Supabase.
-- Ranking por juego y ranking global.
-- Chat global en tiempo real.
-- Pagina Quien Soy con datos consumidos desde la API de GitHub.
-- UI uniforme con Bootstrap, estilos personalizados y animaciones.
-
----
-
-## Tecnologias utilizadas
-
-- Angular 21
-- TypeScript
-- Supabase (Auth + Database + Realtime)
-- Bootstrap 5
-- Bootstrap Icons
-- RxJS
+- 🔐 Autenticacion de usuarios (login y registro).
+- 🛡️ Guardias de ruta para proteger pantallas y juegos.
+- 🎮 Juegos implementados:
+  - 🪢 Ahorcado
+  - 🃏 Mayor o Menor
+  - 🌍 Preguntados
+  - 💣 Busca Minas _(juego propio)_
+- 📊 Guardado de partidas y puntajes en Supabase.
+- 🥇 Ranking por juego y ranking global.
+- 💬 Chat global en tiempo real.
+- 👨‍💻 Pagina Quien Soy con datos consumidos desde la API de GitHub.
+- 🎨 UI uniforme con Bootstrap, estilos personalizados y animaciones.
 
 ---
 
-## Capturas (placeholders)
+## 🛠️ Tecnologias utilizadas
 
-Coloca tus imagenes en esta carpeta:
+| Tecnologia         | Uso                        |
+| ------------------ | -------------------------- |
+| ⚡ Angular 21      | Framework frontend         |
+| 🟦 TypeScript      | Tipado estático            |
+| 🗄️ Supabase        | Auth + Database + Realtime |
+| 🎨 Bootstrap 5     | Estilos y grid             |
+| 🔣 Bootstrap Icons | Iconografia                |
+| 🔁 RxJS            | Programacion reactiva      |
 
-SalaDeJuegos/src/assets/img/readme/
+---
 
-Luego reemplaza los nombres de archivo en esta seccion si lo necesitas.
+## 📸 Capturas de pantalla
 
-### Home
+> Coloca tus imagenes en: `SalaDeJuegos/src/assets/img/readme/`
+
+### 🏠 Home
 
 ![Home](./SalaDeJuegos/src/assets/img/readme/home.png)
 
-### Login
+### 🔐 Login
 
 ![Login](./SalaDeJuegos/src/assets/img/readme/login.png)
 
-### Registro
+### 📝 Registro
 
 ![Registro](./SalaDeJuegos/src/assets/img/readme/registro.png)
 
-### Juego: Ahorcado
+### 🪢 Juego: Ahorcado
 
 ![Ahorcado](./SalaDeJuegos/src/assets/img/readme/ahorcado.png)
 
-### Juego: Mayor o Menor
+### 🃏 Juego: Mayor o Menor
 
 ![Mayor o Menor](./SalaDeJuegos/src/assets/img/readme/mayor-menor.png)
 
-### Juego: Preguntados
+### 🌍 Juego: Preguntados
 
 ![Preguntados](./SalaDeJuegos/src/assets/img/readme/preguntados.png)
 
-### Juego propio: Busca Minas
+### 💣 Juego propio: Busca Minas
 
 ![Busca Minas](./SalaDeJuegos/src/assets/img/readme/busca-minas.png)
 
-### Chat global
+### 💬 Chat global
 
 ![Chat](./SalaDeJuegos/src/assets/img/readme/chat.png)
 
-### Estadisticas y ranking
+### 📊 Estadisticas y ranking
 
 ![Ranking](./SalaDeJuegos/src/assets/img/readme/ranking.png)
 
-### Quien soy
+### 👤 Quien soy
 
 ![Quien Soy](./SalaDeJuegos/src/assets/img/readme/quien-soy.png)
 
 ---
 
-## Estructura del proyecto
+## 🗂️ Estructura del proyecto
 
 ```
 SalaDeJuegos/
-	src/
-		app/
-			core/          # guards, servicios base, auth
-			features/      # modulos y paginas funcionales
-			shared/        # componentes compartidos
-			layouts/       # navbar y estructuras visuales
-		assets/
-			data/          # JSONs locales
-			icons/         # iconografia
-			images/        # imagenes de la app
+  src/
+    app/
+      core/          # 🛡️ guards, servicios base, auth
+      features/      # 📄 modulos y paginas funcionales
+      shared/        # 🔧 componentes compartidos
+      layouts/       # 🖼️ navbar y estructuras visuales
+    assets/
+      data/          # 📦 JSONs locales
+      icons/         # 🔣 iconografia
+      images/        # 🖼️ imagenes de la app
 ```
 
 ---
 
-## Instalacion y ejecucion local
+## ⚙️ Instalacion y ejecucion local
 
-1. Clonar repositorio
+**1. Clonar repositorio**
 
 ```bash
-git clone https://github.com/TU-USUARIO/PrograIV-TP1-CasadoSantino.git
+git clone https://github.com/SantinoCasado/PrograIV-TP1-CasadoSantino.git
 cd PrograIV-TP1-CasadoSantino/SalaDeJuegos
 ```
 
-2. Instalar dependencias
+**2. Instalar dependencias**
 
 ```bash
 npm install
 ```
 
-3. Levantar entorno local
+**3. Levantar entorno local**
 
 ```bash
 npm run start
 ```
 
-4. Abrir en navegador
+**4. Abrir en navegador**
 
-```text
+```
 http://localhost:4200
 ```
 
 ---
 
-## Build de produccion
+## 📦 Build de produccion
 
 ```bash
 npm run build
 ```
 
-Los archivos compilados se generan en:
-
-```
-SalaDeJuegos/dist/
-```
+> Los archivos compilados se generan en `SalaDeJuegos/dist/`
 
 ---
 
-## Base de datos y tiempo real
+## 🗄️ Base de datos y tiempo real
 
-El proyecto usa Supabase para:
+El proyecto usa **Supabase** para:
 
-- autenticacion de usuarios,
-- guardado de perfiles,
-- persistencia de partidas,
-- ranking global,
-- chat en tiempo real (suscripcion a cambios).
-
----
-
-## Estado por sprint (resumen)
-
-- Sprint 1: estructura base, auth inicial, home, quien soy, favicon.
-- Sprint 2: login/registro robustos, navegacion y experiencia de usuario.
-- Sprint 3: Ahorcado, Mayor o Menor, chat global realtime.
-- Sprint 4: Preguntados, juego propio (Busca Minas), rankings y estadisticas.
+- 🔐 autenticacion de usuarios,
+- 👤 guardado de perfiles,
+- 💾 persistencia de partidas,
+- 🏆 ranking global,
+- 💬 chat en tiempo real (suscripcion a cambios via websockets).
 
 ---
 
-## Mejoras futuras
+## 📅 Estado por sprint
 
-- Tests end-to-end (E2E).
-- Dashboard de metricas mas avanzado.
-- Internacionalizacion.
-- Optimizar carga de recursos y lazy loading adicional.
+| Sprint      | Contenido                                                        |
+| ----------- | ---------------------------------------------------------------- |
+| ✅ Sprint 1 | Estructura base, auth inicial, home, quien soy, favicon          |
+| ✅ Sprint 2 | Login/registro robustos, navegacion y experiencia de usuario     |
+| ✅ Sprint 3 | Ahorcado, Mayor o Menor, chat global realtime                    |
+| ✅ Sprint 4 | Preguntados, juego propio (Busca Minas), rankings y estadisticas |
 
 ---
 
-## Licencia
+## 🔮 Mejoras futuras
 
-Uso academico. Proyecto desarrollado para Programacion IV.
+- 🧪 Tests end-to-end (E2E).
+- 📈 Dashboard de metricas mas avanzado.
+- 🌐 Internacionalizacion.
+- ⚡ Optimizar carga de recursos y lazy loading adicional.
+
+---
+
+## 📄 Licencia
+
+Uso academico. Proyecto desarrollado para **Programacion IV** — 2026.
