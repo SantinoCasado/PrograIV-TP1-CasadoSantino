@@ -106,7 +106,7 @@
               >
                 @if (celda.revelada) {
                   @if (celda.tieneMina) {
-                    <img src="assets/images/buscaMinas/mina.svg" alt="Mina" class="celda-icon" />
+                    <img src="/assets/images/buscaMinas/mina.svg" alt="Mina" class="celda-icon" />
                   } @else if (celda.adyacentes > 0) {
                     @if (rutaNumero(celda); as ruta) {
                       <img [src]="ruta" [alt]="'Numero ' + celda.adyacentes" class="celda-icon" />
@@ -121,7 +121,7 @@
                   }
                 } @else if (celda.marcada) {
                   <img
-                    src="assets/images/buscaMinas/bandera.svg"
+                    src="/assets/images/buscaMinas/bandera.svg"
                     alt="Bandera"
                     class="celda-icon"
                   />

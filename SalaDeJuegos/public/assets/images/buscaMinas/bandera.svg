@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Bandera">
+  <rect width="128" height="128" rx="16" fill="#141414"/>
+  <rect x="32" y="18" width="8" height="92" fill="#b7b7b7"/>
+  <path d="M40 24 L92 34 L78 56 L92 78 L40 68 Z" fill="#d63f3f" stroke="#f08b8b" stroke-width="3"/>
+  <circle cx="40" cy="24" r="4" fill="#e2e2e2"/>
+</svg>

@@ -1,0 +1,27 @@
+<svg width="640" height="640" viewBox="0 0 640 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="rough4" x="0" y="0" width="640" height="640" filterUnits="userSpaceOnUse">
+      <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="2" seed="21" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.4" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+
+  <g stroke="#F6F3E6" stroke-linecap="round" stroke-linejoin="round" fill="none" filter="url(#rough4)">
+    <path d="M120 530H470" stroke-width="10" opacity="0.92"/>
+    <path d="M122 528H468" stroke-width="5" opacity="0.38"/>
+    <path d="M145 530V95" stroke-width="10" opacity="0.92"/>
+    <path d="M147 528V98" stroke-width="5" opacity="0.38"/>
+    <path d="M145 100H360" stroke-width="10" opacity="0.92"/>
+    <path d="M147 102H358" stroke-width="5" opacity="0.38"/>
+    <path d="M245 100L145 205" stroke-width="8" opacity="0.82"/>
+    <path d="M243 103L147 203" stroke-width="4" opacity="0.34"/>
+    <path d="M360 100V165" stroke-width="8" opacity="0.9"/>
+    <path d="M361 102V166" stroke-width="4" opacity="0.34"/>
+
+    <circle cx="360" cy="205" r="36" stroke-width="9" opacity="0.95"/>
+    <path d="M360 242V346" stroke-width="10" opacity="0.95"/>
+    <path d="M360 282L308 330" stroke-width="10" opacity="0.95"/>
+    <path d="M360 282L412 330" stroke-width="10" opacity="0.95"/>
+    <path d="M359 244V344" stroke-width="4" opacity="0.28"/>
+  </g>
+</svg>
