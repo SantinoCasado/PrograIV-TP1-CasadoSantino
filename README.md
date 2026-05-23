@@ -7,7 +7,7 @@
 
 ## 🚀 Demo en vivo
 
-[![Ver demo](https://img.shields.io/badge/Demo-Live-brightgreen?style=for-the-badge)](https://prograiv-saladejuegos.web.app/)
+[![Ver demo](https://img.shields.io/badge/Demo-Live-brightgreen?style=for-the-badge)](https://prograiv-saladejuegos.web.app)
 
 ---
 
